@@ -1,18 +1,3 @@
-### GraphQL & React with Typescript
-
-This project is implementing the front-end code of server from [Boilerplate of CosmosDB with GraphQL](https://github.com/DitoHI/cosmosdb-graphql-boilerplate)
-
-
-Dependencies
---------
-
-* React with Bootstrap 4.x implemented (Reactstrap)
-* React Icons
-
-
-License
---------
-
     Copyright 2019 Dito Hafizh Indriarto
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated 

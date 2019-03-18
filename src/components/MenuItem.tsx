@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 
+import '../styles/Main.css';
 import '../styles/MenuItem.css';
 
 interface State {
@@ -33,13 +34,25 @@ class MenuItem extends React.Component<{}, State> {
         <Collapse isOpen={isOpen} navbar className="wrapper--introduction__collapsed-toolbar">
           <Nav navbar>
             <NavItem>
-              <NavLink className="wrapper--introduction__navbar__link">Education</NavLink>
+              <NavLink
+                className="wrapper--introduction__navbar__link
+                wrapper--padding-left-right-20">
+                Education
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="wrapper--introduction__navbar__link">Experience</NavLink>
+              <NavLink
+                className="wrapper--introduction__navbar__link
+                wrapper--padding-left-right-20">
+                Experience
+              </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink className="wrapper--introduction__navbar__link">Project</NavLink>
+              <NavLink
+                className="wrapper--introduction__navbar__link
+                wrapper--padding-left-right-20">
+                Project
+              </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
