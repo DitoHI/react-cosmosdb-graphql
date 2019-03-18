@@ -1,0 +1,23 @@
+.wrapper--introduction__parent {
+    justify-content: space-around !important;
+}
+
+.wrapper--introduction__brand {
+    margin-left: 24px !important;
+    margin-right: 24px !important;
+    color: #e00303 !important;
+    font-weight: 600 !important;
+    font-size: 36px !important;
+}
+
+.wrapper--introduction__collapsed-toolbar {
+    flex-grow: unset !important;
+}
+
+.wrapper--introduction__navbar__link {
+    color: #e00303 !important;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}

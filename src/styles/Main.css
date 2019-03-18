@@ -1,0 +1,41 @@
+.wrapper--horizontal-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wrapper--vertical-center {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.wrapper--profile-img {
+    border-radius: 50%;
+    object-fit: cover;
+    width: 300px;
+    height: 300px;
+    display: block;
+}
+
+.wrapper--divider {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0;
+    border: 0;
+    border-bottom: 4px solid #e43030ff;
+}
+
+.wrapper--flex-center-space {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.wrapper--margin-left-right-20 {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.wrapper--padding-top-bottom-20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
