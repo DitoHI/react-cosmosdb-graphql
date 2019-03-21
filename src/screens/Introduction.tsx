@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Jumbotron , Container, Row, Col } from 'reactstrap';
+import { Jumbotron, Container, Row, Col } from 'reactstrap';
 
-import './../styles/Introduction.css';
+import '../styles/Introduction.css';
 import './../styles/Main.css';
 import profileMePng from '../images/profileMe.png';
 
-import FollowMe from './FollowMe';
+import HeaderContainer from '../components/HeaderContainer';
+import FollowMe from '../components/FollowMe';
 
 class Introduction extends React.Component {
   render() {
@@ -15,16 +16,14 @@ class Introduction extends React.Component {
           <Row>
             <Col lg="6">
               <img
-                className="wrapper--horizontal-center wrapper--profile-img"
+                className="wrapper--horizontal-center wrapper--profile-img animated fadeInUp"
                 src={profileMePng}
                 alt="Profile Me"
               />
             </Col>
-            <Col lg="6" className="wrapper--vertical-center">
-              <h3>Who Am I ?</h3>
-              <hr
-                className="wrapper--divider"
-                style={{ marginTop: '30px', marginBottom: '30px', width: '40%' }}
+            <Col lg="6" className="wrapper--vertical-center animated fadeIn">
+              <HeaderContainer
+                headerTitle="Who Am I ?"
               />
               <p>
                 Passionate Coders. Coding for Society. Deep interests in learning machine learning

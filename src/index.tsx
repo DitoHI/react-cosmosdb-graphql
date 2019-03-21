@@ -9,7 +9,7 @@ import apolloBoost from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 const client = new apolloBoost({
-  uri: 'http://localhost:8000/graphql',
+  uri: 'https://hafizhprivateblogapi.azurewebsites.net/graphql',
   credentials: 'include',
 });
 

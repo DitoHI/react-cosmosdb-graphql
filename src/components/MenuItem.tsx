@@ -28,7 +28,7 @@ class MenuItem extends React.Component<{}, State> {
   render() {
     const { isOpen } = this.state;
     return (
-      <Navbar light expand="sm" className="wrapper--introduction__parent">
+      <Navbar light expand="sm" className="wrapper--introduction__parent animated fadeInDown">
         <NavbarBrand className="wrapper--introduction__brand">Me</NavbarBrand>
         <NavbarToggler onClick={this.toggle}/>
         <Collapse isOpen={isOpen} navbar className="wrapper--introduction__collapsed-toolbar">
