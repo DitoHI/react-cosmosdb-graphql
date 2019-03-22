@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { Container } from 'reactstrap';
 import { Query } from 'react-apollo';
+import classnames from 'classnames';
 
 import './index.css';
 import './styles/Main.css';
@@ -19,12 +20,60 @@ import { Me } from './schemaTypes';
 
 import { IEducation } from './custom/interface';
 
-class App extends React.Component {
+interface States {
+  prevScrollpos: any;
+  visible: boolean;
+}
+
+class App extends React.Component<{}, States> {
+  private educationRef: any = React.createRef();
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      prevScrollpos: window.pageYOffset,
+      visible: true,
+    };
+
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentWillMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll() {
+    const { prevScrollpos } = this.state;
+
+    const currentScrollPos = window.pageYOffset;
+    const visible = prevScrollpos > currentScrollPos;
+
+    this.setState({
+      visible,
+      prevScrollpos: currentScrollPos,
+    });
+  }
+
   public render() {
+    const { visible } = this.state;
+    const refs: any = [];
+    refs.push(this.educationRef);
     return (
       <div>
+        <nav className={
+          classnames('wrapper--introduction__parent',
+                     { 'wrapper--introduction__parent--hidden': !visible },
+            )}
+        >
+          <MenuItem
+            refs={refs}
+          />
+        </nav>
         <div className="main-nav">
-          <MenuItem/>
           <Introduction/>
           <Container className="wrapper--flex-center-space">
             <IoIosArrowDown
@@ -60,9 +109,11 @@ class App extends React.Component {
             const educations = data.me.education as IEducation[];
 
             return (
-              <Education
-                educations={ educations }
-              />
+              <div ref={this.educationRef}>
+                <Education
+                  educations={educations}
+                />
+              </div>
             );
           }}
         </Query>

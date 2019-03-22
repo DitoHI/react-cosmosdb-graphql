@@ -31,12 +31,13 @@ const educationCardView: React.FunctionComponent<Props> =
               <CardTitle className="card-container__title">
                 {education.name}
               </CardTitle>
-              <CardSubtitle>
+              <CardSubtitle
+                style={{ display: 'flex', justifyContent: 'center' }}
+              >
                 <Button
                   color="danger"
                   outline
-                  className="card-container__btn-subtitle"
-                  style={{ width: '100%' }}
+                  className="wrapper--btn-outline-radius"
                 >
                   {education.major} <Badge color="danger">{education.degree}</Badge>
                 </Button>
@@ -44,7 +45,7 @@ const educationCardView: React.FunctionComponent<Props> =
               <CardTitle className="card-container__btn-subtitle">{education.location}</CardTitle>
               <CardText className="card-container__text">{education.description}</CardText>
               <CardText className="card-container__text">
-                <Button color="danger" outline className="card-container__btn-subtitle">
+                <Button color="danger" outline className="wrapper--btn-outline-radius">
                   {dateFormat(education.dateStart, 'mmm yyyy')}
                   &nbsp;-&nbsp;
                   {dateFormat(education.dateEnd, 'mmm yyyy')}

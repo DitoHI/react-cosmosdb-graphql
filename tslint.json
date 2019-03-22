@@ -15,6 +15,7 @@
     "ordered-imports": false,
     "interface-name": false,
     "no-submodule-imports": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "match-default-export-name": false
   }
 }

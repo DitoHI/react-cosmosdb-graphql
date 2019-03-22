@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {
-  Carousel, CarouselControl, CarouselIndicators, CarouselItem,
   Container,
 } from 'reactstrap';
-import Slider from 'react-slick';
+import { default as Slider } from 'react-slick';
 
 import HeaderContainer from '../components/HeaderContainer';
 import EducationCardView from '../components/EducationCardView';
@@ -19,7 +18,6 @@ interface States {
 }
 
 class Education extends React.Component<Props, States> {
-  private animating: boolean;
 
   constructor(props) {
     super(props);
@@ -27,51 +25,6 @@ class Education extends React.Component<Props, States> {
       activeIndex: 0,
       educationItems: [],
     };
-    this.next = this.next.bind(this);
-    this.previous = this.previous.bind(this);
-    this.onExisting = this.onExisting.bind(this);
-    this.onExited = this.onExited.bind(this);
-  }
-
-  onExisting() {
-    this.animating = true;
-  }
-
-  onExited() {
-    this.animating = false;
-  }
-
-  next() {
-    const { activeIndex, educationItems } = this.state;
-    if (this.animating) {
-      return;
-    }
-    const nextIndex = activeIndex === educationItems.length - 1
-      ? 0
-      : activeIndex + 1;
-    this.setState({
-      activeIndex: nextIndex,
-    });
-  }
-
-  previous() {
-    const { activeIndex, educationItems } = this.state;
-    if (this.animating) {
-      return;
-    }
-    const nextIndex = activeIndex === 0
-      ? educationItems.length - 1
-      : activeIndex - 1;
-    this.setState({
-      activeIndex: nextIndex,
-    });
-  }
-
-  goToIndex(newIndex: number) {
-    const { activeIndex } = this.state;
-    this.setState({
-      activeIndex: newIndex,
-    });
   }
 
   componentDidMount() {
@@ -114,11 +67,11 @@ class Education extends React.Component<Props, States> {
           headerTextStyle={{
             color: '#e00303ff',
             fontWeight: '600',
-            fontSize: '36px',
+            fontSize: '28px',
             maxWidth: '700px',
           }}
         />
-        <Slider { ...settings }>
+        <Slider {...settings}>
           {educationItems}
         </Slider>
       </Container>

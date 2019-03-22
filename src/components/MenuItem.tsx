@@ -1,14 +1,27 @@
 import * as React from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
+import {
+  Button,
+  Collapse,
+  Nav,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 
 import '../styles/Main.css';
 import '../styles/MenuItem.css';
+
+interface Props {
+  refs: any[];
+}
 
 interface State {
   isOpen: boolean;
 }
 
-class MenuItem extends React.Component<{}, State> {
+class MenuItem extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -26,6 +39,7 @@ class MenuItem extends React.Component<{}, State> {
   }
 
   render() {
+    const { refs } = this.props;
     const { isOpen } = this.state;
     return (
       <Navbar light expand="sm" className="wrapper--introduction__parent animated fadeInDown">
@@ -33,25 +47,31 @@ class MenuItem extends React.Component<{}, State> {
         <NavbarToggler onClick={this.toggle}/>
         <Collapse isOpen={isOpen} navbar className="wrapper--introduction__collapsed-toolbar">
           <Nav navbar>
-            <NavItem>
+            <NavItem onClick={() => refs[0].current.scrollIntoView({ behavior: 'smooth' })}>
               <NavLink
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">
-                Education
+                <Button outline color="danger wrapper--btn-outline-radius">
+                  Education
+                </Button>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">
-                Experience
+                <Button outline color="danger wrapper--btn-outline-radius">
+                  Experience
+                </Button>
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">
-                Project
+                <Button outline color="danger wrapper--btn-outline-radius">
+                  Project
+                </Button>
               </NavLink>
             </NavItem>
           </Nav>
