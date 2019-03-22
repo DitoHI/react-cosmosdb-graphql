@@ -5,6 +5,7 @@ interface IEducation {
   description: string;
   dateStart: Date;
   dateEnd: Date;
+  location: string;
 }
 
 export default IEducation;

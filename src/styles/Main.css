@@ -16,6 +16,12 @@
     display: block;
 }
 
+.wrapper--icon-card {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}
+
 .wrapper--divider {
     margin-left: 0;
     margin-right: 0;
@@ -43,4 +49,10 @@
 .wrapper--padding-left-right-20 {
     padding-left: 20px !important;
     padding-right: 20px !important;
+}
+
+.wrappper--column-center-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

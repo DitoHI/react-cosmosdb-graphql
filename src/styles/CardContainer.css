@@ -1,0 +1,20 @@
+.card-container {
+    font-size: 18px;
+}
+
+.card-container > * {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+}
+
+.card-container__title {
+    font-size: 28px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.card-container__btn-subtitle {
+    border-radius: 25px !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}

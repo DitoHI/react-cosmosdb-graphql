@@ -3,7 +3,6 @@ import { Jumbotron, Container, Row, Col } from 'reactstrap';
 
 import '../styles/Introduction.css';
 import './../styles/Main.css';
-import profileMePng from '../images/profileMe.png';
 
 import HeaderContainer from '../components/HeaderContainer';
 import FollowMe from '../components/FollowMe';
@@ -17,7 +16,7 @@ class Introduction extends React.Component {
             <Col lg="6">
               <img
                 className="wrapper--horizontal-center wrapper--profile-img animated fadeInUp"
-                src={profileMePng}
+                src={require('../images/profileMe.png')}
                 alt="Profile Me"
               />
             </Col>
