@@ -42,8 +42,8 @@ const educationCardView: React.FunctionComponent<Props> =
                 </Button>
               </CardSubtitle>
               <CardTitle className="card-container__btn-subtitle">{education.location}</CardTitle>
-              <CardText>{education.description}</CardText>
-              <CardText>
+              <CardText className="card-container__text">{education.description}</CardText>
+              <CardText className="card-container__text">
                 <Button color="danger" outline className="card-container__btn-subtitle">
                   {dateFormat(education.dateStart, 'mmm yyyy')}
                   &nbsp;-&nbsp;

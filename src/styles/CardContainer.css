@@ -8,13 +8,17 @@
 }
 
 .card-container__title {
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 800;
     text-align: center;
 }
 
 .card-container__btn-subtitle {
     border-radius: 25px !important;
-    font-size: 20px !important;
+    font-size: 16px !important;
     font-weight: 600 !important;
+}
+
+.card-container__text {
+    font-size: 14px !important;
 }

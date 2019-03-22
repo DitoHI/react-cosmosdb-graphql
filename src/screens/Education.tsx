@@ -1,10 +1,9 @@
 import * as React from 'react';
 import {
   Carousel, CarouselControl, CarouselIndicators, CarouselItem,
-  Col,
   Container,
-  Row,
 } from 'reactstrap';
+import Slider from 'react-slick';
 
 import HeaderContainer from '../components/HeaderContainer';
 import EducationCardView from '../components/EducationCardView';
@@ -81,17 +80,11 @@ class Education extends React.Component<Props, States> {
     this.setState({
       educationItems: educations.map((education: IEducation, step: number) => {
         return (
-          <CarouselItem
-            onExiting={this.onExisting}
-            onExited={this.onExited}
+          <EducationCardView
             key={education.name}
-          >
-            <EducationCardView
-              key={education.name}
-              education={education}
-              icon={educationIcons[step]}
-            />
-          </CarouselItem>
+            education={education}
+            icon={educationIcons[step]}
+          />
         );
       }),
     });
@@ -99,6 +92,13 @@ class Education extends React.Component<Props, States> {
 
   public render() {
     const { activeIndex, educationItems } = this.state;
+    const settings = {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    };
     return (
       <Container
         style={{ marginTop: '50px', marginBottom: '50px' }}
@@ -118,20 +118,9 @@ class Education extends React.Component<Props, States> {
             maxWidth: '700px',
           }}
         />
-        <Carousel
-          activeIndex={activeIndex}
-          next={this.next}
-          previous={this.previous}
-        >
-          <CarouselIndicators
-            items={educationItems}
-            activeIndex={activeIndex}
-            onClickHandler={this.goToIndex}
-          />
+        <Slider { ...settings }>
           {educationItems}
-          <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous}/>
-          <CarouselControl direction="next" directionText="Next" onClickHandler={this.next}/>
-        </Carousel>
+        </Slider>
       </Container>
     );
   }
