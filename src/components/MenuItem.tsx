@@ -15,6 +15,7 @@ import '../styles/MenuItem.css';
 
 interface Props {
   refs: any[];
+  showAlertViewNotReady: any;
 }
 
 interface State {
@@ -39,12 +40,13 @@ class MenuItem extends React.Component<Props, State> {
   }
 
   render() {
-    const { refs } = this.props;
+    const { refs, showAlertViewNotReady } = this.props;
     const { isOpen } = this.state;
     return (
       <Navbar light expand="sm" className="wrapper--introduction__parent animated fadeInDown">
-        <NavbarBrand onClick={() => refs[0].current.scrollIntoView({ behavior: 'smooth' })}
-                     className="wrapper--introduction__brand wrapper--introduction__navbar__link">
+        <NavbarBrand onClick={() => {
+          refs[0].current.scrollIntoView({ behavior: 'smooth' });
+        }} className="wrapper--introduction__brand wrapper--introduction__navbar__link">
           <Button outline color="secondary wrapper--btn-outline-radius">
             Me
           </Button>
@@ -52,7 +54,14 @@ class MenuItem extends React.Component<Props, State> {
         <NavbarToggler onClick={this.toggle}/>
         <Collapse isOpen={isOpen} navbar className="wrapper--introduction__collapsed-toolbar">
           <Nav navbar>
-            <NavItem onClick={() => refs[1].current.scrollIntoView({ behavior: 'smooth' })}>
+            <NavItem onClick={() => {
+              if (refs[1].current) {
+                showAlertViewNotReady(false);
+                refs[1].current.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                showAlertViewNotReady(true, 'education');
+              }
+            }}>
               <NavLink
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">
@@ -61,7 +70,14 @@ class MenuItem extends React.Component<Props, State> {
                 </Button>
               </NavLink>
             </NavItem>
-            <NavItem onClick={() => refs[2].current.scrollIntoView({ behavior: 'smooth' })}>
+            <NavItem onClick={() => {
+              if (refs[2].current) {
+                showAlertViewNotReady(false);
+                refs[2].current.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                showAlertViewNotReady(true, 'project');
+              }
+            }}>
               <NavLink
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">

@@ -14,6 +14,7 @@ import Introduction from './screens/Introduction';
 import MainSpinner from './components/MainSpinner';
 import Education from './screens/Education';
 import Project from './screens/Project';
+import AlertNotExisted from './components/AlertNotExisted';
 
 // Import GraphQL Queries
 import { meQuery } from './graphql/queries/me';
@@ -24,6 +25,8 @@ import { IEducation, IProject } from './custom/interface';
 interface States {
   prevScrollpos: any;
   visible: boolean;
+  alertTitle: string;
+  alertVisible: boolean;
 }
 
 class App extends React.Component<{}, States> {
@@ -32,9 +35,12 @@ class App extends React.Component<{}, States> {
     this.state = {
       prevScrollpos: window.pageYOffset,
       visible: true,
+      alertTitle: 'default',
+      alertVisible: false,
     };
 
     this.handleScroll = this.handleScroll.bind(this);
+    this.showAlertViewNotReady = this.showAlertViewNotReady.bind(this);
   }
 
   componentWillMount() {
@@ -57,8 +63,15 @@ class App extends React.Component<{}, States> {
     });
   }
 
+  showAlertViewNotReady(showed: boolean, title?: string) {
+    this.setState({
+      alertTitle: title || 'default',
+      alertVisible: showed,
+    });
+  }
+
   public render() {
-    const { visible } = this.state;
+    const { alertVisible, alertTitle, visible } = this.state;
     const meRef: any = React.createRef();
     const educationRef: any = React.createRef();
     const projectRef: any = React.createRef();
@@ -76,7 +89,12 @@ class App extends React.Component<{}, States> {
           )}
         >
           <MenuItem
+            showAlertViewNotReady={this.showAlertViewNotReady}
             refs={refs}
+          />
+          <AlertNotExisted
+            title={ alertTitle }
+            propVisible={ alertVisible }
           />
         </nav>
         <div
