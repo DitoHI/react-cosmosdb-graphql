@@ -36,9 +36,9 @@ class Project extends React.Component<Props, States> {
       projectItems: projects.map((project: IProject, step: number) => {
         return (
           <img
-            key={project.name}
-            alt={project.name}
-            src={require(`../images/project/${projectIcons[step]}`)}
+            key={ project.name }
+            alt={ project.name }
+            src={ require(`../images/project/${ projectIcons[step] }`) }
             className="wrapper--icon-card-md"
           />
         );
@@ -63,6 +63,7 @@ class Project extends React.Component<Props, States> {
     const { activeProject, projectItems } = this.state;
     const sliderSetting = {
       dots: true,
+      arrows: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
@@ -77,12 +78,11 @@ class Project extends React.Component<Props, States> {
         <HeaderContainer
           headerTitle="What can I help you with? These are some of my
           projects which make me proud"
-        >
-        </HeaderContainer>
+        />
         <Row>
           <Col sm="5" className="wrapper--vertical-center">
-            <Slider {...sliderSetting}>
-              {projectItems}
+            <Slider { ...sliderSetting }>
+              { projectItems }
             </Slider>
           </Col>
           <Col sm="7">

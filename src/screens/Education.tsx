@@ -45,6 +45,7 @@ class Education extends React.Component<Props, States> {
     const { educationItems } = this.state;
     const sliderSetting = {
       dots: true,
+      arrows: false,
       infinite: true,
       speed: 500,
       slidesToShow: 1,

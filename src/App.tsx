@@ -10,8 +10,9 @@ import './styles/NavWrapper.css';
 
 // Custom Elements
 import MenuItem from './components/MenuItem';
-import Introduction from './screens/Introduction';
 import MainSpinner from './components/MainSpinner';
+import Experience from './screens/Experience';
+import Introduction from './screens/Introduction';
 import Education from './screens/Education';
 import Project from './screens/Project';
 import AlertNotExisted from './components/AlertNotExisted';
@@ -20,7 +21,7 @@ import AlertNotExisted from './components/AlertNotExisted';
 import { meQuery } from './graphql/queries/me';
 import { Me } from './schemaTypes';
 
-import { IEducation, IProject } from './custom/interface';
+import { IEducation, IExperience, IProject } from './custom/interface';
 
 interface States {
   prevScrollpos: any;
@@ -68,8 +69,9 @@ class App extends React.Component<{}, States> {
       alertTitle: title || 'default',
       alertVisible: showed,
     });
-    setTimeout(() => { this.setState({ alertVisible: false }); },
-               1000);
+    setTimeout(() => {
+      this.setState({ alertVisible: false });
+    },         1000);
   }
 
   public render() {
@@ -77,22 +79,24 @@ class App extends React.Component<{}, States> {
     const meRef: any = React.createRef();
     const educationRef: any = React.createRef();
     const projectRef: any = React.createRef();
+    const experienceRef: any = React.createRef();
 
     const refs: any = [];
     refs.push(meRef);
     refs.push(educationRef);
     refs.push(projectRef);
+    refs.push(experienceRef);
 
     return (
       <div>
         <nav className={
           classnames('wrapper--introduction__parent',
                      { 'wrapper--introduction__parent--hidden': !visible },
-          )}
+          ) }
         >
           <MenuItem
-            showAlertViewNotReady={this.showAlertViewNotReady}
-            refs={refs}
+            showAlertViewNotReady={ this.showAlertViewNotReady }
+            refs={ refs }
           />
           <AlertNotExisted
             title={ alertTitle }
@@ -100,7 +104,7 @@ class App extends React.Component<{}, States> {
           />
         </nav>
         <div
-          ref={meRef}
+          ref={ meRef }
           className="main-nav"
         >
           <Introduction/>
@@ -108,21 +112,32 @@ class App extends React.Component<{}, States> {
             <IoIosArrowDown
               size="68px"
               color="#e11414"
+              onClick={() => {
+                if (refs[1].current) {
+                  this.showAlertViewNotReady(false);
+                  refs[1].current.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                  this.showAlertViewNotReady(true, 'education');
+                }
+              }}
+              style={{
+                cursor: 'pointer',
+              }}
             />
           </Container>
         </div>
 
-        <Query<Me> query={meQuery}>
-          {({ loading, error, data }) => {
+        <Query<Me> query={ meQuery }>
+          { ({ loading, error, data }) => {
             if (loading) {
               return (
                 <MainSpinner
                   name="circle"
                   color="#404040"
-                  style={{
+                  style={ {
                     width: '80px',
                     height: '80px',
-                  }}
+                  } }
                 />
               );
             }
@@ -131,33 +146,46 @@ class App extends React.Component<{}, States> {
               return null;
             }
 
-            if (!data.me.education && !data.me.project) {
+            if (!data.me.education && !data.me.project && !data.me.experience) {
               return null;
             }
 
             const educations = data.me.education as IEducation[];
             const projects = data.me.project as IProject[];
+            const experiences = data.me.experience as IExperience[];
 
             return (
               <div className="wrapper--container-margin-top-bottom">
-                <div ref={educationRef}>
+                <div
+                  ref={ educationRef }
+                >
                   <Education
-                    educations={educations}
+                    educations={ educations }
                   />
                 </div>
                 <div
-                  ref={projectRef}
-                  style={{
+                  ref={ projectRef }
+                  style={ {
                     backgroundColor: '#f7f7f8',
-                  }}
+                  } }
                 >
                   <Project
-                    projects={projects}
+                    projects={ projects }
+                  />
+                </div>
+                <div
+                  ref={ experienceRef }
+                  style={{
+                    backgroundColor: '#efeff3',
+                  }}
+                >
+                  <Experience
+                    experiences={ experiences }
                   />
                 </div>
               </div>
             );
-          }}
+          } }
         </Query>
       </div>
     );

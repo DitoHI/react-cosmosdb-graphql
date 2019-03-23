@@ -1,4 +1,5 @@
 import IEducation from './IEducation';
 import IProject from './IProject';
+import IExperience from './IExperience';
 
-export { IEducation, IProject };
+export { IEducation, IExperience, IProject };

@@ -3,7 +3,7 @@
 }
 
 .card-container-fixed-flex {
-    height: 400px;
+    height: 450px;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
