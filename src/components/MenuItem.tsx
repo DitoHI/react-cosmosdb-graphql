@@ -43,11 +43,16 @@ class MenuItem extends React.Component<Props, State> {
     const { isOpen } = this.state;
     return (
       <Navbar light expand="sm" className="wrapper--introduction__parent animated fadeInDown">
-        <NavbarBrand className="wrapper--introduction__brand">Me</NavbarBrand>
+        <NavbarBrand onClick={() => refs[0].current.scrollIntoView({ behavior: 'smooth' })}
+                     className="wrapper--introduction__brand wrapper--introduction__navbar__link">
+          <Button outline color="secondary wrapper--btn-outline-radius">
+            Me
+          </Button>
+        </NavbarBrand>
         <NavbarToggler onClick={this.toggle}/>
         <Collapse isOpen={isOpen} navbar className="wrapper--introduction__collapsed-toolbar">
           <Nav navbar>
-            <NavItem onClick={() => refs[0].current.scrollIntoView({ behavior: 'smooth' })}>
+            <NavItem onClick={() => refs[1].current.scrollIntoView({ behavior: 'smooth' })}>
               <NavLink
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">

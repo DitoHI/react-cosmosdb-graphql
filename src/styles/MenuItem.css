@@ -3,6 +3,10 @@
     margin-right: 24px !important;
     color: #e00303 !important;
     font-weight: 600 !important;
+}
+
+.wrapper--introduction__brand > * {
+    border-radius: 36px !important;
     font-size: 36px !important;
 }
 

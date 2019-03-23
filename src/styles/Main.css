@@ -22,6 +22,12 @@
     object-fit: contain;
 }
 
+.wrapper--icon-card-md {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
 .wrapper--divider {
     margin-left: 0;
     margin-right: 0;
@@ -75,6 +81,11 @@
 
 .wrapper--introduction__parent--hidden {
     top: -100px;
+}
+
+.wrapper--container-margin-top-bottom > * {
+    padding-top: 50px;
+    padding-bottom: 50px;
 }
 
 /* override */

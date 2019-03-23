@@ -57,7 +57,7 @@ const educationCardView: React.FunctionComponent<Props> =
         <Col sm="5" className="wrappper--column-center-all">
           <img
             alt={ icon }
-            src={require(`../images/${icon}`)}
+            src={require(`../images/education/${icon}`)}
             className="wrapper--icon-card"
           />
         </Col>

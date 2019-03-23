@@ -13,7 +13,6 @@ interface Props {
 }
 
 interface States {
-  activeIndex: number;
   educationItems: any[];
 }
 
@@ -22,7 +21,6 @@ class Education extends React.Component<Props, States> {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0,
       educationItems: [],
     };
   }
@@ -44,8 +42,8 @@ class Education extends React.Component<Props, States> {
   }
 
   public render() {
-    const { activeIndex, educationItems } = this.state;
-    const settings = {
+    const { educationItems } = this.state;
+    const sliderSetting = {
       dots: true,
       infinite: true,
       speed: 500,
@@ -54,24 +52,13 @@ class Education extends React.Component<Props, States> {
     };
     return (
       <Container
-        style={{ marginTop: '50px', marginBottom: '50px' }}
-        className="animated fadeInDown">
+        className="animated fadeInDown"
+      >
         <HeaderContainer
-          headerContainerStyle={{
-            display: 'flex',
-            flexFlow: 'column wrap',
-            alignItems: 'center',
-          }}
           headerTitle="Education is the most important thing for me.
         So which schools I was educated ?"
-          headerTextStyle={{
-            color: '#e00303ff',
-            fontWeight: '600',
-            fontSize: '28px',
-            maxWidth: '700px',
-          }}
         />
-        <Slider {...settings}>
+        <Slider {...sliderSetting}>
           {educationItems}
         </Slider>
       </Container>

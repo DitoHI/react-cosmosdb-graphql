@@ -13,12 +13,13 @@ import MenuItem from './components/MenuItem';
 import Introduction from './screens/Introduction';
 import MainSpinner from './components/MainSpinner';
 import Education from './screens/Education';
+import Project from './screens/Project';
 
 // Import GraphQL Queries
 import { meQuery } from './graphql/queries/me';
 import { Me } from './schemaTypes';
 
-import { IEducation } from './custom/interface';
+import { IEducation, IProject } from './custom/interface';
 
 interface States {
   prevScrollpos: any;
@@ -26,8 +27,6 @@ interface States {
 }
 
 class App extends React.Component<{}, States> {
-  private educationRef: any = React.createRef();
-
   constructor(props) {
     super(props);
     this.state = {
@@ -60,20 +59,30 @@ class App extends React.Component<{}, States> {
 
   public render() {
     const { visible } = this.state;
+    const meRef: any = React.createRef();
+    const educationRef: any = React.createRef();
+    const projectRef: any = React.createRef();
+
     const refs: any = [];
-    refs.push(this.educationRef);
+    refs.push(meRef);
+    refs.push(educationRef);
+    refs.push(projectRef);
+
     return (
       <div>
         <nav className={
           classnames('wrapper--introduction__parent',
                      { 'wrapper--introduction__parent--hidden': !visible },
-            )}
+          )}
         >
           <MenuItem
             refs={refs}
           />
         </nav>
-        <div className="main-nav">
+        <div
+          ref={meRef}
+          className="main-nav"
+        >
           <Introduction/>
           <Container className="wrapper--flex-center-space">
             <IoIosArrowDown
@@ -102,17 +111,25 @@ class App extends React.Component<{}, States> {
               return null;
             }
 
-            if (!data.me.education) {
+            if (!data.me.education && !data.me.project) {
               return null;
             }
 
             const educations = data.me.education as IEducation[];
+            const projects = data.me.project as IProject[];
 
             return (
-              <div ref={this.educationRef}>
-                <Education
-                  educations={educations}
-                />
+              <div className="wrapper--container-margin-top-bottom">
+                <div ref={educationRef}>
+                  <Education
+                    educations={educations}
+                  />
+                </div>
+                <div ref={projectRef}>
+                  <Project
+                    projects={projects}
+                  />
+                </div>
               </div>
             );
           }}
