@@ -125,7 +125,12 @@ class App extends React.Component<{}, States> {
                     educations={educations}
                   />
                 </div>
-                <div ref={projectRef}>
+                <div
+                  ref={projectRef}
+                  style={{
+                    backgroundColor: '#f7f7f8',
+                  }}
+                >
                   <Project
                     projects={projects}
                   />

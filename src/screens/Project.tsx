@@ -75,7 +75,8 @@ class Project extends React.Component<Props, States> {
         className="animated fadeInUp"
       >
         <HeaderContainer
-          headerTitle="What can I help you with? These are my projects which I have done"
+          headerTitle="What can I help you with? These are some of my
+          projects which make me proud"
         >
         </HeaderContainer>
         <Row>

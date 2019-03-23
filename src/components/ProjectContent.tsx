@@ -37,7 +37,7 @@ const projectContent: React.FunctionComponent<Props> = ({ project }) => {
         <CardText className="card-container__text">{project.description}</CardText>
         <CardText>
           <Button color="link">
-            <a href={ project.link } target="_blank">
+            <a href={ project.link } target="_blank" style={{ fontWeight: 600 }}>
               Read More...
             </a>
           </Button>

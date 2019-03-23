@@ -61,12 +61,12 @@ class MenuItem extends React.Component<Props, State> {
                 </Button>
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem onClick={() => refs[2].current.scrollIntoView({ behavior: 'smooth' })}>
               <NavLink
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">
                 <Button outline color="danger wrapper--btn-outline-radius">
-                  Experience
+                  Project
                 </Button>
               </NavLink>
             </NavItem>
@@ -75,7 +75,7 @@ class MenuItem extends React.Component<Props, State> {
                 className="wrapper--introduction__navbar__link
                 wrapper--padding-left-right-20">
                 <Button outline color="danger wrapper--btn-outline-radius">
-                  Project
+                  Experience
                 </Button>
               </NavLink>
             </NavItem>
