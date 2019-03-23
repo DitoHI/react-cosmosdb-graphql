@@ -23,10 +23,6 @@ class AlertNotExisted extends React.Component<Props, States> {
     this.setState({
       visible: nextProps.propVisible,
     });
-    if (nextProps.propVisible) {
-      setTimeout(() => { this.setState({ visible: false }); },
-                 1000);
-    }
   }
 
   componentWillUnmount() {

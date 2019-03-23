@@ -68,6 +68,8 @@ class App extends React.Component<{}, States> {
       alertTitle: title || 'default',
       alertVisible: showed,
     });
+    setTimeout(() => { this.setState({ alertVisible: false }); },
+               1000);
   }
 
   public render() {
