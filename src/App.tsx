@@ -84,8 +84,8 @@ class App extends React.Component<{}, States> {
     const refs: any = [];
     refs.push(meRef);
     refs.push(educationRef);
-    refs.push(projectRef);
     refs.push(experienceRef);
+    refs.push(projectRef);
 
     return (
       <div>
@@ -164,23 +164,23 @@ class App extends React.Component<{}, States> {
                   />
                 </div>
                 <div
-                  ref={ projectRef }
-                  style={ {
-                    backgroundColor: '#f7f7f8',
-                  } }
-                >
-                  <Project
-                    projects={ projects }
-                  />
-                </div>
-                <div
                   ref={ experienceRef }
                   style={{
-                    backgroundColor: '#efeff3',
+                    backgroundColor: '#f7f7f8',
                   }}
                 >
                   <Experience
                     experiences={ experiences }
+                  />
+                </div>
+                <div
+                  ref={ projectRef }
+                  style={ {
+                    backgroundColor: '#efeff3',
+                  } }
+                >
+                  <Project
+                    projects={ projects }
                   />
                 </div>
               </div>

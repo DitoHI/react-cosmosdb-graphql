@@ -55,9 +55,10 @@ class MenuItem extends React.Component<Props, State> {
         <Collapse isOpen={isOpen} navbar className="wrapper--introduction__collapsed-toolbar">
           <Nav navbar>
             <NavItem onClick={() => {
-              if (refs[1].current) {
+              const index = 1;
+              if (refs[index].current) {
                 showAlertViewNotReady(false);
-                refs[1].current.scrollIntoView({ behavior: 'smooth' });
+                refs[index].current.scrollIntoView({ behavior: 'smooth' });
               } else {
                 showAlertViewNotReady(true, 'education');
               }
@@ -71,9 +72,27 @@ class MenuItem extends React.Component<Props, State> {
               </NavLink>
             </NavItem>
             <NavItem onClick={() => {
-              if (refs[2].current) {
+              const index = 2;
+              if (refs[index].current) {
                 showAlertViewNotReady(false);
-                refs[2].current.scrollIntoView({ behavior: 'smooth' });
+                refs[index].current.scrollIntoView({ behavior: 'smooth' });
+              } else {
+                showAlertViewNotReady(true, 'project');
+              }
+            }}>
+              <NavLink
+                className="wrapper--introduction__navbar__link
+                wrapper--padding-left-right-20">
+                <Button outline color="danger wrapper--btn-outline-radius">
+                  Experience
+                </Button>
+              </NavLink>
+            </NavItem>
+            <NavItem onClick={() => {
+              const index = 3;
+              if (refs[index].current) {
+                showAlertViewNotReady(false);
+                refs[index].current.scrollIntoView({ behavior: 'smooth' });
               } else {
                 showAlertViewNotReady(true, 'project');
               }
@@ -83,15 +102,6 @@ class MenuItem extends React.Component<Props, State> {
                 wrapper--padding-left-right-20">
                 <Button outline color="danger wrapper--btn-outline-radius">
                   Project
-                </Button>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink
-                className="wrapper--introduction__navbar__link
-                wrapper--padding-left-right-20">
-                <Button outline color="danger wrapper--btn-outline-radius">
-                  Experience
                 </Button>
               </NavLink>
             </NavItem>
