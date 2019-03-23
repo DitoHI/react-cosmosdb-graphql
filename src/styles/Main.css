@@ -33,7 +33,9 @@
     margin-right: 0;
     padding: 0;
     border: 0;
-    border-bottom: 4px solid #e43030ff;
+    border-bottom-width: 4px;
+    border-bottom-style: solid;
+    border-bottom-color: #e43030ff;
 }
 
 .wrapper--flex-center-space {

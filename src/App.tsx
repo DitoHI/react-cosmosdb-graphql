@@ -9,19 +9,20 @@ import './styles/Main.css';
 import './styles/NavWrapper.css';
 
 // Custom Elements
-import MenuItem from './components/MenuItem';
-import MainSpinner from './components/MainSpinner';
 import Experience from './screens/Experience';
 import Introduction from './screens/Introduction';
 import Education from './screens/Education';
 import Project from './screens/Project';
+import Footer from './screens/Footer';
+import MenuItem from './components/MenuItem';
+import MainSpinner from './components/MainSpinner';
 import AlertNotExisted from './components/AlertNotExisted';
 
 // Import GraphQL Queries
 import { meQuery } from './graphql/queries/me';
 import { Me } from './schemaTypes';
 
-import { IEducation, IExperience, IProject } from './custom/interface';
+import { IEducation, IExperience, IMe, IProject } from './custom/interface';
 
 interface States {
   prevScrollpos: any;
@@ -90,8 +91,9 @@ class App extends React.Component<{}, States> {
     return (
       <div>
         <nav className={
-          classnames('wrapper--introduction__parent',
-                     { 'wrapper--introduction__parent--hidden': !visible },
+          classnames('wrapper--introduction__parent', {
+            'wrapper--introduction__parent--hidden': !visible,
+          },
           ) }
         >
           <MenuItem
@@ -112,17 +114,17 @@ class App extends React.Component<{}, States> {
             <IoIosArrowDown
               size="68px"
               color="#e11414"
-              onClick={() => {
+              onClick={ () => {
                 if (refs[1].current) {
                   this.showAlertViewNotReady(false);
                   refs[1].current.scrollIntoView({ behavior: 'smooth' });
                 } else {
                   this.showAlertViewNotReady(true, 'education');
                 }
-              }}
-              style={{
+              } }
+              style={ {
                 cursor: 'pointer',
-              }}
+              } }
             />
           </Container>
         </div>
@@ -153,6 +155,7 @@ class App extends React.Component<{}, States> {
             const educations = data.me.education as IEducation[];
             const projects = data.me.project as IProject[];
             const experiences = data.me.experience as IExperience[];
+            const me = data.me as IMe;
 
             return (
               <div className="wrapper--container-margin-top-bottom">
@@ -165,9 +168,9 @@ class App extends React.Component<{}, States> {
                 </div>
                 <div
                   ref={ experienceRef }
-                  style={{
+                  style={ {
                     backgroundColor: '#f7f7f8',
-                  }}
+                  } }
                 >
                   <Experience
                     experiences={ experiences }
@@ -181,6 +184,15 @@ class App extends React.Component<{}, States> {
                 >
                   <Project
                     projects={ projects }
+                  />
+                </div>
+                <div
+                  style={ {
+                    backgroundColor: '#f7f7f8',
+                  } }
+                >
+                  <Footer
+                    me={me}
                   />
                 </div>
               </div>

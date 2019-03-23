@@ -1,0 +1,11 @@
+.footer__content-info {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: start;
+    align-items: center;
+    color: #555;
+    font-weight: 400;
+    font-size: 1em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

@@ -38,6 +38,7 @@ const educationCardView: React.FunctionComponent<Props> =
                   color="danger"
                   outline
                   className="wrapper--btn-outline-radius"
+                  style={{ cursor: 'default' }}
                 >
                   { education.major } <Badge color="danger">{ education.degree }</Badge>
                 </Button>
@@ -45,7 +46,12 @@ const educationCardView: React.FunctionComponent<Props> =
               <CardTitle className="card-container__btn-subtitle">{ education.location }</CardTitle>
               <CardText className="card-container__text">{ education.description }</CardText>
               <CardText className="card-container__text">
-                <Button color="danger" outline className="wrapper--btn-outline-radius">
+                <Button
+                  color="danger"
+                  outline
+                  className="wrapper--btn-outline-radius"
+                  style={{ cursor: 'default' }}
+                >
                   { dateFormat(education.dateStart, 'mmm yyyy') }
                   &nbsp;-&nbsp;
                   { dateFormat(education.dateEnd, 'mmm yyyy') }

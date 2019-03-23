@@ -25,7 +25,12 @@ const experienceContent: React.FunctionComponent<Props> = ({ experience, experie
         { experience.name }
       </div>
       <div className="card-container__text" style={{ textAlign: 'center' }}>
-        <Button color="danger" outline className="wrapper--btn-outline-radius">
+        <Button
+          color="danger"
+          outline
+          className="wrapper--btn-outline-radius"
+          style={{ cursor: 'default' }}
+        >
           { dateFormat(experience.dateStart, 'mmm yyyy') }
           &nbsp;-&nbsp;
           { dateFormat(experience.dateEnd, 'mmm yyyy') }

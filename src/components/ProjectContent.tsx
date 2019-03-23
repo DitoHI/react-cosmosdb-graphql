@@ -35,6 +35,7 @@ const projectContent: React.FunctionComponent<Props> = ({ project }) => {
             color="danger"
             outline
             className="wrapper--btn-outline-radius"
+            style={{ cursor: 'default' }}
           >{project.role}
           </Button>
         </CardSubtitle>
