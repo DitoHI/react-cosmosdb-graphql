@@ -45,8 +45,8 @@ const footer: React.FunctionComponent<Props> = ({ me }) => {
       <Row>
         <Col sm={{ size: 8, offset: 2 }} style={{ display: 'flex', justifyContent: 'center' }}>
           <div className="footer__content-info" style={{ fontSize: '14px', fontWeight: 800 }}>
-            <span>Copyright&nbsp;&copy;&nbsp;Dito Hafizh 2019.</span>&nbsp;
-            <span>Build with&nbsp;<IoIosHeart/>&nbsp;React.</span>&nbsp;
+            <span>Copyright&nbsp;&copy;&nbsp;Dito Hafizh Indriarto 2019.</span>&nbsp;
+            <span>Build with&nbsp;<IoIosHeart/>&nbsp;in React.</span>&nbsp;
           </div>
         </Col>
       </Row>
