@@ -29,6 +29,8 @@ interface States {
   visibleAlertSourceCode: boolean;
   alertTitle: string;
   alertVisible: boolean;
+  height: number;
+  width: number;
 }
 
 class App extends React.Component<{}, States> {
@@ -40,11 +42,19 @@ class App extends React.Component<{}, States> {
       visibleAlertSourceCode: true,
       alertTitle: 'default',
       alertVisible: false,
+      height: 0,
+      width: 0,
     };
 
     this.handleScroll = this.handleScroll.bind(this);
     this.showAlertViewNotReady = this.showAlertViewNotReady.bind(this);
     this.onDismiss = this.onDismiss.bind(this);
+    this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateWindowDimensions();
+    window.addEventListener('resize', this.updateWindowDimensions);
   }
 
   componentWillMount() {
@@ -52,7 +62,12 @@ class App extends React.Component<{}, States> {
   }
 
   componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWindowDimensions);
     window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  updateWindowDimensions() {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
   handleScroll() {
@@ -74,7 +89,8 @@ class App extends React.Component<{}, States> {
     });
     setTimeout(() => {
       this.setState({
-        alertVisible: false });
+        alertVisible: false,
+      });
     },         1000);
   }
 
@@ -85,7 +101,14 @@ class App extends React.Component<{}, States> {
   }
 
   public render() {
-    const { alertVisible, alertTitle, visible, visibleAlertSourceCode } = this.state;
+    const {
+      alertVisible,
+      alertTitle,
+      visible,
+      visibleAlertSourceCode,
+      width,
+      height,
+    } = this.state;
     const meRef: any = React.createRef();
     const educationRef: any = React.createRef();
     const projectRef: any = React.createRef();
@@ -97,16 +120,27 @@ class App extends React.Component<{}, States> {
     refs.push(experienceRef);
     refs.push(projectRef);
 
+    const topNavbar = !visible
+      ? visibleAlertSourceCode
+        ? width > 375
+          ? { top: '-10rem' }
+          : { top: '-20rem' }
+        : { top: '-6rem' }
+      : { top: '0' };
+
+    const marginTopMainNav = visibleAlertSourceCode
+      ? width > 375
+        ? { marginTop: '4rem' }
+        : { marginTop: '9rem' }
+      : width > 375
+        ? { marginTop: '0' }
+        : { marginTop: '2rem' };
+
     return (
       <div>
         <nav
           className="wrapper--introduction__parent"
-          style={ !visible
-            ? visibleAlertSourceCode
-              ? { top: '-10rem' }
-              : { top: '-6rem' }
-            : { top: '0' }
-          }
+          style={ topNavbar }
         >
           <Alert
             color="info"
@@ -134,7 +168,7 @@ class App extends React.Component<{}, States> {
         <div
           ref={ meRef }
           className="main-nav"
-          style={ visibleAlertSourceCode ? { marginTop: '4rem' } : { marginTop: '0' } }
+          style={ marginTopMainNav }
         >
           <Introduction/>
           <Container className="wrapper--flex-center-space">

@@ -34,6 +34,7 @@ class Experience extends React.Component<Props, States> {
       experienceIcons: experiences.map((experience: IExperience, step: number) => {
         return (
           <ExperienceContent
+            key={ experience.name }
             experience={ experience }
             experienceIcon={ experienceIcons[step] }
           />
@@ -53,6 +54,15 @@ class Experience extends React.Component<Props, States> {
       centerPadding: '60px',
       speed: 500,
       slidesToShow: 2,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1,
+            infinite: false,
+          },
+        },
+      ],
     };
     return (
       <Container className="animated fadeInUp">

@@ -22,4 +22,11 @@
 
 .card-container__text {
     font-size: 14px !important;
+    overflow-y: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    .card-container-fixed-flex {
+        height: 500px;
+    }
 }

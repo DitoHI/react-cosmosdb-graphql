@@ -13,14 +13,14 @@ class Introduction extends React.Component {
       <Jumbotron className="wrapper--introduction">
         <Container className="wrapper--padding-top-bottom-20">
           <Row>
-            <Col lg="6">
+            <Col sm="6">
               <img
                 className="wrapper--horizontal-center wrapper--profile-img animated fadeInUp"
                 src={require('../images/profileMe.png')}
                 alt="Profile Me"
               />
             </Col>
-            <Col lg="6" className="wrapper--vertical-center animated fadeIn">
+            <Col sm="6" className="wrapper--vertical-center animated fadeIn">
               <HeaderContainer
                 headerTitle="Who Am I ?"
               />
