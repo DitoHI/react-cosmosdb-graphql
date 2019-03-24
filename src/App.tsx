@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { IoIosArrowDown } from 'react-icons/io';
-import { Container } from 'reactstrap';
+import { IoIosArrowDown, IoIosHeart } from 'react-icons/io';
+import { Alert, Container } from 'reactstrap';
 import { Query } from 'react-apollo';
-import classnames from 'classnames';
 
 import './index.css';
 import './styles/Main.css';
@@ -27,6 +26,7 @@ import { IEducation, IExperience, IMe, IProject } from './custom/interface';
 interface States {
   prevScrollpos: any;
   visible: boolean;
+  visibleAlertSourceCode: boolean;
   alertTitle: string;
   alertVisible: boolean;
 }
@@ -37,12 +37,14 @@ class App extends React.Component<{}, States> {
     this.state = {
       prevScrollpos: window.pageYOffset,
       visible: true,
+      visibleAlertSourceCode: true,
       alertTitle: 'default',
       alertVisible: false,
     };
 
     this.handleScroll = this.handleScroll.bind(this);
     this.showAlertViewNotReady = this.showAlertViewNotReady.bind(this);
+    this.onDismiss = this.onDismiss.bind(this);
   }
 
   componentWillMount() {
@@ -71,12 +73,19 @@ class App extends React.Component<{}, States> {
       alertVisible: showed,
     });
     setTimeout(() => {
-      this.setState({ alertVisible: false });
+      this.setState({
+        alertVisible: false });
     },         1000);
   }
 
+  onDismiss() {
+    this.setState({
+      visibleAlertSourceCode: false,
+    });
+  }
+
   public render() {
-    const { alertVisible, alertTitle, visible } = this.state;
+    const { alertVisible, alertTitle, visible, visibleAlertSourceCode } = this.state;
     const meRef: any = React.createRef();
     const educationRef: any = React.createRef();
     const projectRef: any = React.createRef();
@@ -90,12 +99,29 @@ class App extends React.Component<{}, States> {
 
     return (
       <div>
-        <nav className={
-          classnames('wrapper--introduction__parent', {
-            'wrapper--introduction__parent--hidden': !visible,
-          },
-          ) }
+        <nav
+          className="wrapper--introduction__parent"
+          style={ !visible
+            ? visibleAlertSourceCode
+              ? { top: '-10rem' }
+              : { top: '-6rem' }
+            : { top: '0' }
+          }
         >
+          <Alert
+            color="info"
+            isOpen={ visibleAlertSourceCode }
+            toggle={ this.onDismiss }
+            style={ { textAlign: 'center' } }
+          >
+            This project is maintained with the legacy of open source. Check in my
+            <a
+              href="https://github.com/DitoHI/react-cosmosdb-graphql"
+              target="_blank"
+              className="alert-link"
+            >&nbsp;Github&nbsp;</a>profile.
+            Spread the <IoIosHeart/>
+          </Alert>
           <MenuItem
             showAlertViewNotReady={ this.showAlertViewNotReady }
             refs={ refs }
@@ -108,6 +134,7 @@ class App extends React.Component<{}, States> {
         <div
           ref={ meRef }
           className="main-nav"
+          style={ visibleAlertSourceCode ? { marginTop: '4rem' } : { marginTop: '0' } }
         >
           <Introduction/>
           <Container className="wrapper--flex-center-space">
@@ -192,7 +219,7 @@ class App extends React.Component<{}, States> {
                   } }
                 >
                   <Footer
-                    me={me}
+                    me={ me }
                   />
                 </div>
               </div>

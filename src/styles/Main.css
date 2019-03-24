@@ -75,14 +75,9 @@
     background-color: #f8f8f8;
     justify-content: space-around !important;
     position: fixed;
-    top: 0;
     transition: top 0.6s;
     width: 100%;
     z-index: 999;
-}
-
-.wrapper--introduction__parent--hidden {
-    top: -100px;
 }
 
 .wrapper--container-margin-top-bottom > * {
