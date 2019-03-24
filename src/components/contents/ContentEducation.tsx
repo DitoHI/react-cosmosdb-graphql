@@ -12,16 +12,16 @@ import {
 } from 'reactstrap';
 import * as dateFormat from 'dateformat';
 
-import '../styles/Main.css';
-import '../styles/CardContainer.css';
-import IEducation from '../custom/interface/IEducation';
+import '../../styles/Main.css';
+import '../../styles/CardContainer.css';
+import IEducation from '../../custom/interface/IEducation';
 
 interface Props {
   education: IEducation;
   icon: string;
 }
 
-const educationCardView: React.FunctionComponent<Props> =
+const contentEducation: React.FunctionComponent<Props> =
   ({ education, icon }) => {
     return (
       <Row>
@@ -63,7 +63,7 @@ const educationCardView: React.FunctionComponent<Props> =
         <Col sm="5" className="wrappper--column-center-all">
           <img
             alt={ icon }
-            src={ require(`../images/education/${ icon }`) }
+            src={ require(`../../images/education/${ icon }`) }
             className="wrapper--icon-card"
           />
         </Col>
@@ -71,4 +71,4 @@ const educationCardView: React.FunctionComponent<Props> =
     );
   };
 
-export default educationCardView;
+export default contentEducation;

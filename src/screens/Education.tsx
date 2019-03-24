@@ -5,7 +5,7 @@ import {
 import { default as Slider } from 'react-slick';
 
 import HeaderContainer from '../components/HeaderContainer';
-import EducationCardView from '../components/EducationCardView';
+import { default as EducationCardView } from '../components/contents/ContentEducation';
 import IEducation from '../custom/interface/IEducation';
 
 interface Props {

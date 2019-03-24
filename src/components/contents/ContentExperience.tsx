@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button } from 'reactstrap';
-import IExperience from '../custom/interface/IExperience';
+import IExperience from '../../custom/interface/IExperience';
 import * as dateFormat from 'dateformat';
 
 interface Props {
@@ -8,14 +8,14 @@ interface Props {
   experienceIcon: string;
 }
 
-const experienceContent: React.FunctionComponent<Props> = ({ experience, experienceIcon }) => {
+const contentExperience: React.FunctionComponent<Props> = ({ experience, experienceIcon }) => {
   return (
     <div
       className="card-container"
     >
       <img
         alt={ experience.name }
-        src={ require(`../images/experience/${ experienceIcon }`) }
+        src={ require(`../../images/experience/${ experienceIcon }`) }
         className="wrapper--icon-card wrapper--horizontal-center"
       />
       <div className="card-container__title">
@@ -40,4 +40,4 @@ const experienceContent: React.FunctionComponent<Props> = ({ experience, experie
   );
 };
 
-export default experienceContent;
+export default contentExperience;

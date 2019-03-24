@@ -3,7 +3,7 @@ import { Col, Container, Row } from 'reactstrap';
 import { default as Slider } from 'react-slick';
 
 import HeaderContainer from '../components/HeaderContainer';
-import ProjectContent from '../components/ProjectContent';
+import { default as ProjectContent } from '../components/contents/ContentProject';
 import IProject from '../custom/interface/IProject';
 
 import '../styles/Main.css';

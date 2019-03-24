@@ -6,7 +6,7 @@ import '../styles/Main.css';
 import '../styles/CardContainer.css';
 
 import HeaderContainer from '../components/HeaderContainer';
-import ExperienceContent from '../components/ExperienceContent';
+import { default as ExperienceContent } from '../components/contents/ContentExperience';
 import IExperience from '../custom/interface/IExperience';
 
 interface Props {

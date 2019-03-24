@@ -8,14 +8,14 @@ import {
   CardTitle,
 } from 'reactstrap';
 
-import '../styles/CardContainer.css';
-import IProject from '../custom/interface/IProject';
+import '../../styles/CardContainer.css';
+import IProject from '../../custom/interface/IProject';
 
 interface Props {
   project: IProject;
 }
 
-const projectContent: React.FunctionComponent<Props> = ({ project }) => {
+const contentProject: React.FunctionComponent<Props> = ({ project }) => {
   const stacks = project.techStacks
     ? project.techStacks.join(', ')
     : 'Default Stacks';
@@ -55,4 +55,4 @@ const projectContent: React.FunctionComponent<Props> = ({ project }) => {
   );
 };
 
-export default projectContent;
+export default contentProject;

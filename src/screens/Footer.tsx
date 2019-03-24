@@ -17,12 +17,12 @@ const footer: React.FunctionComponent<Props> = ({ me }) => {
       <HeaderContainer
         headerTitle="Contact Me"
         headerTextStyle={{
-          color: '#111',
+          color: '#1C1E21',
           fontWeight: '600',
           fontSize: '28px',
         }}
         headerDividerStyle={{
-          borderBottomColor: '#111',
+          borderBottomColor: '#1C1E21',
         }}
       >
       </HeaderContainer>
