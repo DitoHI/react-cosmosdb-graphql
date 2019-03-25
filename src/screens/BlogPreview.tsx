@@ -26,7 +26,7 @@ const blogPreview: React.FunctionComponent<Props> = ({ blogs }) => {
     <Container>
       <div style={ headerContainerStyle }>
         <span style={ headerStyle }>
-          Writing is helping me to share the knowledges
+          Writing helps me to share the knowledges
         </span>
         <Button color="link">
           <NavLink to="/blog">

@@ -54,6 +54,11 @@
     padding-bottom: 20px !important;
 }
 
+.wrapper--padding-top-bottom-50 {
+    padding-top: 50px !important;
+    padding-bottom: 50px !important;
+}
+
 .wrapper--padding-left-right-20 {
     padding-left: 20px !important;
     padding-right: 20px !important;
