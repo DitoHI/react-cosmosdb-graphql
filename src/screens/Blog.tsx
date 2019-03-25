@@ -1,21 +1,44 @@
 import * as React from 'react';
+import { ChildProps, graphql } from 'react-apollo';
 import { NavLink } from 'react-router-dom';
-import { graphql, ChildProps } from 'react-apollo';
-import { default as gql } from 'graphql-tag';
+
+import IBlog from '../custom/interface/IBlog';
+import { blogs } from '../graphql/queries/blogs';
 
 interface Props {
   parentStyle: any;
 }
 
-class Blog extends React.Component<ChildProps<Props>, {}> {
+interface States {
+  blogs: IBlog[];
+}
+
+class Blog extends React.Component<ChildProps<Props>, States> {
   constructor(props) {
     super(props);
+    this.state = {
+      blogs: [],
+    };
+  }
+
+  shouldComponentUpdate(nextProps, nextState): boolean {
+    const { blogs } = this.state;
+    return !!(nextState.blogs.length !== 0 && nextState.blogs !== blogs);
+  }
+
+  componentWillReceiveProps(nextProps: ChildProps) {
+    const { data } = nextProps;
+    const blogs = (data as any).blogs;
+    this.setState({
+      blogs,
+    });
   }
 
   render() {
-    const { children, data } = this.props;
-    const blogs = (data as any).blogs;
+    const { children } = this.props;
+    const { blogs } = this.state;
     const parentStyle = children as React.CSSProperties;
+    console.log(blogs);
     return (
       <div style={ parentStyle } >
         <h3>
@@ -29,22 +52,6 @@ class Blog extends React.Component<ChildProps<Props>, {}> {
   }
 }
 
-const currentBlogs = gql`
-      query Blogs($startAt: Int, $endAt: Int, $hastag: String) {
-        blogs(startAt: $startAt, endAt: $endAt, hastag: $hastag) {
-          id
-          user
-          title
-          content
-          lastEdited
-          isDeleted
-          imageUri
-          positionIndex
-          hastag
-        }
-      }
-    `;
-
-const blogCurrent = graphql(currentBlogs)(Blog);
+const blogCurrent = graphql(blogs)(Blog);
 
 export default blogCurrent;
