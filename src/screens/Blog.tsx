@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 import IBlog from '../custom/interface/IBlog';
 import { blogs } from '../graphql/queries/blogs';
+import MainSpinner from '../components/spinner/MainSpinner';
 
 interface Props {
   parentStyle: any;
@@ -11,6 +12,7 @@ interface Props {
 
 interface States {
   blogs: IBlog[];
+  loading: boolean;
 }
 
 class Blog extends React.Component<ChildProps<Props>, States> {
@@ -18,12 +20,8 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     super(props);
     this.state = {
       blogs: [],
+      loading: true,
     };
-  }
-
-  shouldComponentUpdate(nextProps, nextState): boolean {
-    const { blogs } = this.state;
-    return !!(nextState.blogs.length !== 0 && nextState.blogs !== blogs);
   }
 
   componentWillReceiveProps(nextProps: ChildProps) {
@@ -31,19 +29,21 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     const blogs = (data as any).blogs;
     this.setState({
       blogs,
+      loading: blogs.length === 0 && !blogs,
     });
   }
 
   render() {
     const { children } = this.props;
-    const { blogs } = this.state;
+    const { blogs, loading } = this.state;
     const parentStyle = children as React.CSSProperties;
-    console.log(blogs);
+    if (loading) {
+      return <div style={ parentStyle }><MainSpinner color="#150940" name="cube-grid"/></div>;
+    }
+
     return (
-      <div style={ parentStyle } >
-        <h3>
-          Testing Blog
-        </h3>
+      <div style={ parentStyle } className="animated fadeInUp">
+        <h3>Testing Blog</h3>
         <NavLink to="/">
           Back to home
         </NavLink>

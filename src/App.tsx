@@ -270,7 +270,7 @@ class App extends React.Component<{}, States> {
                     render={ props =>
                       <Blog
                         { ...props }
-                        children={ marginTopMainNav }
+                        children={ marginTopBlogMainNav }
                       />
                     }
                   />
