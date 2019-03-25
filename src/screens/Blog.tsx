@@ -1,19 +1,24 @@
 import * as React from 'react';
 import { ChildProps, graphql } from 'react-apollo';
 import { NavLink } from 'react-router-dom';
-import { InputProps } from 'reactstrap';
+import { connect } from 'react-redux';
+import { fetchBlogs } from '../redux/actions/postBlog';
 
-import IBlog from '../custom/interface/IBlog';
 import { blogs } from '../graphql/queries/blogs';
 import MainSpinner from '../components/spinner/MainSpinner';
 
+import { objectAreSame } from '../custom/function';
+
 interface Props {
   parentStyle?: any;
+  fetchBlogs: any;
+  blogs: any;
 }
 
 interface States {
-  blogs: IBlog[];
+  // blogs: IBlog[];
   loading: boolean;
+  blogs: [];
 }
 
 class Blog extends React.Component<ChildProps<Props>, States> {
@@ -25,34 +30,38 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     };
   }
 
-  componentWillReceiveProps(nextProps: ChildProps) {
+  shouldComponentUpdate(nextProps, nextState): boolean {
+    const { loading } = this.state;
+    return nextState.loading !== loading;
+  }
+
+  componentWillReceiveProps(nextProps: any) {
+    const { blogs, fetchBlogs } = this.props;
     const { data } = nextProps;
-    const blogs = (data as any).blogs;
-    if (blogs) {
-      if (blogs.length === 0 && !blogs) {
+    const dataBlogs = (data as any).blogs;
+    const blogChanged = objectAreSame(blogs.items, dataBlogs);
+    if (!data.loading && !blogChanged) {
+      if (dataBlogs.length === 0 && !dataBlogs) {
         this.setState({
           loading: true,
         });
       } else {
         this.setState({
           loading: false,
+          blogs: dataBlogs,
         });
+        fetchBlogs(dataBlogs);
       }
     }
-    this.setState({
-      blogs,
-    });
   }
 
   render() {
-    const { children } = this.props;
-    const { blogs, loading } = this.state;
-    const parentStyle = children as React.CSSProperties;
+    const { loading } = this.state;
+    const { parentStyle, blogs, data } = this.props;
     if (loading) {
       return <div style={ parentStyle }><MainSpinner color="#150940" name="cube-grid"/></div>;
     }
 
-    console.log(blogs);
     return (
       <div style={ parentStyle } className="animated fadeInUp">
         <h3>Testing Blog</h3>
@@ -68,4 +77,8 @@ const blogCurrent = graphql<any>(blogs, {
   options: { variables: { startAt: 1, endAt: 3 } },
 })(Blog);
 
-export default blogCurrent;
+const mapStateToProps = (state: any) => ({
+  blogs: state.blogs,
+});
+
+export default connect(mapStateToProps, { fetchBlogs })(blogCurrent);

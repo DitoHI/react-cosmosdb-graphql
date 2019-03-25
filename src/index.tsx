@@ -5,17 +5,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import registerServiceWorker from './registerServiceWorker';
 
 // setup Apolle Client
-import apolloBoost from 'apollo-boost';
+import { default as Apollo } from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
-const client = new apolloBoost({
+// setup redux
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+
+const client = new Apollo({
   uri: 'https://hafizhprivateblogapi.azurewebsites.net/graphql',
   credentials: 'include',
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
+  <ApolloProvider client={ client }>
+    <Provider store={ store }>
+      <App/>
+    </Provider>
   </ApolloProvider>,
   document.getElementById('root') as HTMLElement,
 );
