@@ -1,13 +1,14 @@
 import * as React from 'react';
 import { ChildProps, graphql } from 'react-apollo';
 import { NavLink } from 'react-router-dom';
+import { InputProps } from 'reactstrap';
 
 import IBlog from '../custom/interface/IBlog';
 import { blogs } from '../graphql/queries/blogs';
 import MainSpinner from '../components/spinner/MainSpinner';
 
 interface Props {
-  parentStyle: any;
+  parentStyle?: any;
 }
 
 interface States {
@@ -27,9 +28,19 @@ class Blog extends React.Component<ChildProps<Props>, States> {
   componentWillReceiveProps(nextProps: ChildProps) {
     const { data } = nextProps;
     const blogs = (data as any).blogs;
+    if (blogs) {
+      if (blogs.length === 0 && !blogs) {
+        this.setState({
+          loading: true,
+        });
+      } else {
+        this.setState({
+          loading: false,
+        });
+      }
+    }
     this.setState({
       blogs,
-      loading: blogs.length === 0 && !blogs,
     });
   }
 
@@ -41,6 +52,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
       return <div style={ parentStyle }><MainSpinner color="#150940" name="cube-grid"/></div>;
     }
 
+    console.log(blogs);
     return (
       <div style={ parentStyle } className="animated fadeInUp">
         <h3>Testing Blog</h3>
@@ -52,6 +64,8 @@ class Blog extends React.Component<ChildProps<Props>, States> {
   }
 }
 
-const blogCurrent = graphql(blogs)(Blog);
+const blogCurrent = graphql<any>(blogs, {
+  options: { variables: { startAt: 1, endAt: 3 } },
+})(Blog);
 
 export default blogCurrent;

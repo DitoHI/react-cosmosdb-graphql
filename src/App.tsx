@@ -178,34 +178,33 @@ class App extends React.Component<{}, States> {
           return (
             <BrowserRouter>
               <div>
-                {/* Navigation */ }
-                <nav className="wrapper--introduction__parent" style={ topNavbar }>
-                  <Alert
-                    color="info"
-                    isOpen={ visibleAlertSourceCode }
-                    toggle={ this.onDismiss }
-                    style={ { textAlign: 'center' } }
-                  >
-                    This project is maintained with the legacy of open source. Check in my
-                    <a
-                      href="https://github.com/DitoHI/react-cosmosdb-graphql"
-                      target="_blank"
-                      className="alert-link"
-                    >&nbsp;Github&nbsp;</a>profile.
-                    Spread the <IoIosHeart/>
-                  </Alert>
-                  <MenuItem
-                    showAlertViewNotReady={ this.showAlertViewNotReady }
-                    refs={ refs }
-                  />
-                  <AlertNotExisted
-                    title={ alertTitle }
-                    propVisible={ alertVisible }
-                  />
-                </nav>
-
                 <Switch>
                   <Route path="/" exact>
+                    {/* Navigation */ }
+                    <nav className="wrapper--introduction__parent" style={ topNavbar }>
+                      <Alert
+                        color="info"
+                        isOpen={ visibleAlertSourceCode }
+                        toggle={ this.onDismiss }
+                        style={ { textAlign: 'center' } }
+                      >
+                        This project is maintained with the legacy of open source. Check in my
+                        <a
+                          href="https://github.com/DitoHI/react-cosmosdb-graphql"
+                          target="_blank"
+                          className="alert-link"
+                        >&nbsp;Github&nbsp;</a>profile.
+                        Spread the <IoIosHeart/>
+                      </Alert>
+                      <MenuItem
+                        showAlertViewNotReady={ this.showAlertViewNotReady }
+                        refs={ refs }
+                      />
+                      <AlertNotExisted
+                        title={ alertTitle }
+                        propVisible={ alertVisible }
+                      />
+                    </nav>
                     <div
                       ref={ meRef }
                       className="main-nav"
@@ -270,7 +269,6 @@ class App extends React.Component<{}, States> {
                     render={ props =>
                       <Blog
                         { ...props }
-                        children={ marginTopBlogMainNav }
                       />
                     }
                   />
