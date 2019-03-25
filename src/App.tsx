@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IoIosArrowDown, IoIosHeart } from 'react-icons/io';
 import { Alert, Container } from 'reactstrap';
 import { Query } from 'react-apollo';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import './index.css';
 import './styles/Main.css';
@@ -13,6 +14,8 @@ import Introduction from './screens/Introduction';
 import Education from './screens/Education';
 import Project from './screens/Project';
 import Footer from './screens/Footer';
+import BlogPreview from './screens/BlogPreview';
+import Blog from './screens/Blog';
 import MenuItem from './components/MenuItem';
 import MainSpinner from './components/MainSpinner';
 import AlertNotExisted from './components/AlertNotExisted';
@@ -91,7 +94,7 @@ class App extends React.Component<{}, States> {
       this.setState({
         alertVisible: false,
       });
-    },         1000);
+    }, 1000);
   }
 
   onDismiss() {
@@ -137,130 +140,145 @@ class App extends React.Component<{}, States> {
         : { marginTop: '2rem' };
 
     return (
-      <div>
-        <nav
-          className="wrapper--introduction__parent"
-          style={ topNavbar }
-        >
-          <Alert
-            color="info"
-            isOpen={ visibleAlertSourceCode }
-            toggle={ this.onDismiss }
-            style={ { textAlign: 'center' } }
-          >
-            This project is maintained with the legacy of open source. Check in my
-            <a
-              href="https://github.com/DitoHI/react-cosmosdb-graphql"
-              target="_blank"
-              className="alert-link"
-            >&nbsp;Github&nbsp;</a>profile.
-            Spread the <IoIosHeart/>
-          </Alert>
-          <MenuItem
-            showAlertViewNotReady={ this.showAlertViewNotReady }
-            refs={ refs }
-          />
-          <AlertNotExisted
-            title={ alertTitle }
-            propVisible={ alertVisible }
-          />
-        </nav>
-        <div
-          ref={ meRef }
-          className="main-nav"
-          style={ marginTopMainNav }
-        >
-          <Introduction/>
-          <Container className="wrapper--flex-center-space">
-            <IoIosArrowDown
-              size="68px"
-              color="#e11414"
-              onClick={ () => {
-                if (refs[1].current) {
-                  this.showAlertViewNotReady(false);
-                  refs[1].current.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  this.showAlertViewNotReady(true, 'education');
-                }
-              } }
-              style={ {
-                cursor: 'pointer',
-              } }
-            />
-          </Container>
-        </div>
-
-        <Query<Me> query={ meQuery }>
-          { ({ loading, error, data }) => {
-            if (loading) {
-              return (
-                <MainSpinner
-                  name="circle"
-                  color="#404040"
-                  style={ {
-                    width: '80px',
-                    height: '80px',
-                  } }
+      <BrowserRouter>
+        <div>
+          <Switch>
+            <Route path="/" exact>
+              <nav
+                className="wrapper--introduction__parent"
+                style={ topNavbar }
+              >
+                <Alert
+                  color="info"
+                  isOpen={ visibleAlertSourceCode }
+                  toggle={ this.onDismiss }
+                  style={ { textAlign: 'center' } }
+                >
+                  This project is maintained with the legacy of open source. Check in my
+                  <a
+                    href="https://github.com/DitoHI/react-cosmosdb-graphql"
+                    target="_blank"
+                    className="alert-link"
+                  >&nbsp;Github&nbsp;</a>profile.
+                  Spread the <IoIosHeart/>
+                </Alert>
+                <MenuItem
+                  showAlertViewNotReady={ this.showAlertViewNotReady }
+                  refs={ refs }
                 />
-              );
-            }
-
-            if (!data || !data.me) {
-              return null;
-            }
-
-            if (!data.me.education && !data.me.project && !data.me.experience) {
-              return null;
-            }
-
-            const educations = data.me.education as IEducation[];
-            const projects = data.me.project as IProject[];
-            const experiences = data.me.experience as IExperience[];
-            const me = data.me as IMe;
-
-            return (
-              <div className="wrapper--container-margin-top-bottom">
-                <div
-                  ref={ educationRef }
-                >
-                  <Education
-                    educations={ educations }
+                <AlertNotExisted
+                  title={ alertTitle }
+                  propVisible={ alertVisible }
+                />
+              </nav>
+              <div
+                ref={ meRef }
+                className="main-nav"
+                style={ marginTopMainNav }
+              >
+                <Introduction/>
+                <Container className="wrapper--flex-center-space">
+                  <IoIosArrowDown
+                    size="68px"
+                    color="#e11414"
+                    onClick={ () => {
+                      if (refs[1].current) {
+                        this.showAlertViewNotReady(false);
+                        refs[1].current.scrollIntoView({ behavior: 'smooth' });
+                      } else {
+                        this.showAlertViewNotReady(true, 'education');
+                      }
+                    } }
+                    style={ {
+                      cursor: 'pointer',
+                    } }
                   />
-                </div>
-                <div
-                  ref={ experienceRef }
-                  style={ {
-                    backgroundColor: '#f7f7f8',
-                  } }
-                >
-                  <Experience
-                    experiences={ experiences }
-                  />
-                </div>
-                <div
-                  ref={ projectRef }
-                  style={ {
-                    backgroundColor: '#efeff3',
-                  } }
-                >
-                  <Project
-                    projects={ projects }
-                  />
-                </div>
-                <div
-                  style={ {
-                    backgroundColor: '#f7f7f8',
-                  } }
-                >
-                  <Footer
-                    me={ me }
-                  />
-                </div>
+                </Container>
               </div>
-            );
-          } }
-        </Query>
-      </div>
+
+              <Query<Me> query={ meQuery }>
+                { ({ loading, error, data }) => {
+                  if (loading) {
+                    return (
+                      <MainSpinner
+                        name="circle"
+                        color="#404040"
+                        style={ {
+                          width: '80px',
+                          height: '80px',
+                        } }
+                      />
+                    );
+                  }
+
+                  if (!data || !data.me) {
+                    return null;
+                  }
+
+                  if (!data.me.education && !data.me.project && !data.me.experience) {
+                    return null;
+                  }
+
+                  const educations = data.me.education as IEducation[];
+                  const projects = data.me.project as IProject[];
+                  const experiences = data.me.experience as IExperience[];
+                  const me = data.me as IMe;
+
+                  return (
+                    <div className="wrapper--container-margin-top-bottom">
+                      <div
+                        ref={ educationRef }
+                      >
+                        <Education
+                          educations={ educations }
+                        />
+                      </div>
+                      <div
+                        ref={ experienceRef }
+                        style={ {
+                          backgroundColor: '#f7f7f8',
+                        } }
+                      >
+                        <Experience
+                          experiences={ experiences }
+                        />
+                      </div>
+                      <div
+                        ref={ projectRef }
+                        style={ {
+                          backgroundColor: '#efeff3',
+                        } }
+                      >
+                        <Project
+                          projects={ projects }
+                        />
+                      </div>
+                      <div
+                        style={ {
+                          backgroundColor: '#fff',
+                        } }
+                      >
+                        <BlogPreview
+                        />
+                      </div>
+                      <div
+                        style={ {
+                          backgroundColor: '#f7f7f8',
+                        } }
+                      >
+                        <Footer
+                          me={ me }
+                        />
+                      </div>
+                    </div>
+                  );
+                } }
+              </Query>
+            </Route>
+            <Route path="/blog" component={ Blog }/>
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }
