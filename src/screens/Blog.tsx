@@ -79,7 +79,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
       return (
         <div
           key={ hastag }
-          className={`${css(BlogStyle.blogHastagsContent)} hastag-content`}
+          className={`${css(BlogStyle.blogHastagsContent)}`}
         >
           { hastag }
         </div>
@@ -130,11 +130,11 @@ class Blog extends React.Component<ChildProps<Props>, States> {
         </div>
 
         {/* Hastags */ }
-        <Container
+        <div
           className={`${css(BlogStyle.blogHastagsWrapper)} wrapper--padding-top-bottom-20`}
         >
           { this.renderHastag(hastags) }
-        </Container>
+        </div>
 
         <Switch>
           <Route exact path="/blog">

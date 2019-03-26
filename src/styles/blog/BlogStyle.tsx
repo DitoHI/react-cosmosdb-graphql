@@ -22,6 +22,7 @@ export default StyleSheet.create({
     color: '#fff',
   },
   blogHastagsWrapper: {
+    backgroundColor: '#f2f2f2',
     display: 'flex',
     flexFlow: 'row wrap',
     justifyContent: 'center',
@@ -37,7 +38,7 @@ export default StyleSheet.create({
     paddingBottom: '30px',
   },
   blogItemsContent: {
-    backgroundColor: '#efeff3',
+    backgroundColor: '#fff',
     display: 'flex',
     flexWrap: 'wrap' as 'wrap',
     flexDirection: 'column' as 'column',
@@ -72,6 +73,11 @@ export default StyleSheet.create({
     fontSize: '1.8rem',
     paddingTop: '10px',
     paddingBottom: '10px',
+  },
+  blogItemContentLastEdited: {
+    fontStyle: 'italic',
+    color: '#90949c',
+    fontSize: '0.9rem',
   },
   blogItemContentTextDesc: {
     fontSize: '1.2rem',

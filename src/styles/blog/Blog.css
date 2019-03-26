@@ -1,14 +1,3 @@
-.hastag-content {
-    opacity: 0.6;
-    border-bottom: 1px solid transparent;
-}
-
-.hastag-content:hover,
-.hastag-content:focus {
-    opacity: 1.0;
-    border-bottom: 1px solid #150940;
-}
-
 .blog-item-img {
     display: block;
     width: 750px;

@@ -7,6 +7,7 @@ import { css } from 'aphrodite';
 import '../../styles/Main.css';
 import '../../styles/blog/Blog.css';
 import BlogStyle from '../../styles/blog/BlogStyle';
+import * as dateFormat from 'dateformat';
 
 interface Props {
   blog: IBlog;
@@ -31,6 +32,9 @@ const contentBlog: React.FunctionComponent<Props> = ({ blog, handleClick }) => {
           src={ blogImage }
           className="blog-item-img"
         />
+      </div>
+      <div className={css(BlogStyle.blogItemContentLastEdited)}>
+        { dateFormat(blog.lastEdited, 'dd mmm yyyy') }
       </div>
       <div className={css(BlogStyle.blogItemContentTextWrapper)}>
         <div className={css(BlogStyle.blogItemContentTextTitle)}>{ blog.title }</div>

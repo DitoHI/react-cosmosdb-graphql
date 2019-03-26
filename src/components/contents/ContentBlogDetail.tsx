@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Query } from 'react-apollo';
 import { css } from 'aphrodite';
+import * as dateFormat from 'dateformat';
 
 import '../../styles/Main.css';
 import '../../styles/blog/Blog.css';
@@ -100,6 +101,9 @@ class ContentBlogDetail extends React.Component<Props, {}> {
                     src={ blogImage }
                     className="blog-item-img"
                   />
+                </div>
+                <div className={css(BlogStyle.blogItemContentLastEdited)}>
+                  { dateFormat(blog.lastEdited, 'dd mmm yyyy') }
                 </div>
                 <div className={css(BlogStyle.blogItemContentTextDesc)}>{ blog.content }</div>
 
