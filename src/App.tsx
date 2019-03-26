@@ -131,7 +131,7 @@ class App extends React.Component<{}, States> {
         ? width > 375
           ? { top: '-10rem' }
           : { top: '-20rem' }
-        : { top: '-6rem' }
+        : { top: '-12rem' }
       : { top: '0' };
 
     const marginTopMainNav = visibleAlertSourceCode
