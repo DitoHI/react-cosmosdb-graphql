@@ -1,4 +1,6 @@
-export default {
+import { StyleSheet } from 'aphrodite';
+
+export default StyleSheet.create({
   blogNavMain: {
     backgroundColor: '#4267b2',
     display: 'flex',
@@ -48,7 +50,7 @@ export default {
     display: 'flex',
     flexDirection: 'column' as 'column',
     flexWrap: 'wrap' as 'wrap',
-    alignItems: 'start',
+    alignItems: 'flex-start' as 'flex-start',
   },
   blogItemContentTextTitle: {
     fontWeight: 800,
@@ -74,4 +76,4 @@ export default {
     marginTop: '30px',
     marginBottom: '30px',
   },
-};
+});

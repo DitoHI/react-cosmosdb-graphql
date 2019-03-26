@@ -3,8 +3,7 @@ import { ChildProps, graphql } from 'react-apollo';
 import { NavLink, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Container } from 'reactstrap';
-import IBlog from '../custom/interface/IBlog';
-import { fetchBlogs } from '../redux/actions/postBlog';
+import { css } from 'aphrodite';
 
 import { blogsQuery } from '../graphql/queries/blogs';
 import MainSpinner from '../components/spinner/MainSpinner';
@@ -13,6 +12,8 @@ import ContentBlogDetail from '../components/contents/ContentBlogDetail';
 
 import { objectAreSame } from '../custom/function';
 import BlogStyle from '../styles/blog/BlogStyle';
+import IBlog from '../custom/interface/IBlog';
+import { fetchBlogs } from '../redux/actions/postBlog';
 
 import '../styles/Main.css';
 import '../styles/blog/Blog.css';
@@ -76,7 +77,10 @@ class Blog extends React.Component<ChildProps<Props>, States> {
   renderHastag(hastags) {
     return hastags.map((hastag: string) => {
       return (
-        <div key={ hastag } style={ BlogStyle.blogHastagsContent } className="hastag-content">
+        <div
+          key={ hastag }
+          className={`${css(BlogStyle.blogHastagsContent)} hastag-content`}
+        >
           { hastag }
         </div>
       );
@@ -116,10 +120,10 @@ class Blog extends React.Component<ChildProps<Props>, States> {
 
     return (
       <div>
-        <div style={ BlogStyle.blogNavMain } className="animated fadeInDown">
-          <span style={ BlogStyle.blogNavMainTitle }>Hafizh Notes</span>
+        <div className={`${css(BlogStyle.blogNavMain)} animated fadeInDown`}>
+          <span className={css(BlogStyle.blogNavMainTitle)}>Hafizh Notes</span>
           <NavLink to="/">
-            <Button color="link" style={ BlogStyle.blogNavMainRedirect }>
+            <Button color="link" className={css(BlogStyle.blogNavMainRedirect)}>
               Back to Home
             </Button>
           </NavLink>
@@ -127,8 +131,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
 
         {/* Hastags */ }
         <Container
-          style={ BlogStyle.blogHastagsWrapper }
-          className="wrapper--padding-top-bottom-20"
+          className={`${css(BlogStyle.blogHastagsWrapper)} wrapper--padding-top-bottom-20`}
         >
           { this.renderHastag(hastags) }
         </Container>
@@ -136,7 +139,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
         <Switch>
           <Route exact path="/blog">
             {/* Blogs */ }
-            <div style={ BlogStyle.blogItemsContent } className="wrapper--padding-top-bottom-50">
+            <div className={`${css(BlogStyle.blogItemsContent)} wrapper--padding-top-bottom-50`}>
               { this.renderBlog(blogs) }
             </div>
           </Route>

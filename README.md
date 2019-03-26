@@ -10,6 +10,7 @@ Dependencies
 * React Icons
 * React Slick
 * Redux
+* Aphrodite
 
 
 License
