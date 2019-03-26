@@ -3,6 +3,9 @@ import { Button } from 'reactstrap';
 import IExperience from '../../custom/interface/IExperience';
 import * as dateFormat from 'dateformat';
 
+import '../../styles/Main.css';
+import '../../styles/CardContainer.css';
+
 interface Props {
   experience: IExperience;
   experienceIcon: string;

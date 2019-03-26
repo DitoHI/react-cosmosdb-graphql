@@ -4,7 +4,7 @@ export default {
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: '235px',
+    height: '160px',
   },
   blogNavMainTitle: {
     fontSize: '4rem',
@@ -26,6 +26,10 @@ export default {
     fontWeight: 500,
     color: '#150940',
   },
+  blogItemsContentWrapper: {
+    paddingTop: '30px',
+    paddingBottom: '30px',
+  },
   blogItemsContent: {
     backgroundColor: '#efeff3',
     display: 'flex',
@@ -34,12 +38,18 @@ export default {
     alignItems: 'center',
   },
   blogItemContentImageWrapper: {
-    maxWidth: '500px',
+    maxWidth: '750px',
     maxHeight: '400px',
     position: 'relative' as 'relative',
     overflow: 'hidden',
     marginTop: '50px',
     marginBottom: '50px',
+  },
+  blogItemContentTextWrapper: {
+    display: 'flex',
+    flexDirection: 'column' as 'column',
+    flexWrap: 'wrap' as 'wrap',
+    alignItems: 'start',
   },
   blogItemContentTextTitle: {
     fontWeight: 800,
@@ -52,7 +62,17 @@ export default {
     paddingTop: '10px',
     paddingBottom: '10px',
   },
+  blogItemContentReadMore: {
+    padding: '20px 0',
+  },
   blogItemContentTextHastag: {
     cursor: 'default',
+  },
+  blogItemContentDetailWrapper: {
+    padding: '3rem 15rem',
+  },
+  blogItemContentDetailImageWrapper: {
+    marginTop: '30px',
+    marginBottom: '30px',
   },
 };

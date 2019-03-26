@@ -7,10 +7,3 @@ export const fetchBlogs = (blogs: IBlog[]) => (dispatch: any) => {
     payload: blogs,
   });
 };
-
-export const activeBlog = (blog: IBlog) => (dispatch: any) => {
-  dispatch({
-    type: ACTIVE_BLOG,
-    payload: blog,
-  });
-};

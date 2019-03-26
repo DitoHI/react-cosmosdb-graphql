@@ -3,6 +3,38 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: Blogs
+// ====================================================
+
+export interface Blogs_blogs {
+  __typename: "Blog";
+  id: string;
+  user: string;
+  title: string | null;
+  content: string | null;
+  lastEdited: any | null;
+  isDeleted: boolean | null;
+  imageUri: (string | null)[] | null;
+  positionIndex: number | null;
+  hastag: string | null;
+}
+
+export interface Blogs {
+  blogs: (Blogs_blogs | null)[] | null;
+}
+
+export interface BlogsVariables {
+  id?: string | null;
+  startAt?: number | null;
+  endAt?: number | null;
+  hastag?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: Me
 // ====================================================
 
@@ -53,6 +85,27 @@ export interface Me_me {
 
 export interface Me {
   me: Me_me | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL fragment: BlogPage
+// ====================================================
+
+export interface BlogPage {
+  __typename: "Blog";
+  id: string;
+  user: string;
+  title: string | null;
+  content: string | null;
+  lastEdited: any | null;
+  isDeleted: boolean | null;
+  imageUri: (string | null)[] | null;
+  positionIndex: number | null;
+  hastag: string | null;
 }
 
 /* tslint:disable */

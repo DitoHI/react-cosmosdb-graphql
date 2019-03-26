@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { ChildProps, graphql } from 'react-apollo';
-import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Container } from 'reactstrap';
 import IBlog from '../custom/interface/IBlog';
 import { fetchBlogs } from '../redux/actions/postBlog';
 
-import { blogs } from '../graphql/queries/blogs';
+import { blogsQuery } from '../graphql/queries/blogs';
 import MainSpinner from '../components/spinner/MainSpinner';
 import ContentBlog from '../components/contents/ContentBlog';
+import ContentBlogDetail from '../components/contents/ContentBlogDetail';
 
 import { objectAreSame } from '../custom/function';
 import BlogStyle from '../styles/blog/BlogStyle';
@@ -20,12 +21,14 @@ import '../styles/Introduction.css';
 interface Props {
   parentStyle?: any;
   fetchBlogs: any;
+  activeBlog: any;
   blogs: any;
 }
 
 interface States {
   loading: boolean;
   blogs: [];
+  blog: IBlog;
 }
 
 class Blog extends React.Component<ChildProps<Props>, States> {
@@ -34,7 +37,10 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     this.state = {
       blogs: [],
       loading: true,
+      blog: {} as IBlog,
     };
+
+    this.setActiveBlog = this.setActiveBlog.bind(this);
   }
 
   componentDidMount() {
@@ -45,8 +51,8 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     const { blogs, fetchBlogs } = this.props;
     const { data } = nextProps;
     const dataBlogs = (data as any).blogs;
-    if (blogs.items && dataBlogs) {
-      const blogChanged = objectAreSame(blogs.items, dataBlogs);
+    if (blogs && dataBlogs) {
+      const blogChanged = objectAreSame(blogs, dataBlogs);
       if (!data.loading && !blogChanged) {
         if (dataBlogs.length === 0 && !dataBlogs) {
           this.setState({
@@ -67,7 +73,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     }
   }
 
-  static renderHastag(hastags) {
+  renderHastag(hastags) {
     return hastags.map((hastag: string) => {
       return (
         <div key={ hastag } style={ BlogStyle.blogHastagsContent } className="hastag-content">
@@ -77,25 +83,32 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     });
   }
 
-  static renderBlog(blogs) {
+  renderBlog(blogs) {
     return blogs.map((blog: IBlog) => {
       return (
         <ContentBlog
           key={ blog.title }
           blog={ blog }
+          handleClick={ this.setActiveBlog }
         />);
     });
   }
 
+  setActiveBlog(blogActive) {
+    this.setState({
+      blog: blogActive,
+    });
+  }
+
   render() {
-    const { loading } = this.state;
+    const { blog, loading } = this.state;
     const { blogs, data, children } = this.props;
     const parentStyle = children as React.CSSProperties;
     if (loading) {
       return <div style={ parentStyle }><MainSpinner color="#150940" name="cube-grid"/></div>;
     }
 
-    const hastags = blogs.items
+    const hastags = blogs
       .map((blog) => {
         return blog.hastag;
       })
@@ -117,33 +130,29 @@ class Blog extends React.Component<ChildProps<Props>, States> {
           style={ BlogStyle.blogHastagsWrapper }
           className="wrapper--padding-top-bottom-20"
         >
-          { Blog.renderHastag(hastags) }
+          { this.renderHastag(hastags) }
         </Container>
 
         <Switch>
-          <Route path="/blog" exact>
+          <Route exact path="/blog">
             {/* Blogs */ }
             <div style={ BlogStyle.blogItemsContent } className="wrapper--padding-top-bottom-50">
-              { Blog.renderBlog(blogs.items) }
+              { this.renderBlog(blogs) }
             </div>
           </Route>
-          <Route path="/blog/testing">
-            <div>
-              Testing
-            </div>
-          </Route>
+          <Route path="/blog/:blogId" component={ ContentBlogDetail }/>
         </Switch>
       </div>
     );
   }
 }
 
-const blogCurrent = graphql<any>(blogs, {
-  options: { variables: { startAt: 0, endAt: 3 } },
+const blogCurrent = graphql<any>(blogsQuery, {
+  options: { variables: { startAt: 0, endAt: 8 } },
 })(Blog);
 
 const mapStateToProps = (state: any) => ({
-  blogs: state.blogs,
+  blogs: state.blogs.items,
 });
 
 export default connect(mapStateToProps, { fetchBlogs })(blogCurrent);

@@ -17,7 +17,6 @@ import Footer from './screens/Footer';
 import BlogPreview from './screens/BlogPreview';
 import Blog from './screens/Blog';
 import MenuItem from './components/MenuItem';
-import MainSpinner from './components/spinner/MainSpinner';
 import HomeSpinner from './components/spinner/HomeSpinner';
 import AlertNotExisted from './components/AlertNotExisted';
 
@@ -60,6 +59,7 @@ class App extends React.Component<{}, States> {
 
   componentDidMount() {
     this.updateWindowDimensions();
+    window.scrollTo(0, 0);
     window.addEventListener('resize', this.updateWindowDimensions);
   }
 
