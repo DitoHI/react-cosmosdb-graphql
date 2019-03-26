@@ -12,6 +12,10 @@ export default StyleSheet.create({
     fontSize: '4rem',
     fontWeight: 600,
     color: '#fff',
+
+    '@media (max-width: 768px)': {
+      fontSize: '2rem',
+    },
   },
   blogNavMainRedirect: {
     fontWeight: 600,
@@ -39,12 +43,23 @@ export default StyleSheet.create({
     flexDirection: 'column' as 'column',
     alignItems: 'center',
   },
+  blogItemContentWrapper: {
+    maxWidth: '750px',
+    '@media (max-width: 768px)': {
+      paddingLeft: '25px',
+      paddingRight: '25px',
+    },
+  },
   blogItemContentImageWrapper: {
     maxHeight: '400px',
     position: 'relative' as 'relative',
     overflow: 'hidden',
     marginTop: '50px',
     marginBottom: '50px',
+    '@media (max-width: 768px)': {
+      marginTop: '20px',
+      marginBottom: '20px',
+    },
   },
   blogItemContentTextWrapper: {
     display: 'flex',

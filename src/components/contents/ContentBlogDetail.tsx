@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Query } from 'react-apollo';
+import { css } from 'aphrodite';
 
 import '../../styles/Main.css';
 import '../../styles/blog/Blog.css';
@@ -67,9 +68,19 @@ class ContentBlogDetail extends React.Component<Props, {}> {
             ? blog.imageUri
             : require('../../images/placeholder.png');
 
+          // testing
+          // blog.content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+
           return (
-            <div style={ { ...BlogStyle.blogItemsContent, ...BlogStyle.blogItemsContentWrapper } }>
-              <div style={ BlogStyle.blogItemContentTextWrapper }>
+            <div
+              className={
+                css(
+                  [BlogStyle.blogItemsContent,
+                    BlogStyle.blogItemsContentWrapper,
+                    BlogStyle.blogItemContentWrapper])
+              }
+            >
+              <div className={ css(BlogStyle.blogItemContentTextWrapper) }>
                 <NavLink to="/blog">
                   <Button
                     color="link"
@@ -77,12 +88,12 @@ class ContentBlogDetail extends React.Component<Props, {}> {
                   > Back to Blog
                   </Button>
                 </NavLink>
-                <div style={ BlogStyle.blogItemContentTextTitle }>{ blog.title }</div>
+                <div className={ css(BlogStyle.blogItemContentTextTitle) }>{ blog.title }</div>
                 <div
-                  style={ {
-                    ...BlogStyle.blogItemContentImageWrapper,
-                    ...BlogStyle.blogItemContentDetailImageWrapper,
-                  } }
+                  className={
+                    css([BlogStyle.blogItemContentImageWrapper,
+                      BlogStyle.blogItemContentDetailImageWrapper])
+                  }
                 >
                   <img
                     alt={ blog.title }
@@ -90,9 +101,9 @@ class ContentBlogDetail extends React.Component<Props, {}> {
                     className="blog-item-img"
                   />
                 </div>
-                <div style={ BlogStyle.blogItemContentTextDesc }>{ blog.content }</div>
+                <div className={css(BlogStyle.blogItemContentTextDesc)}>{ blog.content }</div>
 
-                <Button outline color="info" style={ BlogStyle.blogItemContentTextHastag }>
+                <Button outline color="info" className={css(BlogStyle.blogItemContentTextHastag)}>
                   <div>{ blog.hastag }</div>
                 </Button>
               </div>
