@@ -81,7 +81,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
           key={ hastag }
           className={`${css(BlogStyle.blogHastagsContent)}`}
         >
-          { hastag }
+          #{ hastag }
         </div>
       );
     });

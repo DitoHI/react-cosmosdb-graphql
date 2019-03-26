@@ -28,10 +28,14 @@ export default StyleSheet.create({
     justifyContent: 'center',
   },
   blogHastagsContent: {
+    borderBottom: '2px solid transparent',
     cursor: 'pointer',
     fontSize: '1.2rem',
     fontWeight: 500,
     color: '#150940',
+    ':hover': {
+      borderBottom: '2px solid #150940',
+    },
   },
   blogItemsContentWrapper: {
     paddingTop: '30px',
