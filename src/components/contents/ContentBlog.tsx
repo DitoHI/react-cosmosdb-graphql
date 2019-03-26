@@ -10,7 +10,7 @@ interface Props {
   blog: IBlog;
 }
 
-const contentEducation: React.FunctionComponent<Props> =
+const contentBlog: React.FunctionComponent<Props> =
   ({ blog }) => {
     const blogImage = blog.imageUri
       ? blog.imageUri
@@ -30,7 +30,7 @@ const contentEducation: React.FunctionComponent<Props> =
         <div>
           <div style={ BlogStyle.blogItemContentTextTitle }>{ blog.title }</div>
           <div style={ BlogStyle.blogItemContentTextDesc }>{ blog.content }</div>
-          <Button outline color="info">
+          <Button outline color="info" style={ BlogStyle.blogItemContentTextHastag }>
             <div>{ blog.hastag }</div>
           </Button>
         </div>
@@ -38,4 +38,4 @@ const contentEducation: React.FunctionComponent<Props> =
     );
   };
 
-export default contentEducation;
+export default contentBlog;

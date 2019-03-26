@@ -52,4 +52,7 @@ export default {
     paddingTop: '10px',
     paddingBottom: '10px',
   },
+  blogItemContentTextHastag: {
+    cursor: 'default',
+  },
 };

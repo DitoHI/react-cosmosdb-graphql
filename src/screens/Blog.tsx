@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { ChildProps, graphql } from 'react-apollo';
-import { NavLink } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Button, Container } from 'reactstrap';
 import IBlog from '../custom/interface/IBlog';
@@ -37,10 +37,8 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     };
   }
 
-  shouldComponentUpdate(nextProps): boolean {
-    const { blogs } = this.props;
-    const changedBlog = objectAreSame(blogs.items, nextProps.blogs.items);
-    return !changedBlog;
+  componentDidMount() {
+    window.scrollTo(0, 0);
   }
 
   componentWillReceiveProps(nextProps: any) {
@@ -61,6 +59,10 @@ class Blog extends React.Component<ChildProps<Props>, States> {
           });
           fetchBlogs(dataBlogs);
         }
+      } else {
+        this.setState({
+          loading: false,
+        });
       }
     }
   }
@@ -79,6 +81,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     return blogs.map((blog: IBlog) => {
       return (
         <ContentBlog
+          key={ blog.title }
           blog={ blog }
         />);
     });
@@ -86,7 +89,8 @@ class Blog extends React.Component<ChildProps<Props>, States> {
 
   render() {
     const { loading } = this.state;
-    const { blogs, parentStyle, data } = this.props;
+    const { blogs, data, children } = this.props;
+    const parentStyle = children as React.CSSProperties;
     if (loading) {
       return <div style={ parentStyle }><MainSpinner color="#150940" name="cube-grid"/></div>;
     }
@@ -116,10 +120,19 @@ class Blog extends React.Component<ChildProps<Props>, States> {
           { Blog.renderHastag(hastags) }
         </Container>
 
-        {/* Blogs */ }
-        <div style={ BlogStyle.blogItemsContent } className="wrapper--padding-top-bottom-50">
-          { Blog.renderBlog(blogs.items) }
-        </div>
+        <Switch>
+          <Route path="/blog" exact>
+            {/* Blogs */ }
+            <div style={ BlogStyle.blogItemsContent } className="wrapper--padding-top-bottom-50">
+              { Blog.renderBlog(blogs.items) }
+            </div>
+          </Route>
+          <Route path="/blog/testing">
+            <div>
+              Testing
+            </div>
+          </Route>
+        </Switch>
       </div>
     );
   }
