@@ -44,7 +44,7 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   blogItemContentWrapper: {
-    maxWidth: '750px',
+    maxWidth: '100%',
     '@media (max-width: 768px)': {
       paddingLeft: '25px',
       paddingRight: '25px',
