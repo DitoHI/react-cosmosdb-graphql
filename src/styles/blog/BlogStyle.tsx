@@ -38,7 +38,6 @@ export default {
     alignItems: 'center',
   },
   blogItemContentImageWrapper: {
-    maxWidth: '750px',
     maxHeight: '400px',
     position: 'relative' as 'relative',
     overflow: 'hidden',

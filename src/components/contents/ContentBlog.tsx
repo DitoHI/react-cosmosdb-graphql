@@ -16,8 +16,9 @@ const contentBlog: React.FunctionComponent<Props> = ({ blog, handleClick }) => {
   const blogImage = blog.imageUri
     ? blog.imageUri
     : require('../../images/placeholder.png');
+
   return (
-    <div>
+    <div style={{ maxWidth: '750px' }}>
       <div
         style={ BlogStyle.blogItemContentImageWrapper }
       >
@@ -29,7 +30,7 @@ const contentBlog: React.FunctionComponent<Props> = ({ blog, handleClick }) => {
       </div>
       <div style={ BlogStyle.blogItemContentTextWrapper }>
         <div style={ BlogStyle.blogItemContentTextTitle }>{ blog.title }</div>
-        <div style={ BlogStyle.blogItemContentTextDesc }>{ blog.content }</div>
+        <div className="blog-item-content">{ blog.content }</div>
 
         <NavLink to={ `/blog/${blog.id}` }>
           <Button
