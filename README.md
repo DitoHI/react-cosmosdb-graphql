@@ -9,6 +9,7 @@ Dependencies
 * React with Bootstrap 4.x implemented (Reactstrap)
 * React Icons
 * React Slick
+* Redux
 
 
 License
