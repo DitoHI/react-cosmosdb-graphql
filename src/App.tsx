@@ -19,6 +19,7 @@ import Blog from './screens/Blog';
 import MenuItem from './components/MenuItem';
 import HomeSpinner from './components/spinner/HomeSpinner';
 import AlertNotExisted from './components/AlertNotExisted';
+import ErrorPath from './components/ErrorPath';
 
 import { default as radioSpinner } from './images/radio_spinner.gif';
 
@@ -273,12 +274,15 @@ class App extends React.Component<{}, States> {
                       />
                     }
                   />
+                  <Route component={ ErrorPath } />
                 </Switch>
 
                 {/* Footer */ }
                 <div
                   style={ {
                     backgroundColor: '#f7f7f8',
+                    display: 'flex',
+                    justifyContent: 'center',
                   } }
                   className="wrapper--padding-top-bottom-50"
                 >

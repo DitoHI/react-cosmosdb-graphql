@@ -79,7 +79,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
       return (
         <div
           key={ hastag }
-          className={`${css(BlogStyle.blogHastagsContent)}`}
+          className={ `${ css(BlogStyle.blogHastagsContent) }` }
         >
           #{ hastag }
         </div>
@@ -120,10 +120,10 @@ class Blog extends React.Component<ChildProps<Props>, States> {
 
     return (
       <div>
-        <div className={`${css(BlogStyle.blogNavMain)} animated fadeInDown`}>
-          <span className={css(BlogStyle.blogNavMainTitle)}>Hafizh Notes</span>
+        <div className={ `${ css(BlogStyle.blogNavMain) } animated fadeInDown` }>
+          <span className={ css(BlogStyle.blogNavMainTitle) }>Hafizh Notes</span>
           <NavLink to="/">
-            <Button color="link" className={css(BlogStyle.blogNavMainRedirect)}>
+            <Button color="link" className={ css(BlogStyle.blogNavMainRedirect) }>
               Back to Home
             </Button>
           </NavLink>
@@ -131,7 +131,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
 
         {/* Hastags */ }
         <div
-          className={`${css(BlogStyle.blogHastagsWrapper)} wrapper--padding-top-bottom-20`}
+          className={ `${ css(BlogStyle.blogHastagsWrapper) } wrapper--padding-top-bottom-20` }
         >
           { this.renderHastag(hastags) }
         </div>
@@ -139,7 +139,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
         <Switch>
           <Route exact path="/blog">
             {/* Blogs */ }
-            <div className={`${css(BlogStyle.blogItemsContent)} wrapper--padding-top-bottom-50`}>
+            <div className={ `${ css(BlogStyle.blogItemsContent) } wrapper--padding-top-bottom-50` }>
               { this.renderBlog(blogs) }
             </div>
           </Route>
