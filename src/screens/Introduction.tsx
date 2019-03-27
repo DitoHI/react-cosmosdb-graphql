@@ -10,7 +10,7 @@ import FollowMe from '../components/FollowMe';
 class Introduction extends React.Component {
   render() {
     return (
-      <Jumbotron className="wrapper--introduction">
+      <div className="wrapper--introduction">
         <Container className="wrapper--padding-top-bottom-20">
           <Row>
             <Col sm="6">
@@ -35,7 +35,7 @@ class Introduction extends React.Component {
 
         <FollowMe/>
 
-      </Jumbotron>
+      </div>
     );
   }
 }

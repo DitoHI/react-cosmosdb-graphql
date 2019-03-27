@@ -13,7 +13,8 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 
 const client = new Apollo({
-  uri: 'https://hafizhprivateblogapi.azurewebsites.net/graphql',
+  // uri: 'https://hafizhprivateblogapi.azurewebsites.net/graphql',
+  uri: 'http://localhost:8080/graphql',
   credentials: 'include',
 });
 

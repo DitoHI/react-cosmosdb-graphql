@@ -137,11 +137,11 @@ class App extends React.Component<{}, States> {
 
     const marginTopMainNav = visibleAlertSourceCode
       ? width > 375
-        ? { marginTop: '4rem' }
-        : { marginTop: '9rem' }
+        ? { marginTop: '4rem', paddingTop: '6rem' }
+        : { marginTop: '9rem', paddingTop: '4rem' }
       : width > 375
-        ? { marginTop: '0' }
-        : { marginTop: '2rem' };
+        ? { marginTop: '0', paddingTop: '6rem' }
+        : { marginTop: '2rem', paddingTop: '3rem' };
 
     const marginTopBlogMainNav = visibleAlertSourceCode
       ? width > 375
@@ -226,6 +226,8 @@ class App extends React.Component<{}, States> {
                           } }
                           style={ {
                             cursor: 'pointer',
+                            paddingTop: '20px',
+                            paddingBottom: '20px',
                           } }
                         />
                       </Container>
