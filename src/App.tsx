@@ -81,7 +81,7 @@ class App extends React.Component<{}, States> {
     const { prevScrollpos } = this.state;
 
     const currentScrollPos = window.pageYOffset;
-    const visible = prevScrollpos > currentScrollPos;
+    const visible = prevScrollpos >= currentScrollPos;
 
     this.setState({
       visible,
