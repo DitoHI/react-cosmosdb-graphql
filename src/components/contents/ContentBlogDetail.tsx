@@ -66,7 +66,7 @@ class ContentBlogDetail extends React.Component<Props, {}> {
           }
 
           const blogImage = blog.imageUri
-            ? blog.imageUri
+            ? require(`../../images/blog/${blog.imageUri}`)
             : require('../../images/placeholder.png');
 
           return (
@@ -89,8 +89,7 @@ class ContentBlogDetail extends React.Component<Props, {}> {
                 <div className={ css(BlogStyle.blogItemContentTextTitle) }>{ blog.title }</div>
                 <div
                   className={
-                    css([BlogStyle.blogItemContentImageWrapper,
-                      BlogStyle.blogItemContentDetailImageWrapper])
+                    css([BlogStyle.blogItemContentImageWrapper])
                   }
                 >
                   <img

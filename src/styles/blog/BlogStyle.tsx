@@ -64,12 +64,6 @@ export default StyleSheet.create({
     maxHeight: '400px',
     position: 'relative' as 'relative',
     overflow: 'hidden',
-    marginTop: '50px',
-    marginBottom: '50px',
-    '@media (max-width: 768px)': {
-      marginTop: '20px',
-      marginBottom: '20px',
-    },
   },
   blogItemContentTextWrapper: {
     display: 'flex',
@@ -102,9 +96,5 @@ export default StyleSheet.create({
   },
   blogItemContentDetailWrapper: {
     padding: '3rem 15rem',
-  },
-  blogItemContentDetailImageWrapper: {
-    marginTop: '30px',
-    marginBottom: '30px',
   },
 });
