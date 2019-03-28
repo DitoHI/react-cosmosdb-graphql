@@ -49,13 +49,18 @@ export default StyleSheet.create({
     alignItems: 'center',
   },
   blogItemContentWrapper: {
+    display: 'flex',
+    flexFlow: 'column wrap',
     maxWidth: '100%',
+    paddingLeft: '4rem',
+    paddingRight: '4rem',
     '@media (max-width: 768px)': {
       paddingLeft: '25px',
       paddingRight: '25px',
     },
   },
   blogItemContentImageWrapper: {
+    maxWidth: '750px',
     maxHeight: '400px',
     position: 'relative' as 'relative',
     overflow: 'hidden',
@@ -85,6 +90,7 @@ export default StyleSheet.create({
   },
   blogItemContentTextDesc: {
     fontSize: '1.2rem',
+    textAlign: 'justify',
     paddingTop: '10px',
     paddingBottom: '10px',
   },

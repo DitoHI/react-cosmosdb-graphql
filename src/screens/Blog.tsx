@@ -139,7 +139,9 @@ class Blog extends React.Component<ChildProps<Props>, States> {
         <Switch>
           <Route exact path="/blog">
             {/* Blogs */ }
-            <div className={ `${ css(BlogStyle.blogItemsContent) } wrapper--padding-top-bottom-50` }>
+            <div
+              className="wrapper--padding-top-bottom-50"
+            >
               { this.renderBlog(blogs) }
             </div>
           </Route>

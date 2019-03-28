@@ -18,9 +18,8 @@ const contentBlog: React.FunctionComponent<Props> = ({ blog, handleClick }) => {
   const blogImage = blog.imageUri
     ? blog.imageUri
     : require('../../images/placeholder.png');
-
-  // testing
-  // blog.content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+  let cleanContent = blog.content.replace(/<\/?[^>]+(>|$)/g, '');
+  cleanContent = cleanContent.replace('&rsquo;', '\'');
 
   return (
     <div className={css(BlogStyle.blogItemContentWrapper)}>
@@ -38,7 +37,7 @@ const contentBlog: React.FunctionComponent<Props> = ({ blog, handleClick }) => {
       </div>
       <div className={css(BlogStyle.blogItemContentTextWrapper)}>
         <div className={css(BlogStyle.blogItemContentTextTitle)}>{ blog.title }</div>
-        <div className="blog-item-content">{ blog.content }</div>
+        <div className="blog-item-content">{ cleanContent }</div>
 
         <NavLink to={ `/blog/${blog.id}` }>
           <Button

@@ -26,23 +26,6 @@
     padding-right: 1em;
 }
 
-.blog-item-content:before {
-    content: '...';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
-.blog-item-content:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.2em;
-    background: transparent;
-}
-
 @media only screen and (max-width: 768px) {
     .blog-item-img {
         width: 100%;

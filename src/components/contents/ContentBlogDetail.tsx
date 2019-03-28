@@ -69,9 +69,6 @@ class ContentBlogDetail extends React.Component<Props, {}> {
             ? blog.imageUri
             : require('../../images/placeholder.png');
 
-          // testing
-          // blog.content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
-
           return (
             <div
               className={
@@ -105,7 +102,10 @@ class ContentBlogDetail extends React.Component<Props, {}> {
                 <div className={css(BlogStyle.blogItemContentLastEdited)}>
                   { dateFormat(blog.lastEdited, 'dd mmm yyyy') }
                 </div>
-                <div className={css(BlogStyle.blogItemContentTextDesc)}>{ blog.content }</div>
+                <div
+                  className={css(BlogStyle.blogItemContentTextDesc)}
+                  dangerouslySetInnerHTML={{ __html: blog.content }}
+                />
 
                 <Button outline color="info" className={css(BlogStyle.blogItemContentTextHastag)}>
                   <div>{ blog.hastag }</div>
