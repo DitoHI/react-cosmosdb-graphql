@@ -81,7 +81,7 @@ class App extends React.Component<{}, States> {
     const { prevScrollpos } = this.state;
 
     const currentScrollPos = window.pageYOffset;
-    const visible = prevScrollpos >= currentScrollPos;
+    const visible = prevScrollpos >= currentScrollPos || currentScrollPos <= 10;
 
     this.setState({
       visible,
@@ -276,7 +276,7 @@ class App extends React.Component<{}, States> {
                       />
                     }
                   />
-                  <Route component={ ErrorPath } />
+                  <Route component={ ErrorPath }/>
                 </Switch>
 
                 {/* Footer */ }

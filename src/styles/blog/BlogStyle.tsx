@@ -76,6 +76,10 @@ export default StyleSheet.create({
     fontSize: '1.8rem',
     paddingTop: '10px',
     paddingBottom: '10px',
+
+    '@media (max-width: 768px)': {
+      fontSize: '1.2rem',
+    },
   },
   blogItemContentLastEdited: {
     fontStyle: 'italic',
@@ -84,9 +88,13 @@ export default StyleSheet.create({
   },
   blogItemContentTextDesc: {
     fontSize: '1.2rem',
-    textAlign: 'justify',
+    textAlign: 'start',
     paddingTop: '10px',
     paddingBottom: '10px',
+
+    '@media (max-width: 768px)': {
+      fontSize: '1.0rem',
+    },
   },
   blogItemContentReadMore: {
     padding: '20px 0',
