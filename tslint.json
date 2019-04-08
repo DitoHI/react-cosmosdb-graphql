@@ -9,6 +9,7 @@
     ]
   },
   "rules": {
+    "prettier": [true, ".prettierrc"],
     "no-console": false,
     "member-access": false,
     "object-literal-sort-keys": false,

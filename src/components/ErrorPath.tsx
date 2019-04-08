@@ -1,14 +1,24 @@
 import * as React from 'react';
 import { Badge, Container } from 'reactstrap';
-import NotFoundPageStyle from '../styles/NotFoundPageStyle';
 import { css } from 'aphrodite';
 
-const errorPath = () => {
+// custom styles
+import MainStyle from '../styles/MainStyle';
+import NotFoundPageStyle from '../styles/NotFoundPageStyle';
+
+interface IProps {
+  text: string;
+  statusCode: number;
+  icon?: any;
+}
+
+const errorPath: React.FunctionComponent<IProps> = ({ text, statusCode, icon }) => {
   return (
-    <Container>
+    <Container className={css(MainStyle.mainFlexColumnWrapper)}>
       <h1 className={css(NotFoundPageStyle.notFoundWrapper)}>
-        Not Found Page <Badge color="secondary">404</Badge>
+        {text}&nbsp;<Badge color="secondary">{statusCode}</Badge>
       </h1>
+      <img className={css(NotFoundPageStyle.notFoundIcon)} src={icon} alt="Error" />
     </Container>
   );
 };

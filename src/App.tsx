@@ -98,7 +98,7 @@ class App extends React.Component<{}, States> {
       this.setState({
         alertVisible: false,
       });
-    },         1000);
+    }, 1000);
   }
 
   onDismiss() {
@@ -108,14 +108,7 @@ class App extends React.Component<{}, States> {
   }
 
   public render() {
-    const {
-      alertVisible,
-      alertTitle,
-      visible,
-      visibleAlertSourceCode,
-      width,
-      height,
-    } = this.state;
+    const { alertVisible, alertTitle, visible, visibleAlertSourceCode, width, height } = this.state;
     const meRef: any = React.createRef();
     const educationRef: any = React.createRef();
     const projectRef: any = React.createRef();
@@ -140,31 +133,32 @@ class App extends React.Component<{}, States> {
         ? { marginTop: '4rem', paddingTop: '6rem' }
         : { marginTop: '9rem', paddingTop: '4rem' }
       : width > 375
-        ? { marginTop: '0', paddingTop: '6rem' }
-        : { marginTop: '2rem', paddingTop: '3rem' };
+      ? { marginTop: '0', paddingTop: '6rem' }
+      : { marginTop: '2rem', paddingTop: '3rem' };
 
     const marginTopBlogMainNav = visibleAlertSourceCode
       ? width > 375
         ? { marginTop: '12rem' }
         : { marginTop: '18rem' }
       : width > 375
-        ? { marginTop: '8rem' }
-        : { marginTop: '10rem' };
+      ? { marginTop: '8rem' }
+      : { marginTop: '10rem' };
 
     return (
-      <Query<Me> query={ meQuery }>
-        { ({ loading, error, data }) => {
+      <Query<Me> query={meQuery}>
+        {({ loading, error, data }) => {
           if (loading) {
-            return (
-              <HomeSpinner
-                containerImg={ radioSpinner }
-                contentText="Please wait a moment"
-              />
-            );
+            return <HomeSpinner containerImg={radioSpinner} contentText="Please wait a moment" />;
           }
 
           if (!data || !data.me) {
-            return null;
+            return (
+              <ErrorPath
+                text="Server is still in maintenance"
+                statusCode={500}
+                icon={require('./images/server_error.png')}
+              />
+            );
           }
 
           if (!data.me.education && !data.me.project && !data.me.experience) {
@@ -181,121 +175,104 @@ class App extends React.Component<{}, States> {
               <div>
                 <Switch>
                   <Route path="/" exact>
-                    {/* Navigation */ }
-                    <nav className="wrapper--introduction__parent" style={ topNavbar }>
+                    {/* Navigation */}
+                    <nav className="wrapper--introduction__parent" style={topNavbar}>
                       <Alert
                         color="info"
-                        isOpen={ visibleAlertSourceCode }
-                        toggle={ this.onDismiss }
-                        style={ { textAlign: 'center' } }
+                        isOpen={visibleAlertSourceCode}
+                        toggle={this.onDismiss}
+                        style={{ textAlign: 'center' }}
                       >
                         This project is maintained with the legacy of open source. Check in my
                         <a
                           href="https://github.com/DitoHI/react-cosmosdb-graphql"
                           target="_blank"
                           className="alert-link"
-                        >&nbsp;Github&nbsp;</a>profile.
-                        Spread the <IoIosHeart/>
+                        >
+                          &nbsp;Github&nbsp;
+                        </a>
+                        profile. Spread the <IoIosHeart />
                       </Alert>
-                      <MenuItem
-                        showAlertViewNotReady={ this.showAlertViewNotReady }
-                        refs={ refs }
-                      />
-                      <AlertNotExisted
-                        title={ alertTitle }
-                        propVisible={ alertVisible }
-                      />
+                      <MenuItem showAlertViewNotReady={this.showAlertViewNotReady} refs={refs} />
+                      <AlertNotExisted title={alertTitle} propVisible={alertVisible} />
                     </nav>
-                    <div
-                      ref={ meRef }
-                      className="main-nav"
-                      style={ marginTopMainNav }
-                    >
-                      <Introduction/>
+                    <div ref={meRef} className="main-nav" style={marginTopMainNav}>
+                      <Introduction />
                       <Container className="wrapper--flex-center-space">
                         <IoIosArrowDown
                           size="68px"
                           color="#e11414"
-                          onClick={ () => {
+                          onClick={() => {
                             if (refs[1].current) {
                               this.showAlertViewNotReady(false);
                               refs[1].current.scrollIntoView({ behavior: 'smooth' });
                             } else {
                               this.showAlertViewNotReady(true, 'education');
                             }
-                          } }
-                          style={ {
+                          }}
+                          style={{
                             cursor: 'pointer',
                             paddingTop: '20px',
                             paddingBottom: '20px',
-                          } }
+                          }}
                         />
                       </Container>
                     </div>
                     <div className="wrapper--container-margin-top-bottom">
-                      <div ref={ educationRef }>
-                        <Education
-                          educations={ educations }
-                        />
+                      <div ref={educationRef}>
+                        <Education educations={educations} />
                       </div>
                       <div
-                        ref={ experienceRef }
-                        style={ {
+                        ref={experienceRef}
+                        style={{
                           backgroundColor: '#f7f7f8',
-                        } }
+                        }}
                       >
-                        <Experience
-                          experiences={ experiences }
-                        />
+                        <Experience experiences={experiences} />
                       </div>
                       <div
-                        ref={ projectRef }
-                        style={ {
+                        ref={projectRef}
+                        style={{
                           backgroundColor: '#efeff3',
-                        } }
+                        }}
                       >
-                        <Project
-                          projects={ projects }
-                        />
+                        <Project projects={projects} />
                       </div>
                       <div
-                        style={ {
+                        style={{
                           backgroundColor: '#fff',
-                        } }
+                        }}
                       >
-                        <BlogPreview/>
+                        <BlogPreview />
                       </div>
                     </div>
                   </Route>
                   <Route
                     path="/blog"
-                    render={ props =>
-                      <Blog
-                        { ...props }
-                        children={ marginTopBlogMainNav }
-                      />
-                    }
+                    render={props => <Blog {...props} children={marginTopBlogMainNav} />}
                   />
-                  <Route component={ ErrorPath }/>
+                  <Route
+                    render={props => (
+                      <ErrorPath {...props} text="Not found page" statusCode={403} />
+                    )}
+                  />
                 </Switch>
 
-                {/* Footer */ }
+                {/* Footer */}
                 <div
-                  style={ {
+                  style={{
                     backgroundColor: '#f7f7f8',
                     display: 'flex',
                     justifyContent: 'center',
-                  } }
+                  }}
                   className="wrapper--padding-top-bottom-50"
                 >
-                  <Footer
-                    me={ me }
-                  />
+                  <Footer me={me} />
                 </div>
               </div>
             </BrowserRouter>
           );
-        } }
+        }}
       </Query>
     );
   }

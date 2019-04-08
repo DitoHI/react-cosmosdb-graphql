@@ -5,10 +5,21 @@ export default StyleSheet.create({
     fontSize: '3rem',
     fontWeight: 600,
     textAlign: 'center',
-    padding: '120px',
+    paddingTop: '4rem',
+    paddingBottom: '4rem',
 
     '@media (max-width: 768px)': {
-      padding: '80px',
+      fontSize: '2rem',
+      paddingTop: '3rem',
+      paddingBottom: '3rem',
+    },
+  },
+  notFoundIcon: {
+    width: '24rem',
+    height: 'auto',
+
+    '@media (max-width: 768px)': {
+      width: '16rem',
     },
   },
 });
