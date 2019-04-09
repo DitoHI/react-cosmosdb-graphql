@@ -1,2 +1,4 @@
 export const FETCH_BLOGS = 'FETCH_BLOGS';
 export const ACTIVE_BLOG = 'ACTIVE_BLOG';
+export const SHOW_ALERT_HOME = 'SHOW_ALERT_HOME';
+export const SHOW_ALERT_OPTIONAL = 'SHOW_ALERT_OPTIONAL';

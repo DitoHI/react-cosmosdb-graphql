@@ -3,10 +3,14 @@ import { IoIosArrowDown, IoIosHeart } from 'react-icons/io';
 import { Alert, Container } from 'reactstrap';
 import { Query } from 'react-apollo';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import './index.css';
 import './styles/Main.css';
 import './styles/NavWrapper.css';
+
+// Custom Function
+import showElement from './redux/actions/showElement';
 
 // Custom Elements
 import Experience from './screens/Experience';
@@ -20,6 +24,7 @@ import MenuItem from './components/MenuItem';
 import HomeSpinner from './components/spinner/HomeSpinner';
 import AlertNotExisted from './components/AlertNotExisted';
 import ErrorPath from './components/ErrorPath';
+import HomePage from './screens/HomePage';
 
 import { default as radioSpinner } from './images/radio_spinner.gif';
 
@@ -29,23 +34,27 @@ import { Me } from './schemaTypes';
 
 import { IEducation, IExperience, IMe, IProject } from './custom/interface';
 
+interface Props {
+  setAlertSourceCodeVisible: any;
+  visibleAlertSourceCode: boolean;
+  setNotReadyElement: any;
+}
+
 interface States {
   prevScrollpos: any;
   visible: boolean;
-  visibleAlertSourceCode: boolean;
   alertTitle: string;
   alertVisible: boolean;
   height: number;
   width: number;
 }
 
-class App extends React.Component<{}, States> {
+class App extends React.Component<Props, States> {
   constructor(props) {
     super(props);
     this.state = {
       prevScrollpos: window.pageYOffset,
       visible: true,
-      visibleAlertSourceCode: true,
       alertTitle: 'default',
       alertVisible: false,
       height: 0,
@@ -90,25 +99,21 @@ class App extends React.Component<{}, States> {
   }
 
   showAlertViewNotReady(showed: boolean, title?: string) {
-    this.setState({
-      alertTitle: title || 'default',
-      alertVisible: showed,
-    });
+    const { setNotReadyElement } = this.props;
+    setNotReadyElement(showed, title);
     setTimeout(() => {
-      this.setState({
-        alertVisible: false,
-      });
+      setNotReadyElement(false, title);
     }, 1000);
   }
 
   onDismiss() {
-    this.setState({
-      visibleAlertSourceCode: false,
-    });
+    const { setAlertSourceCodeVisible } = this.props;
+    setAlertSourceCodeVisible(false);
   }
 
   public render() {
-    const { alertVisible, alertTitle, visible, visibleAlertSourceCode, width, height } = this.state;
+    const { visibleAlertSourceCode } = this.props;
+    const { alertVisible, alertTitle, visible, width, height } = this.state;
     const meRef: any = React.createRef();
     const educationRef: any = React.createRef();
     const projectRef: any = React.createRef();
@@ -175,77 +180,15 @@ class App extends React.Component<{}, States> {
               <div>
                 <Switch>
                   <Route path="/" exact>
-                    {/* Navigation */}
-                    <nav className="wrapper--introduction__parent" style={topNavbar}>
-                      <Alert
-                        color="info"
-                        isOpen={visibleAlertSourceCode}
-                        toggle={this.onDismiss}
-                        style={{ textAlign: 'center' }}
-                      >
-                        This project is maintained with the legacy of open source. Check in my
-                        <a
-                          href="https://github.com/DitoHI/react-cosmosdb-graphql"
-                          target="_blank"
-                          className="alert-link"
-                        >
-                          &nbsp;Github&nbsp;
-                        </a>
-                        profile. Spread the <IoIosHeart />
-                      </Alert>
-                      <MenuItem showAlertViewNotReady={this.showAlertViewNotReady} refs={refs} />
-                      <AlertNotExisted title={alertTitle} propVisible={alertVisible} />
-                    </nav>
-                    <div ref={meRef} className="main-nav" style={marginTopMainNav}>
-                      <Introduction />
-                      <Container className="wrapper--flex-center-space">
-                        <IoIosArrowDown
-                          size="68px"
-                          color="#e11414"
-                          onClick={() => {
-                            if (refs[1].current) {
-                              this.showAlertViewNotReady(false);
-                              refs[1].current.scrollIntoView({ behavior: 'smooth' });
-                            } else {
-                              this.showAlertViewNotReady(true, 'education');
-                            }
-                          }}
-                          style={{
-                            cursor: 'pointer',
-                            paddingTop: '20px',
-                            paddingBottom: '20px',
-                          }}
-                        />
-                      </Container>
-                    </div>
-                    <div className="wrapper--container-margin-top-bottom">
-                      <div ref={educationRef}>
-                        <Education educations={educations} />
-                      </div>
-                      <div
-                        ref={experienceRef}
-                        style={{
-                          backgroundColor: '#f7f7f8',
-                        }}
-                      >
-                        <Experience experiences={experiences} />
-                      </div>
-                      <div
-                        ref={projectRef}
-                        style={{
-                          backgroundColor: '#efeff3',
-                        }}
-                      >
-                        <Project projects={projects} />
-                      </div>
-                      <div
-                        style={{
-                          backgroundColor: '#fff',
-                        }}
-                      >
-                        <BlogPreview />
-                      </div>
-                    </div>
+                    <HomePage
+                      dismissAlertSourceCode={this.onDismiss}
+                      marginTopMainNav={marginTopMainNav}
+                      topNavbar={topNavbar}
+                      showAlertViewNotReady={this.showAlertViewNotReady}
+                      educations={educations}
+                      experiences={experiences}
+                      projects={projects}
+                    />
                   </Route>
                   <Route
                     path="/blog"
@@ -278,4 +221,20 @@ class App extends React.Component<{}, States> {
   }
 }
 
-export default App;
+const mapDispatchTopProps = (dispatch: any) => {
+  return {
+    setAlertSourceCodeVisible: isVisible =>
+      dispatch(showElement.setVisibleAlertSourceCode(isVisible)),
+    setNotReadyElement: (isVisible, title) =>
+      dispatch(showElement.setNotReadyElement(isVisible, title)),
+  };
+};
+
+const mapStateToProps = (state: any) => ({
+  visibleAlertSourceCode: state.element.isAlertSourceVodeVisible,
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchTopProps,
+)(App);
