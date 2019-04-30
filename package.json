@@ -26,15 +26,17 @@
     "react-transition-group": "^2.7.0",
     "reactstrap": "^7.1.0",
     "redux": "^4.0.1",
+    "redux-saga": "^1.0.2",
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
+    "dev": "react-scripts-ts start",
     "build": "react-scripts-ts build",
     "test": "react-scripts-ts test --env=jsdom",
     "eject": "react-scripts-ts eject",
-    "schema:download": "apollo schema:download --endpoint=https://hafizhprivateblogapi.azurewebsites.net/graphql",
+    "schema:download": "apollo schema:download --endpoint=http://localhost:8080/graphql",
     "codegen:generate": "apollo codegen:generate --queries=./src/**/*.tsx --localSchemaFile=./schema.json --tagName=gql --addTypename --globalTypesFile=src/types/graphql-global-types.ts --outputFlat --target=typescript ./src/schemaTypes.ts",
     "gen:types": "npm run schema:download && npm run codegen:generate"
   },
@@ -57,5 +59,8 @@
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.3.3333"
+  },
+  "resolutions": {
+    "@types/react": "16.8.8"
   }
 }

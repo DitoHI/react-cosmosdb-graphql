@@ -6,7 +6,7 @@ const initialState = {
   alertOptionalTitle: '',
 };
 
-export default function(state = initialState, action: any) {
+export default function (state = initialState, action: any) {
   switch (action.type) {
     case SHOW_ALERT_HOME:
       return {

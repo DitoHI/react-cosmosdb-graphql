@@ -103,7 +103,7 @@ class App extends React.Component<Props, States> {
     setNotReadyElement(showed, title);
     setTimeout(() => {
       setNotReadyElement(false, title);
-    }, 1000);
+    },         1000);
   }
 
   onDismiss() {
@@ -167,7 +167,13 @@ class App extends React.Component<Props, States> {
           }
 
           if (!data.me.education && !data.me.project && !data.me.experience) {
-            return null;
+            return (
+              <ErrorPath
+                text="Server is still in maintenance"
+                statusCode={500}
+                icon={require('./images/server_error.png')}
+              />
+            );
           }
 
           const educations = data.me.education as IEducation[];

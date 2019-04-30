@@ -10,6 +10,7 @@ import Education from './Education';
 import Experience from './Experience';
 import Introduction from './Introduction';
 import Project from './Project';
+import { IEducation } from '../custom/interface';
 
 interface Props {
   // props in redux
@@ -21,7 +22,7 @@ interface Props {
   marginTopMainNav: any;
   topNavbar: any;
   showAlertViewNotReady: any;
-  educations: any;
+  educations: IEducation[];
   experiences: any;
   projects: any;
 }
@@ -51,6 +52,11 @@ const homePage: React.FunctionComponent<Props> = ({
   refs.push(experienceRef);
   refs.push(projectRef);
 
+  // sort the education
+  const sortedEducations = educations.sort((a: IEducation, b: IEducation) => {
+    return new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime();
+  });
+
   return (
     <div>
       <nav className="wrapper--introduction__parent" style={topNavbar}>
@@ -62,7 +68,7 @@ const homePage: React.FunctionComponent<Props> = ({
         >
           This project is maintained with the legacy of open source. Check in my
           <a
-            href="https://github.com/DitoHI/react-cosmosdb-graphql"
+            href="https://github.com/DitoHI/microservices-react-graphql"
             target="_blank"
             className="alert-link"
           >
@@ -97,7 +103,7 @@ const homePage: React.FunctionComponent<Props> = ({
       </div>
       <div className="wrapper--container-margin-top-bottom">
         <div ref={educationRef}>
-          <Education educations={educations} />
+          <Education educations={sortedEducations} />
         </div>
         <div
           ref={experienceRef}
