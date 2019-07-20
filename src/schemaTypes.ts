@@ -7,16 +7,17 @@
 // ====================================================
 
 export interface Blogs_blogs {
-  __typename: "Blog";
+  __typename: 'Blog';
   id: string;
   user: string;
   title: string | null;
   content: string | null;
   lastEdited: any | null;
   isDeleted: boolean | null;
-  imageUri: (string | null)[] | null;
+  blobUri: string | null;
+  blobName: string | null;
   positionIndex: number | null;
-  hastag: string | null;
+  tags: (string | null)[] | null;
 }
 
 export interface Blogs {
@@ -27,7 +28,7 @@ export interface BlogsVariables {
   id?: string | null;
   startAt?: number | null;
   endAt?: number | null;
-  hastag?: string | null;
+  tags?: (string | null)[] | null;
 }
 
 /* tslint:disable */
@@ -39,7 +40,7 @@ export interface BlogsVariables {
 // ====================================================
 
 export interface Me_me_education {
-  __typename: "Education";
+  __typename: 'Education';
   dateStart: any | null;
   dateEnd: any | null;
   location: string | null;
@@ -50,26 +51,30 @@ export interface Me_me_education {
 }
 
 export interface Me_me_experience {
-  __typename: "Experience";
+  __typename: 'Experience';
   name: string | null;
   role: string | null;
   description: string | null;
   dateStart: any | null;
   dateEnd: any | null;
+  blobUri: string | null;
 }
 
 export interface Me_me_project {
-  __typename: "Project";
+  __typename: 'Project';
   name: string | null;
   role: string | null;
   techStacks: (string | null)[] | null;
   description: string | null;
   link: any | null;
+  blobUri: string | null;
 }
 
 export interface Me_me {
-  __typename: "User";
+  __typename: 'User';
   id: string;
+  username: string;
+  password: string;
   name: string;
   email: string;
   occupation: string | null;
@@ -78,6 +83,7 @@ export interface Me_me {
   website: any | null;
   dateBirth: any | null;
   skill: (string | null)[] | null;
+  blobUri: string | null;
   education: (Me_me_education | null)[] | null;
   experience: (Me_me_experience | null)[] | null;
   project: (Me_me_project | null)[] | null;
@@ -85,6 +91,10 @@ export interface Me_me {
 
 export interface Me {
   me: Me_me | null;
+}
+
+export interface MeVariables {
+  sort?: Sort | null;
 }
 
 /* tslint:disable */
@@ -96,16 +106,17 @@ export interface Me {
 // ====================================================
 
 export interface BlogPage {
-  __typename: "Blog";
+  __typename: 'Blog';
   id: string;
   user: string;
   title: string | null;
   content: string | null;
   lastEdited: any | null;
   isDeleted: boolean | null;
-  imageUri: (string | null)[] | null;
+  blobUri: string | null;
+  blobName: string | null;
   positionIndex: number | null;
-  hastag: string | null;
+  tags: (string | null)[] | null;
 }
 
 /* tslint:disable */
@@ -117,7 +128,7 @@ export interface BlogPage {
 // ====================================================
 
 export interface UserPage_education {
-  __typename: "Education";
+  __typename: 'Education';
   dateStart: any | null;
   dateEnd: any | null;
   location: string | null;
@@ -128,26 +139,30 @@ export interface UserPage_education {
 }
 
 export interface UserPage_experience {
-  __typename: "Experience";
+  __typename: 'Experience';
   name: string | null;
   role: string | null;
   description: string | null;
   dateStart: any | null;
   dateEnd: any | null;
+  blobUri: string | null;
 }
 
 export interface UserPage_project {
-  __typename: "Project";
+  __typename: 'Project';
   name: string | null;
   role: string | null;
   techStacks: (string | null)[] | null;
   description: string | null;
   link: any | null;
+  blobUri: string | null;
 }
 
 export interface UserPage {
-  __typename: "User";
+  __typename: 'User';
   id: string;
+  username: string;
+  password: string;
   name: string;
   email: string;
   occupation: string | null;
@@ -156,6 +171,7 @@ export interface UserPage {
   website: any | null;
   dateBirth: any | null;
   skill: (string | null)[] | null;
+  blobUri: string | null;
   education: (UserPage_education | null)[] | null;
   experience: (UserPage_experience | null)[] | null;
   project: (UserPage_project | null)[] | null;
@@ -168,6 +184,11 @@ export interface UserPage {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export interface Sort {
+  by?: string | null;
+  as?: string | null;
+}
 
 //==============================================================
 // END Enums and Input Objects
