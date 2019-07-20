@@ -1,6 +1,7 @@
-### GraphQL & React with Typescript
-
-This project is implementing the front-end code of server from [Boilerplate of CosmosDB with GraphQL](https://github.com/DitoHI/cosmosdb-graphql-boilerplate)
+<p align="center" style="color: #343a40">
+    <h1 align="center">Open Public Blog</h1>
+</p>
+<p align="center" style="font-size: 1.2rem;">Integrate GraphQL Api to be the fully end to end Web Interface in React</p>
 
 ## Dependencies
 
@@ -16,18 +17,4 @@ The code is deployed with Azure App service with Container Registry from Docker 
 
 ## License
 
-    Copyright 2019 Dito Hafizh Indriarto
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-    documentation files (the "Software"), to deal in the Software without restriction, including without
-    limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-    Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all copies or substantial
-    portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
-    NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-    IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-    WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-    SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+MIT
