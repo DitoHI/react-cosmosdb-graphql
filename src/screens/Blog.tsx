@@ -13,7 +13,7 @@ import ContentBlogDetail from '../components/contents/ContentBlogDetail';
 import { objectAreSame } from '../custom/function';
 import BlogStyle from '../styles/blog/BlogStyle';
 import IBlog from '../custom/interface/IBlog';
-import { fetchBlogs } from '../redux/actions/postBlog';
+import { fetchBlogs } from '../redux/actions/blogAction';
 
 import '../styles/Main.css';
 import '../styles/blog/Blog.css';
@@ -77,11 +77,8 @@ class Blog extends React.Component<ChildProps<Props>, States> {
   renderHastag(hastags) {
     return hastags.map((hastag: string) => {
       return (
-        <div
-          key={ hastag }
-          className={ `${ css(BlogStyle.blogHastagsContent) }` }
-        >
-          #{ hastag }
+        <div key={hastag} className={`${css(BlogStyle.blogHastagsContent)}`}>
+          #{hastag}
         </div>
       );
     });
@@ -89,12 +86,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
 
   renderBlog(blogs) {
     return blogs.map((blog: IBlog) => {
-      return (
-        <ContentBlog
-          key={ blog.title }
-          blog={ blog }
-          handleClick={ this.setActiveBlog }
-        />);
+      return <ContentBlog key={blog.title} blog={blog} handleClick={this.setActiveBlog} />;
     });
   }
 
@@ -109,43 +101,41 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     const { blogs, data, children } = this.props;
     const parentStyle = children as React.CSSProperties;
     if (loading) {
-      return <div style={ parentStyle }><MainSpinner color="#150940" name="cube-grid"/></div>;
+      return (
+        <div style={parentStyle}>
+          <MainSpinner color="#150940" name="cube-grid" />
+        </div>
+      );
     }
 
     const hastags = blogs
-      .map((blog) => {
+      .map(blog => {
         return blog.hastag;
       })
       .filter((v, i, a) => a.indexOf(v) === i);
 
     return (
       <div>
-        <div className={ `${ css(BlogStyle.blogNavMain) } animated fadeInDown` }>
-          <span className={ css(BlogStyle.blogNavMainTitle) }>Hafizh Notes</span>
+        <div className={`${css(BlogStyle.blogNavMain)} animated fadeInDown`}>
+          <span className={css(BlogStyle.blogNavMainTitle)}>Hafizh Notes</span>
           <NavLink to="/">
-            <Button color="link" className={ css(BlogStyle.blogNavMainRedirect) }>
+            <Button color="link" className={css(BlogStyle.blogNavMainRedirect)}>
               Back to Home
             </Button>
           </NavLink>
         </div>
 
-        {/* Hastags */ }
-        <div
-          className={ `${ css(BlogStyle.blogHastagsWrapper) } wrapper--padding-top-bottom-20` }
-        >
-          { this.renderHastag(hastags) }
+        {/* Hastags */}
+        <div className={`${css(BlogStyle.blogHastagsWrapper)} wrapper--padding-top-bottom-20`}>
+          {this.renderHastag(hastags)}
         </div>
 
         <Switch>
           <Route exact path="/blog">
-            {/* Blogs */ }
-            <div
-              className="wrapper--padding-top-bottom-50"
-            >
-              { this.renderBlog(blogs) }
-            </div>
+            {/* Blogs */}
+            <div className="wrapper--padding-top-bottom-50">{this.renderBlog(blogs)}</div>
           </Route>
-          <Route path="/blog/:blogId" component={ ContentBlogDetail }/>
+          <Route path="/blog/:blogId" component={ContentBlogDetail} />
         </Switch>
       </div>
     );
@@ -160,4 +150,7 @@ const mapStateToProps = (state: any) => ({
   blogs: state.blogs.items,
 });
 
-export default connect(mapStateToProps, { fetchBlogs })(blogCurrent);
+export default connect(
+  mapStateToProps,
+  { fetchBlogs },
+)(blogCurrent);

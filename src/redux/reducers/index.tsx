@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import getBlogReducer from './getBlogReducer';
+import getBlogReducer from './blogReducer';
 import visibleElementReducer from './visibleElementReducer';
 
 export default combineReducers({

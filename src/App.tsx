@@ -10,7 +10,7 @@ import './styles/Main.css';
 import './styles/NavWrapper.css';
 
 // Custom Function
-import showElement from './redux/actions/showElement';
+import showElement from './redux/actions/elementAction';
 
 // Custom Elements
 import Experience from './screens/Experience';
@@ -103,7 +103,7 @@ class App extends React.Component<Props, States> {
     setNotReadyElement(showed, title);
     setTimeout(() => {
       setNotReadyElement(false, title);
-    },         1000);
+    }, 1000);
   }
 
   onDismiss() {
