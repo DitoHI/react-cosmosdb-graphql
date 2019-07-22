@@ -22,6 +22,7 @@ export const userFragment = gql`
       degree
       major
       description
+      blobUri
     }
     experience {
       name

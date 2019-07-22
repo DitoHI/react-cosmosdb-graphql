@@ -7,7 +7,8 @@ interface IBlog {
   isDeleted: boolean;
   imageUri: string;
   positionIndex: number;
-  hastag: string;
+  tags: string[];
+  blobUri: string;
 }
 
 export default IBlog;

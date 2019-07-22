@@ -6,6 +6,7 @@ interface IEducation {
   dateStart: Date;
   dateEnd: Date;
   location: string;
+  blobUri: string;
 }
 
 export default IEducation;

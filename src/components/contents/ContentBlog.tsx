@@ -15,48 +15,37 @@ interface Props {
 }
 
 const contentBlog: React.FunctionComponent<Props> = ({ blog, handleClick }) => {
-
   // filter the result
-  const blogImage = blog.imageUri
+  const blogImage = blog.blobUri
     ? require(`../../images/blog/${blog.imageUri}`)
     : require('../../images/placeholder.png');
 
   let cleanContent = blog.content.replace(/<\/?[^>]+(>|$)/g, '');
-  cleanContent = cleanContent.replace('&rsquo;', '\'');
+  cleanContent = cleanContent.replace('&rsquo;', "'");
 
   return (
     <div className={css(BlogStyle.blogItemContentWrapper)}>
-      <div
-        className={css(BlogStyle.blogItemContentImageWrapper)}
-      >
-        <img
-          alt={ blog.title }
-          src={ blogImage }
-          className="blog-item-img"
-        />
+      <div className={css(BlogStyle.blogItemContentImageWrapper)}>
+        <img alt={blog.title} src={blogImage} className="blog-item-img" />
       </div>
       <div className={css(BlogStyle.blogItemContentLastEdited)}>
-        { dateFormat(blog.lastEdited, 'dd mmm yyyy') }
+        {dateFormat(blog.lastEdited, 'dd mmm yyyy')}
       </div>
       <div className={css(BlogStyle.blogItemContentTextWrapper)}>
-        <div className={css(BlogStyle.blogItemContentTextTitle)}>{ blog.title }</div>
-        <div className="blog-item-content">{ cleanContent }</div>
+        <div className={css(BlogStyle.blogItemContentTextTitle)}>{blog.title}</div>
+        <div className="blog-item-content">{cleanContent}</div>
 
-        <NavLink to={ `/blog/${blog.id}` }>
+        <NavLink to={`/blog/${blog.id}`}>
           <Button
             color="link"
             className={css(BlogStyle.blogItemContentReadMore)}
-            onClick={ () => handleClick(blog) }
+            onClick={() => handleClick(blog)}
           >
             Read More
           </Button>
         </NavLink>
-        <Button
-          outline
-          color="info"
-          className={css(BlogStyle.blogItemContentTextHastag)}
-        >
-          <div>{ blog.hastag }</div>
+        <Button outline color="info" className={css(BlogStyle.blogItemContentTextHastag)}>
+          <div>{blog.tags}</div>
         </Button>
       </div>
     </div>

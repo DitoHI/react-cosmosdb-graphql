@@ -4,6 +4,7 @@ interface IExperience {
   description: string;
   dateStart: Date;
   dateEnd: Date;
+  blobUri: string;
 }
 
 export default IExperience;

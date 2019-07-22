@@ -52,11 +52,6 @@ const homePage: React.FunctionComponent<Props> = ({
   refs.push(experienceRef);
   refs.push(projectRef);
 
-  // sort the education
-  const sortedEducations = educations.sort((a: IEducation, b: IEducation) => {
-    return new Date(b.dateStart).getTime() - new Date(a.dateStart).getTime();
-  });
-
   return (
     <div>
       <nav className="wrapper--introduction__parent" style={topNavbar}>
@@ -103,7 +98,7 @@ const homePage: React.FunctionComponent<Props> = ({
       </div>
       <div className="wrapper--container-margin-top-bottom">
         <div ref={educationRef}>
-          <Education educations={sortedEducations} />
+          <Education educations={educations} />
         </div>
         <div
           ref={experienceRef}

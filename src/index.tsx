@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import registerServiceWorker from './registerServiceWorker';
 
 // setup Apollo Client
-import { default as Apollo } from 'apollo-boost';
+import { ApolloLink, ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';
 import { ApolloProvider } from 'react-apollo';
 
 // setup redux
@@ -25,8 +25,24 @@ const uri =
     ? 'http://localhost:8080/graphql'
     : 'https://privateblog-server.azurewebsites.net/graphql';
 
-const client = new Apollo({
-  uri,
+const httpLink = new HttpLink({ uri });
+
+const authLink = new ApolloLink((operation: any, forward: any) => {
+  const token = process.env.REACT_APP_API_TOKEN;
+
+  operation.setContext({
+    headers: {
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  });
+
+  // Call the next link in the middleware chain.
+  return forward(operation);
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
 });
 
 ReactDOM.render(

@@ -21,54 +21,45 @@ interface Props {
   icon: string;
 }
 
-const contentEducation: React.FunctionComponent<Props> =
-  ({ education, icon }) => {
-    return (
-      <Row>
-        <Col sm="7">
-          <Card>
-            <CardBody className="card-container">
-              <CardTitle className="card-container__title">
-                { education.name }
-              </CardTitle>
-              <CardSubtitle
-                style={ { display: 'flex', justifyContent: 'center' } }
+const contentEducation: React.FunctionComponent<Props> = ({ education, icon }) => {
+  return (
+    <Row>
+      <Col sm="7">
+        <Card>
+          <CardBody className="card-container">
+            <CardTitle className="card-container__title">{education.name}</CardTitle>
+            <CardSubtitle style={{ display: 'flex', justifyContent: 'center' }}>
+              <Button
+                color="danger"
+                outline
+                className="wrapper--btn-outline-radius"
+                style={{ cursor: 'default' }}
               >
-                <Button
-                  color="danger"
-                  outline
-                  className="wrapper--btn-outline-radius"
-                  style={{ cursor: 'default' }}
-                >
-                  { education.major } <Badge color="danger">{ education.degree }</Badge>
-                </Button>
-              </CardSubtitle>
-              <CardTitle className="card-container__btn-subtitle">{ education.location }</CardTitle>
-              <CardText className="card-container__text">{ education.description }</CardText>
-              <CardText className="card-container__text">
-                <Button
-                  color="danger"
-                  outline
-                  className="wrapper--btn-outline-radius"
-                  style={{ cursor: 'default' }}
-                >
-                  { dateFormat(education.dateStart, 'mmm yyyy') }
-                  &nbsp;-&nbsp;
-                  { dateFormat(education.dateEnd, 'mmm yyyy') }
-                </Button>
-              </CardText>
-            </CardBody>
-          </Card>
-        </Col>
-        <Col sm="5" className="wrappper--column-center-all">
-          <img
-            alt={ icon }
-            src={ require(`../../images/education/${ icon }`) }
-            className="wrapper--icon-card"
-          />
-        </Col>
-      </Row>
-    );
-  };
+                {education.major} <Badge color="danger">{education.degree}</Badge>
+              </Button>
+            </CardSubtitle>
+            <CardTitle className="card-container__btn-subtitle">{education.location}</CardTitle>
+            <CardText className="card-container__text">{education.description}</CardText>
+            <CardText className="card-container__text">
+              <Button
+                color="danger"
+                outline
+                className="wrapper--btn-outline-radius"
+                style={{ cursor: 'default' }}
+              >
+                {dateFormat(education.dateStart, 'mmm yyyy')}
+                &nbsp;-&nbsp;
+                {dateFormat(education.dateEnd, 'mmm yyyy')}
+              </Button>
+            </CardText>
+          </CardBody>
+        </Card>
+      </Col>
+      <Col sm="5" className="wrappper--column-center-all">
+        <img alt={icon} src={education.blobUri} className="wrapper--icon-card" />
+      </Col>
+    </Row>
+  );
+};
 
 export default contentEducation;

@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { IoIosArrowDown, IoIosHeart } from 'react-icons/io';
-import { Alert, Container } from 'reactstrap';
 import { Query } from 'react-apollo';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -10,21 +8,18 @@ import './styles/Main.css';
 import './styles/NavWrapper.css';
 
 // Custom Function
-import showElement from './redux/actions/elementAction';
+import elementAction from './redux/actions/elementAction';
 
 // Custom Elements
-import Experience from './screens/Experience';
-import Introduction from './screens/Introduction';
-import Education from './screens/Education';
-import Project from './screens/Project';
 import Footer from './screens/Footer';
-import BlogPreview from './screens/BlogPreview';
 import Blog from './screens/Blog';
-import MenuItem from './components/MenuItem';
 import HomeSpinner from './components/spinner/HomeSpinner';
-import AlertNotExisted from './components/AlertNotExisted';
 import ErrorPath from './components/ErrorPath';
 import HomePage from './screens/HomePage';
+
+// Custom Elements v2
+import { default as BlogV2 } from './screens/v2/Blog';
+import { default as FooterV2 } from './screens/v2/Footer';
 
 import { default as radioSpinner } from './images/radio_spinner.gif';
 
@@ -150,7 +145,7 @@ class App extends React.Component<Props, States> {
       : { marginTop: '10rem' };
 
     return (
-      <Query<Me> query={meQuery}>
+      <Query<Me> query={meQuery} variables={{ sort: { by: 'dateStart', as: 'asc' } }}>
         {({ loading, error, data }) => {
           if (loading) {
             return <HomeSpinner containerImg={radioSpinner} contentText="Please wait a moment" />;
@@ -159,7 +154,7 @@ class App extends React.Component<Props, States> {
           if (!data || !data.me) {
             return (
               <ErrorPath
-                text="Server is still in maintenance"
+                text={`${(error as any).message || 'Server is still in maintenance'}`}
                 statusCode={500}
                 icon={require('./images/server_error.png')}
               />
@@ -181,6 +176,7 @@ class App extends React.Component<Props, States> {
           const experiences = data.me.experience as IExperience[];
           const me = data.me as IMe;
 
+          console.log(me);
           return (
             <BrowserRouter>
               <div>
@@ -198,26 +194,17 @@ class App extends React.Component<Props, States> {
                   </Route>
                   <Route
                     path="/blog"
-                    render={props => <Blog {...props} children={marginTopBlogMainNav} />}
+                    render={(props) => <BlogV2 {...props} children={marginTopBlogMainNav} />}
                   />
                   <Route
-                    render={props => (
+                    render={(props) => (
                       <ErrorPath {...props} text="Not found page" statusCode={403} />
                     )}
                   />
                 </Switch>
 
                 {/* Footer */}
-                <div
-                  style={{
-                    backgroundColor: '#f7f7f8',
-                    display: 'flex',
-                    justifyContent: 'center',
-                  }}
-                  className="wrapper--padding-top-bottom-50"
-                >
-                  <Footer me={me} />
-                </div>
+                <FooterV2 me={me} />
               </div>
             </BrowserRouter>
           );
@@ -229,10 +216,11 @@ class App extends React.Component<Props, States> {
 
 const mapDispatchTopProps = (dispatch: any) => {
   return {
-    setAlertSourceCodeVisible: isVisible =>
-      dispatch(showElement.setVisibleAlertSourceCode(isVisible)),
+    // tslint:disable-next-line:ter-arrow-parens
+    setAlertSourceCodeVisible: (isVisible) =>
+      dispatch(elementAction.setVisibleAlertSourceCode(isVisible)),
     setNotReadyElement: (isVisible, title) =>
-      dispatch(showElement.setNotReadyElement(isVisible, title)),
+      dispatch(elementAction.setNotReadyElement(isVisible, title)),
   };
 };
 

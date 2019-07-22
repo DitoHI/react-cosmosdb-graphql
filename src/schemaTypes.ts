@@ -48,6 +48,7 @@ export interface Me_me_education {
   degree: string | null;
   major: string | null;
   description: string | null;
+  blobUri: string | null;
 }
 
 export interface Me_me_experience {
@@ -136,6 +137,7 @@ export interface UserPage_education {
   degree: string | null;
   major: string | null;
   description: string | null;
+  blobUri: string | null;
 }
 
 export interface UserPage_experience {

@@ -2,11 +2,11 @@ import * as React from 'react';
 import { Query } from 'react-apollo';
 import { css } from 'aphrodite';
 import * as dateFormat from 'dateformat';
+import { NavLink } from 'react-router-dom';
+import { Button } from 'reactstrap';
 
 import '../../styles/Main.css';
 import '../../styles/blog/Blog.css';
-import { NavLink } from 'react-router-dom';
-import { Button } from 'reactstrap';
 import IBlog from '../../custom/interface/IBlog';
 import BlogStyle from '../../styles/blog/BlogStyle';
 
@@ -29,18 +29,15 @@ class ContentBlogDetail extends React.Component<Props, {}> {
   }
 
   render() {
-    const { match: { params } } = this.props;
+    const {
+      match: { params },
+    } = this.props;
     const blogId = params.blogId;
     return (
-      <Query<Blogs>
-        query={ blogsQuery }
-        variables={ { id: blogId } }
-      >
-        { ({ loading, error, data }) => {
+      <Query<Blogs> query={blogsQuery} variables={{ id: blogId }}>
+        {({ loading, error, data }) => {
           if (loading) {
-            return (
-              <MainSpinner color="#150940" name="cube-grid"/>
-            );
+            return <MainSpinner color="#150940" name="cube-grid" />;
           }
 
           if (error) {
@@ -59,47 +56,35 @@ class ContentBlogDetail extends React.Component<Props, {}> {
             return null;
           }
 
-          const blog = data.blogs[0] as unknown as IBlog;
+          const blog = (data.blogs[0] as unknown) as IBlog;
 
           if (!blog) {
             return null;
           }
 
-          const blogImage = blog.imageUri
-            ? require(`../../images/blog/${blog.imageUri}`)
-            : require('../../images/placeholder.png');
+          const blogImage = blog.blobUri ? blog.blobUri : require('../../images/placeholder.png');
 
           return (
             <div
-              className={
-                css(
-                  [BlogStyle.blogItemsContent,
-                    BlogStyle.blogItemsContentWrapper,
-                    BlogStyle.blogItemContentWrapper])
-              }
+              className={css([
+                BlogStyle.blogItemsContent,
+                BlogStyle.blogItemsContentWrapper,
+                BlogStyle.blogItemContentWrapper,
+              ])}
             >
-              <div className={ css(BlogStyle.blogItemContentTextWrapper) }>
+              <div className={css(BlogStyle.blogItemContentTextWrapper)}>
                 <NavLink to="/blog">
-                  <Button
-                    color="link"
-                    style={ { paddingLeft: 0, paddingRight: 0 } }
-                  > Back to Blog
+                  <Button color="link" style={{ paddingLeft: 0, paddingRight: 0 }}>
+                    {' '}
+                    Back to Blog
                   </Button>
                 </NavLink>
-                <div className={ css(BlogStyle.blogItemContentTextTitle) }>{ blog.title }</div>
-                <div
-                  className={
-                    css([BlogStyle.blogItemContentImageWrapper])
-                  }
-                >
-                  <img
-                    alt={ blog.title }
-                    src={ blogImage }
-                    className="blog-item-img"
-                  />
+                <div className={css(BlogStyle.blogItemContentTextTitle)}>{blog.title}</div>
+                <div className={css([BlogStyle.blogItemContentImageWrapper])}>
+                  <img alt={blog.title} src={blogImage} className="blog-item-img" />
                 </div>
                 <div className={css(BlogStyle.blogItemContentLastEdited)}>
-                  { dateFormat(blog.lastEdited, 'dd mmm yyyy') }
+                  {dateFormat(blog.lastEdited, 'dd mmm yyyy')}
                 </div>
                 <div
                   className={css(BlogStyle.blogItemContentTextDesc)}
@@ -107,12 +92,12 @@ class ContentBlogDetail extends React.Component<Props, {}> {
                 />
 
                 <Button outline color="info" className={css(BlogStyle.blogItemContentTextHastag)}>
-                  <div>{ blog.hastag }</div>
+                  <div>{blog.tags}</div>
                 </Button>
               </div>
             </div>
           );
-        } }
+        }}
       </Query>
     );
   }

@@ -109,7 +109,7 @@ class Blog extends React.Component<ChildProps<Props>, States> {
     }
 
     const hastags = blogs
-      .map(blog => {
+      .map((blog) => {
         return blog.hastag;
       })
       .filter((v, i, a) => a.indexOf(v) === i);

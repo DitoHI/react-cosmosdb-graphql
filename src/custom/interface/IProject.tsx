@@ -4,6 +4,7 @@ interface IProject {
   techStacks: string[];
   description: string;
   link: string;
+  blobUri: string;
 }
 
 export default IProject;
