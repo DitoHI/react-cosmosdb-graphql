@@ -14,7 +14,7 @@ interface IProps {
 const footer: React.FunctionComponent<IProps> = ({ me }) => {
   return (
     <div className={css(FooterStyles.footerContainer)}>
-      <Box display="flex" direction="row" justifyContent="center" paddingX={3} paddingY={9}>
+      <Box display="flex" direction="row" justifyContent="center" paddingX={3} paddingY={6}>
         <Column span={4}>
           <Box display="flex" direction="row" alignItems="center" paddingX={9}>
             <Box marginRight={1} padding={1}>
@@ -63,7 +63,7 @@ const footer: React.FunctionComponent<IProps> = ({ me }) => {
           <Icon accessibilityLabel="Heart" icon="heart" color="white" size={21} />
         </Box>
         <Text color="white" bold>
-          Copyright &copy; 2018 by Dito Hafizh
+          Copyright &copy; 2019 by Dito Hafizh
         </Text>
       </Box>
     </div>

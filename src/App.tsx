@@ -1,3 +1,4 @@
+import { css } from 'aphrodite';
 import * as React from 'react';
 import { Query } from 'react-apollo';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -28,6 +29,7 @@ import { meQuery } from './graphql/queries/me';
 import { Me } from './schemaTypes';
 
 import { IEducation, IExperience, IMe, IProject } from './custom/interface';
+import MainStyle from './styles/MainStyle';
 
 interface Props {
   setAlertSourceCodeVisible: any;
@@ -179,7 +181,7 @@ class App extends React.Component<Props, States> {
           console.log(me);
           return (
             <BrowserRouter>
-              <div>
+              <div className={css(MainStyle.mainContainer)}>
                 <Switch>
                   <Route path="/" exact>
                     <HomePage
