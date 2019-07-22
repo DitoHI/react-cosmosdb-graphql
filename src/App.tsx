@@ -178,7 +178,6 @@ class App extends React.Component<Props, States> {
           const experiences = data.me.experience as IExperience[];
           const me = data.me as IMe;
 
-          console.log(me);
           return (
             <BrowserRouter>
               <div className={css(MainStyle.mainContainer)}>
