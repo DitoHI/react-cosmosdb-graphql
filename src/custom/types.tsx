@@ -1,6 +1,6 @@
 export default {
   DEFAULT_BLOG_CONTAINER_SIZE: {
-    height: '450px',
+    height: '500px',
     width: '350px',
   },
 

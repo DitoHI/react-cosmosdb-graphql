@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css } from 'aphrodite';
-import { Box, Card, Column, Divider, Text, Touchable } from 'gestalt';
+import { Box, Card, Column, Divider, Heading, Image, Text, Touchable } from 'gestalt';
 import { Placeholder } from 'semantic-ui-react';
 import 'gestalt/dist/gestalt.css';
 
@@ -97,7 +97,7 @@ class BlogHeader extends React.Component<IProps, {}> {
   renderTopStories() {
     const {} = this.state;
     return (
-      <Box color="white">
+      <Box color="white" overflow="auto" height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}>
         <Box paddingY={2} marginTop={3}>
           <Text size="lg" bold align="center">
             Top Stories
@@ -110,10 +110,33 @@ class BlogHeader extends React.Component<IProps, {}> {
     );
   }
 
+  renderBanner() {
+    const { blogs } = this.props;
+    return (
+      <Box position="relative" height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}>
+        <Image
+          alt={blogs[0].title}
+          color="pine"
+          src={blogs[0].blobUri}
+          fit="cover"
+          naturalHeight={1}
+          naturalWidth={1}
+        >
+          <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', height: '100%', width: '100%' }} />
+        </Image>
+        <Box padding={8} position="absolute" left bottom>
+          <Heading color="white" size="sm">
+            {blogs[0].title}
+          </Heading>
+        </Box>
+      </Box>
+    );
+  }
+
   render() {
     return (
       <Box display="flex" direction="row" color="white" overflow="hidden" shape="rounded">
-        <Column span={8}>{this.renderBannerPlaceholder()}</Column>
+        <Column span={8}>{this.renderBanner()}</Column>
         <Column span={4}>{this.renderTopStories()}</Column>
       </Box>
     );

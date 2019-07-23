@@ -10,7 +10,7 @@ export default {
     lastEdited: new Date(),
     isDeleted: false,
     positionIndex: 0,
-    blobUri: 'https://publicblogapi.blob.core.windows.net/blog/pyCxBPfEr-graphql.jpeg',
+    blobUri: 'https://cdn-images-1.medium.com/max/1017/1*9VyBulcxDuGbfz9FfcZMbg.png',
     id: '31074dc7-68c5-3134-fb9b-507931b65c9a',
   },
 };
