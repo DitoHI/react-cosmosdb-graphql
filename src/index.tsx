@@ -1,7 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import registerServiceWorker from './registerServiceWorker';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'semantic-ui-css/semantic.min.css';
 
 // setup Apollo Client
 import { ApolloLink, ApolloClient, HttpLink, InMemoryCache } from 'apollo-boost';

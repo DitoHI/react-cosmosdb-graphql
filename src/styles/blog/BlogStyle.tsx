@@ -1,4 +1,7 @@
 import { StyleSheet } from 'aphrodite';
+import Colors from '../Colors';
+
+import types from '../../custom/types';
 
 export default StyleSheet.create({
   blogNavMain: {
@@ -104,5 +107,24 @@ export default StyleSheet.create({
   },
   blogItemContentDetailWrapper: {
     padding: '3rem 15rem',
+  },
+
+  // v2
+  blogContainer: {
+    backgroundColor: Colors.oldBlack,
+    flexGrow: 1,
+    minHeight: '100%',
+  },
+
+  // header
+  blogContainerSize: {
+    height: types.DEFAULT_BLOG_CONTAINER_SIZE.height,
+  },
+  blogHeaderPlaceholderSize: {
+    height: types.DEFAULT_BLOG_PLACEHOLDER_SIZE.height,
+    width: types.DEFAULT_BLOG_PLACEHOLDER_SIZE.width,
+  },
+  blogHeaderContentPlaceholderSize: {
+    width: types.DEFAULT_BLOG_PLACEHOLDER_SIZE.width,
   },
 });

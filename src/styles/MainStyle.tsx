@@ -4,6 +4,8 @@ export default StyleSheet.create({
   mainContainer: {
     minHeight: '100%',
     position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
   },
 
   mainFlexColumnWrapper: {

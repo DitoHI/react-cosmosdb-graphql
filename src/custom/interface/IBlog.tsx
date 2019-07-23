@@ -5,7 +5,6 @@ interface IBlog {
   content: string;
   lastEdited: Date;
   isDeleted: boolean;
-  imageUri: string;
   positionIndex: number;
   tags: string[];
   blobUri: string;

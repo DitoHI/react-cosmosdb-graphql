@@ -17,7 +17,7 @@ interface Props {
 const contentBlog: React.FunctionComponent<Props> = ({ blog, handleClick }) => {
   // filter the result
   const blogImage = blog.blobUri
-    ? require(`../../images/blog/${blog.imageUri}`)
+    ? require(`../../images/blog/${blog.blobUri}`)
     : require('../../images/placeholder.png');
 
   let cleanContent = blog.content.replace(/<\/?[^>]+(>|$)/g, '');
