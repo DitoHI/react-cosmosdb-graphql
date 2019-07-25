@@ -12,9 +12,20 @@ export default {
     positionIndex: 0,
     blobUri: 'https://cdn-images-1.medium.com/max/1017/1*9VyBulcxDuGbfz9FfcZMbg.png',
     id: '31074dc7-68c5-3134-fb9b-507931b65c9a',
+    quote: 'GraphQL and React is such the Best Couple of Front Web Development now!',
     titlePreview:
       'What drives me to build a web application with React, GraphQL, and CosmosDB? And why...',
     contentPreview:
       'There is no better day than today to make a web application with a dedicated front-end technology to build it. The field of these emerging fields are so promosing. We have Angular, Vue, and of course...',
+  },
+  user: {
+    id: 'b56efb62-c9ab-3c89-c5a7-34ba6e3cf1c7',
+    name: 'Dito Hafizh Indriarto',
+    email: 'ditohafizh@gmail.com',
+    occupation: 'Software Engineer',
+    isActived: true,
+    address: '',
+    phone: '',
+    blobUri: 'https://publicblogapi.blob.core.windows.net/user/aroyo7AHN-DSC04282.JPG',
   },
 };

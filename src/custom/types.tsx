@@ -14,5 +14,10 @@ export default {
     width: 260,
   },
 
+  DEFAULT_BLOG_PREVIEW_USER_AVA: {
+    height: 120,
+    width: 120,
+  },
+
   COLOR_TOP_STORIES: ['orange', 'midnight', 'eggplant', 'green', 'pine'],
 };

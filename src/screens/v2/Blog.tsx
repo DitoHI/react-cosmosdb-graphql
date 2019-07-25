@@ -28,8 +28,11 @@ class Blog extends React.Component<ChildProps<IProps>, {}> {
         <Box padding={12}>
           <BlogHeader blogs={Array.of<IBlog>(fixtures.blog, fixtures.blog, fixtures.blog)} />
           <Box paddingY={6} />
-          <BlogPreview blog={fixtures.blog} />
         </Box>
+        <Box paddingX={9}>
+          <BlogPreview blog={fixtures.blog} user={fixtures.user} />
+        </Box>
+        <Box paddingY={6} />
       </div>
     );
   }

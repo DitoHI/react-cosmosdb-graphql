@@ -10,6 +10,7 @@ interface IBlog {
   positionIndex: number;
   tags: string[];
   blobUri: string;
+  quote: string;
 }
 
 export default IBlog;

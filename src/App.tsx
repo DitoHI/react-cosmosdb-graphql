@@ -183,6 +183,8 @@ class App extends React.Component<Props, States> {
           const projects = [];
           const experiences = [];
           const me: IMe = {
+            id: '1',
+            name: 'Dito Hafizh',
             email: 'ditohafizh@gmail.com',
             phone: '+6285730084960',
             address: 'Rayan Regency J 22 Wiyung Surabaya',
