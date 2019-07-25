@@ -82,8 +82,8 @@ class BlogHeader extends React.Component<IProps, {}> {
                       {blog.tags[0]}
                     </Text>
                   </Box>
-                  <Box padding={1} maxWidth={350}>
-                    <Text truncate>{blog.title}&#39;</Text>
+                  <Box padding={1}>
+                    <Text>{blog.titlePreview}</Text>
                   </Box>
                 </Box>
               </Box>
@@ -97,7 +97,14 @@ class BlogHeader extends React.Component<IProps, {}> {
   renderTopStories() {
     const {} = this.state;
     return (
-      <Box color="white" overflow="auto" height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}>
+      <Box
+        display="flex"
+        direction="column"
+        color="white"
+        overflow="auto"
+        height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}
+        alignItems="center"
+      >
         <Box paddingY={2} marginTop={3}>
           <Text size="lg" bold align="center">
             Top Stories
