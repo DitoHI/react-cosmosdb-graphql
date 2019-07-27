@@ -1,15 +1,13 @@
 import * as React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { css } from 'aphrodite';
-import { Box } from 'gestalt';
 import { ChildProps } from 'react-apollo';
 import 'gestalt/dist/gestalt.css';
 
-import { IBlog } from '../../custom/interface';
+import BlogContent from '../../components/v2/blog/BlogContent';
+import BlogMain from '../../components/v2/blog/BlogMain';
 
 import BlogStyle from '../../styles/blog/BlogStyle';
-
-import BlogPreview from '../../components/v2/blog/BlogPreview';
-import BlogHeader from '../../components/v2/blog/BlogHeader';
 
 import fixtures from '../../test/fixtures';
 
@@ -25,14 +23,10 @@ class Blog extends React.Component<ChildProps<IProps>, {}> {
   render() {
     return (
       <div className={css(BlogStyle.blogContainer)}>
-        <Box padding={12}>
-          <BlogHeader blogs={Array.of<IBlog>(fixtures.blog, fixtures.blog, fixtures.blog)} />
-          <Box paddingY={6} />
-        </Box>
-        <Box paddingX={9}>
-          <BlogPreview blog={fixtures.blog} user={fixtures.user} />
-        </Box>
-        <Box paddingY={6} />
+        <Switch>
+          <Route exact path="/blog" render={(props) => <BlogMain user={fixtures.user} />} />
+          <Route path="/blog/:id" component={BlogContent} />
+        </Switch>
       </div>
     );
   }
