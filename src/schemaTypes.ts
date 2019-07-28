@@ -20,6 +20,7 @@ export interface Blogs_blogs {
   blobName: string | null;
   positionIndex: number | null;
   tags: (string | null)[] | null;
+  quote: string | null;
 }
 
 export interface Blogs {
@@ -122,6 +123,7 @@ export interface BlogPage {
   blobName: string | null;
   positionIndex: number | null;
   tags: (string | null)[] | null;
+  quote: string | null;
 }
 
 /* tslint:disable */

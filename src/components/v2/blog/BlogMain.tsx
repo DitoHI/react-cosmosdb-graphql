@@ -71,9 +71,7 @@ class BlogMain extends React.Component<IProps, {}> {
                 <Box paddingY={6} />
               </Box>
               <Box paddingX={9}>
-                {loading
-                  ? this.renderSpinner()
-                  : this.renderBlogPreview(Array.from([fixtures.blog, fixtures.blog2]))}
+                {loading ? this.renderSpinner() : this.renderBlogPreview(blogs)}
               </Box>
               <Box paddingY={6} />
             </Box>

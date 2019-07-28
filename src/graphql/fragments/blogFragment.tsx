@@ -14,5 +14,6 @@ export const blogFragment = gql`
     blobName
     positionIndex
     tags
+    quote
   }
 `;
