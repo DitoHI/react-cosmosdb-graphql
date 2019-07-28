@@ -18,6 +18,21 @@ export default {
     contentPreview:
       'There is no better day than today to make a web application with a dedicated front-end technology to build it. The field of these emerging fields are so promosing. We have Angular, Vue, and of course...',
   },
+  blog2: {
+    title: 'Tes2',
+    content: 'Tes2',
+    cover: {},
+    tags: ['GraphQL', 'Web Development', 'React'],
+    user: 'b56efb62-c9ab-3c89-c5a7-34ba6e3cf1c7',
+    lastEdited: new Date(),
+    isDeleted: false,
+    positionIndex: 0,
+    blobUri: 'https://cdn-images-1.medium.com/max/1017/1*9VyBulcxDuGbfz9FfcZMbg.png',
+    id: '31074dc7-68c5-3134-fb9b-507931b65c9b',
+    quote: 'TesQuote',
+    titlePreview: 'TitlePreview2',
+    contentPreview: 'ContentPreview2',
+  },
   user: {
     id: 'b56efb62-c9ab-3c89-c5a7-34ba6e3cf1c7',
     name: 'Dito Hafizh Indriarto',

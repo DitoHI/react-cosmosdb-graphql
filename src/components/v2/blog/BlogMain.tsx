@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box } from 'gestalt';
+import { Box, Spinner } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
 import { Query } from 'react-apollo';
 import { connect } from 'react-redux';
@@ -40,16 +40,26 @@ class BlogMain extends React.Component<IProps, {}> {
               />
             );
           }
-          return (
-            <Box>
-              <Box padding={12}>
-                <BlogHeader blogs={Array.of<IBlog>(fixtures.blog, fixtures.blog, fixtures.blog)} />
+
+          if (data && data.blogs) {
+            const blogs = data.blogs as IBlog[];
+            return (
+              <Box>
+                <Box padding={12}>
+                  <BlogHeader loading={loading} blogs={blogs.slice(0, 5)} />
+                  <Box paddingY={6} />
+                </Box>
+                <Box paddingX={9}>
+                  <BlogPreview blog={fixtures.blog} user={user} />
+                </Box>
                 <Box paddingY={6} />
               </Box>
-              <Box paddingX={9}>
-                <BlogPreview blog={fixtures.blog} user={user} />
-              </Box>
-              <Box paddingY={6} />
+            );
+          }
+
+          return (
+            <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+              <Spinner accessibilityLabel="Nothing to be served" show />
             </Box>
           );
         }}

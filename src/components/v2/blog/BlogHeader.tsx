@@ -12,9 +12,21 @@ import types from '../../../custom/types';
 
 interface IProps {
   blogs: IBlog[];
+  loading: boolean;
 }
 
-class BlogHeader extends React.Component<IProps, {}> {
+interface IState {
+  activeBlog: number;
+}
+
+class BlogHeader extends React.Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeBlog: 0,
+    };
+  }
+
   renderBannerPlaceholder() {
     const {} = this.state;
     return (
@@ -22,7 +34,7 @@ class BlogHeader extends React.Component<IProps, {}> {
         display="flex"
         direction="column"
         alignItems="center"
-        justifyContent="center"
+        justifyContent="start"
         paddingY={6}
         height="100%"
       >
@@ -45,19 +57,23 @@ class BlogHeader extends React.Component<IProps, {}> {
   renderStoriesPlaceholder() {
     const {} = this.state;
     return (
-      <Box paddingY={2}>
-        <Placeholder>
-          <Placeholder.Header image>
-            <Placeholder.Line />
-            <Placeholder.Line />
-          </Placeholder.Header>
-          <Placeholder.Paragraph>
-            <Placeholder.Line />
-            <Placeholder.Line />
-            <Placeholder.Line />
-            <Placeholder.Line />
-          </Placeholder.Paragraph>
-        </Placeholder>
+      <Box paddingY={5} paddingX={3}>
+        {Array.from(Array(2).keys()).map((i: number) => (
+          <Box key={`top_stories_placeholder${i}`} paddingY={1}>
+            <Placeholder>
+              <Placeholder.Header image>
+                <Placeholder.Line />
+                <Placeholder.Line />
+              </Placeholder.Header>
+              <Placeholder.Paragraph>
+                <Placeholder.Line />
+                <Placeholder.Line />
+                <Placeholder.Line />
+                <Placeholder.Line />
+              </Placeholder.Paragraph>
+            </Placeholder>
+          </Box>
+        ))}
       </Box>
     );
   }
@@ -66,7 +82,15 @@ class BlogHeader extends React.Component<IProps, {}> {
     const { blogs } = this.props;
     return blogs.map((blog: IBlog, index: number) => {
       return (
-        <Touchable onTouch={() => {}} shape="rounded" key={index}>
+        <Touchable
+          onTouch={() => {
+            this.setState({
+              activeBlog: index,
+            });
+          }}
+          shape="rounded"
+          key={index}
+        >
           <Box paddingY={2} shape="rounded" overflow="hidden">
             <Card>
               <Box display="flex" direction="row" alignItems="center">
@@ -119,12 +143,13 @@ class BlogHeader extends React.Component<IProps, {}> {
 
   renderBanner() {
     const { blogs } = this.props;
+    const { activeBlog } = this.state;
     return (
       <Box position="relative" height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}>
         <Image
-          alt={blogs[0].title}
+          alt={blogs[activeBlog].title}
           color="pine"
-          src={blogs[0].blobUri}
+          src={blogs[activeBlog].blobUri}
           fit="cover"
           naturalHeight={1}
           naturalWidth={1}
@@ -133,7 +158,7 @@ class BlogHeader extends React.Component<IProps, {}> {
         </Image>
         <Box padding={8} position="absolute" left bottom>
           <Heading color="white" size="sm">
-            {blogs[0].title}
+            {blogs[activeBlog].title}
           </Heading>
         </Box>
       </Box>
@@ -141,10 +166,13 @@ class BlogHeader extends React.Component<IProps, {}> {
   }
 
   render() {
+    const { loading } = this.props;
     return (
       <Box display="flex" direction="row" color="white" overflow="hidden" shape="rounded">
-        <Column span={8}>{this.renderBanner()}</Column>
-        <Column span={4}>{this.renderTopStories()}</Column>
+        <Column span={8}>{loading ? this.renderBannerPlaceholder() : this.renderBanner()}</Column>
+        <Column span={4}>
+          {loading ? this.renderStoriesPlaceholder() : this.renderTopStories()}
+        </Column>
       </Box>
     );
   }

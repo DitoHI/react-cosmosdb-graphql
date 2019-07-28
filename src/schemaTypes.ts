@@ -11,7 +11,9 @@ export interface Blogs_blogs {
   id: string;
   user: string;
   title: string | null;
+  titlePreview: string | null;
   content: string | null;
+  contentPreview: string | null;
   lastEdited: any | null;
   isDeleted: boolean | null;
   blobUri: string | null;
@@ -111,7 +113,9 @@ export interface BlogPage {
   id: string;
   user: string;
   title: string | null;
+  titlePreview: string | null;
   content: string | null;
+  contentPreview: string | null;
   lastEdited: any | null;
   isDeleted: boolean | null;
   blobUri: string | null;

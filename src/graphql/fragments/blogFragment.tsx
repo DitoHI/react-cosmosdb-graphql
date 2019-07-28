@@ -5,7 +5,9 @@ export const blogFragment = gql`
     id
     user
     title
+    titlePreview
     content
+    contentPreview
     lastEdited
     isDeleted
     blobUri
