@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Box, Column, IconButton, Text, Touchable } from 'gestalt';
+import 'gestalt/dist/gestalt.css';
 
 import { IBlog } from '../../../custom/interface';
-import types from '../../../custom/types';
 
 interface IProps {
   prevBlog: IBlog;
@@ -13,9 +13,8 @@ class BlogContentHeader extends React.Component<IProps, {}> {
   render() {
     const { prevBlog, nextBlog } = this.props;
     return (
-      <Box display="flex" direction="row" color="white" padding={3} alignItems="start">
-        <Column span={3} />
-        <Column span={2}>
+      <Box display="flex" direction="row" padding={3} alignItems="start">
+        <Column span={4}>
           <Touchable onTouch={() => {}}>
             <Box justifyContent="start">
               <Box display="flex" direction="row" alignItems="center">
@@ -33,7 +32,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                   </Text>
                 </Box>
               </Box>
-              <Box paddingY={1} maxWidth={types.DEFAULT_WIDTH_TITLE_ONE}>
+              <Box paddingY={1} maxWidth="100%">
                 <Text size="xs" color="gray" bold truncate>
                   {prevBlog.titlePreview}
                 </Text>
@@ -41,7 +40,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
             </Box>
           </Touchable>
         </Column>
-        <Column span={2}>
+        <Column span={4}>
           <Touchable onTouch={() => {}}>
             <Box display="flex" direction="row" justifyContent="center" alignItems="center">
               <IconButton
@@ -60,7 +59,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
             </Box>
           </Touchable>
         </Column>
-        <Column span={2}>
+        <Column span={4}>
           <Touchable onTouch={() => {}}>
             <Box justifyContent="start">
               <Box display="flex" direction="row" alignItems="center">
@@ -80,7 +79,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                   />
                 </Box>
               </Box>
-              <Box paddingY={1} maxWidth={types.DEFAULT_WIDTH_TITLE_ONE}>
+              <Box paddingY={1} maxWidth="100%">
                 <Text size="xs" color="gray" bold truncate>
                   {nextBlog.titlePreview}
                 </Text>

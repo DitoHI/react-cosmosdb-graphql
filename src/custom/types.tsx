@@ -19,7 +19,7 @@ export default {
     width: 120,
   },
 
-  DEFAULT_WIDTH_TITLE_ONE: 200,
+  DEFAULT_WIDTH_TITLE_ONE: 360,
 
   COLOR_TOP_STORIES: ['orange', 'midnight', 'eggplant', 'green', 'pine'],
 };
