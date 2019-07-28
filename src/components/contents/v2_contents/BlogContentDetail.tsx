@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {
-  Avatar,
   Box,
+  Card,
   Column,
   Divider,
   Heading,
@@ -31,10 +31,12 @@ class BlogContentDetail extends React.Component<IProps, {}> {
     const { blog } = this.props;
     return blog.tags.map((tag) => {
       return (
-        <Box paddingX={2} marginRight={3} color="blue">
-          <Text color="white" size="xs" bold>
-            {tag}
-          </Text>
+        <Box paddingX={3} paddingY={2} marginRight={3}>
+          <Card>
+            <Text color="gray" size="sm" bold>
+              #{tag}
+            </Text>
+          </Card>
         </Box>
       );
     });
@@ -106,6 +108,18 @@ class BlogContentDetail extends React.Component<IProps, {}> {
             </Box>
             <Box marginBottom={6}>
               <Divider />
+            </Box>
+            <Box paddingY={2} marginBottom={4}>
+              <Mask height={types.DEFAULT_HEIGHT_IMG.lg}>
+                <Image
+                  alt={blog.blobUri}
+                  color="white"
+                  src={blog.blobUri!}
+                  naturalHeight={1}
+                  naturalWidth={1}
+                  fit="contain"
+                />
+              </Mask>
             </Box>
             <div
               className={css(BlogStyle.blogItemContentTextDesc)}

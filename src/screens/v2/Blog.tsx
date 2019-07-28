@@ -20,6 +20,10 @@ class Blog extends React.Component<ChildProps<IProps>, {}> {
     super(props);
   }
 
+  componentWillMount(): void {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <div className={css(BlogStyle.blogContainer)}>

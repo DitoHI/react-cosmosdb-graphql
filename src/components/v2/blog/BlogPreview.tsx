@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Avatar, Box, Card, Column, Heading, Image, Mask, Spinner, Text, Touchable } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
+import { Route } from 'react-router';
 
 import types from '../../../custom/types';
 
@@ -120,9 +121,17 @@ class BlogPreview extends React.Component<IProps, {}> {
                       </Text>
                     </Box>
                     <Box paddingY={4}>
-                      <Touchable onTouch={() => {}}>
-                        <Heading size="xs">{blog.title}</Heading>
-                      </Touchable>
+                      <Route
+                        render={({ history }) => (
+                          <Touchable
+                            onTouch={() => {
+                              history.push(`/blog/${blog.id}`);
+                            }}
+                          >
+                            <Heading size="xs">{blog.title}</Heading>
+                          </Touchable>
+                        )}
+                      />
                     </Box>
                     <Box>
                       <Text color="gray" size="lg">

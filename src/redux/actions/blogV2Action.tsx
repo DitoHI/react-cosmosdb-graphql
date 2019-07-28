@@ -6,4 +6,9 @@ export default {
       type: typesMod.UP_PAGINATION,
     };
   },
+  restorePagination: () => {
+    return {
+      type: typesMod.RESTORE_PAGINATION,
+    };
+  },
 };

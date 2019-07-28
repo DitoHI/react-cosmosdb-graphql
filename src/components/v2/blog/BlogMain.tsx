@@ -3,6 +3,7 @@ import { Box, Spinner } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
 import { Query } from 'react-apollo';
 import { connect } from 'react-redux';
+import { Route } from 'react-router';
 
 import { IBlog, IMe } from '../../../custom/interface';
 import { blogsQuery } from '../../../graphql/queries/blogs';
@@ -23,9 +24,15 @@ interface IProps {
     end: number;
   };
   upPagination: any;
+  restorePagination: any;
 }
 
 class BlogMain extends React.Component<IProps, {}> {
+  componentWillUnmount(): void {
+    const { restorePagination } = this.props;
+    restorePagination();
+  }
+
   renderBlogPreview(blogs: IBlog[]) {
     const { user } = this.props;
     return blogs.map((blog, index) => {
@@ -87,7 +94,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  upPagination: () => dispatch(() => blogV2Action.upPagination()),
+  upPagination: () => dispatch(blogV2Action.upPagination),
+  restorePagination: () => dispatch(blogV2Action.restorePagination),
 });
 
 export default connect(

@@ -153,42 +153,42 @@ class App extends React.Component<Props, States> {
             return <HomeSpinner containerImg={radioSpinner} contentText="Please wait a moment" />;
           }
 
-          // if (!data || !data.me) {
-          //   return (
-          //     <ErrorPath
-          //       text={`${(error as any).message || 'Server is still in maintenance'}`}
-          //       statusCode={500}
-          //       icon={require('./images/server_error.png')}
-          //     />
-          //   );
-          // }
-          //
-          // if (!data.me.education && !data.me.project && !data.me.experience) {
-          //   return (
-          //     <ErrorPath
-          //       text="Server is still in maintenance"
-          //       statusCode={500}
-          //       icon={require('./images/server_error.png')}
-          //     />
-          //   );
-          // }
+          if (!data || !data.me) {
+            return (
+              <ErrorPath
+                text={`${(error as any).message || 'Server is still in maintenance'}`}
+                statusCode={500}
+                icon={require('./images/server_error.png')}
+              />
+            );
+          }
 
-          // const educations = data.me.education as IEducation[];
-          // const projects = data.me.project as IProject[];
-          // const experiences = data.me.experience as IExperience[];
-          // const me = data.me as IMe;
+          if (!data.me.education && !data.me.project && !data.me.experience) {
+            return (
+              <ErrorPath
+                text="Server is still in maintenance"
+                statusCode={500}
+                icon={require('./images/server_error.png')}
+              />
+            );
+          }
+
+          const educations = data.me.education as IEducation[];
+          const projects = data.me.project as IProject[];
+          const experiences = data.me.experience as IExperience[];
+          const me = data.me as IMe;
 
           // dummy
-          const educations = [];
-          const projects = [];
-          const experiences = [];
-          const me: IMe = {
-            id: '1',
-            name: 'Dito Hafizh',
-            email: 'ditohafizh@gmail.com',
-            phone: '+6285730084960',
-            address: 'Rayan Regency J 22 Wiyung Surabaya',
-          };
+          // const educations = [];
+          // const projects = [];
+          // const experiences = [];
+          // const me: IMe = {
+          //   id: '1',
+          //   name: 'Dito Hafizh',
+          //   email: 'ditohafizh@gmail.com',
+          //   phone: '+6285730084960',
+          //   address: 'Rayan Regency J 22 Wiyung Surabaya',
+          // };
 
           return (
             <BrowserRouter>
