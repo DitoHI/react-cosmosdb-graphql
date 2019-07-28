@@ -10,6 +10,7 @@ import { blogsQuery } from '../../../graphql/queries/blogs';
 import blogV2Action from '../../../redux/actions/blogV2Action';
 
 import fixtures from '../../../test/fixtures';
+import types from '../../../custom/types';
 
 import ErrorPath from '../../ErrorPath';
 import BlogHeader from './BlogHeader';
@@ -25,6 +26,27 @@ interface IProps {
 }
 
 class BlogMain extends React.Component<IProps, {}> {
+  renderBlogPreview(blogs: IBlog[]) {
+    const { user } = this.props;
+    return blogs.map((blog, index) => {
+      const nearestIndex = 5 * Math.floor(index / 5) + index;
+      return (
+        <Box key={blog.titlePreview} paddingY={2}>
+          <BlogPreview bgColor={types.COLOR_TOP_STORIES[nearestIndex]} blog={blog} user={user} />
+        </Box>
+      );
+    });
+  }
+
+  renderSpinner() {
+    const {} = this.state;
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" height="100%">
+        <Spinner accessibilityLabel="blog_preview_spinner" show />
+      </Box>
+    );
+  }
+
   render() {
     const { pagination, user } = this.props;
     return (
@@ -41,25 +63,19 @@ class BlogMain extends React.Component<IProps, {}> {
             );
           }
 
-          if (data && data.blogs) {
-            const blogs = data.blogs as IBlog[];
-            return (
-              <Box>
-                <Box padding={12}>
-                  <BlogHeader loading={loading} blogs={blogs.slice(0, 5)} />
-                  <Box paddingY={6} />
-                </Box>
-                <Box paddingX={9}>
-                  <BlogPreview blog={fixtures.blog} user={user} />
-                </Box>
+          const blogs = data.blogs as IBlog[];
+          return (
+            <Box>
+              <Box padding={12}>
+                <BlogHeader loading={loading} blogs={loading ? [] : blogs.slice(0, 5)} />
                 <Box paddingY={6} />
               </Box>
-            );
-          }
-
-          return (
-            <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-              <Spinner accessibilityLabel="Nothing to be served" show />
+              <Box paddingX={9}>
+                {loading
+                  ? this.renderSpinner()
+                  : this.renderBlogPreview(Array.from([fixtures.blog, fixtures.blog2]))}
+              </Box>
+              <Box paddingY={6} />
             </Box>
           );
         }}

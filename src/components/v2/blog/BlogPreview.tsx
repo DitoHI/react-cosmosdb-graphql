@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar, Box, Card, Column, Heading, Image, Mask, Text, Touchable } from 'gestalt';
+import { Avatar, Box, Card, Column, Heading, Image, Mask, Spinner, Text, Touchable } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
 
 import types from '../../../custom/types';
@@ -12,6 +12,7 @@ import Colors from '../../../styles/Colors';
 interface IProps {
   blog: IBlog;
   user: IMe;
+  bgColor: string;
 }
 
 class BlogPreview extends React.Component<IProps, {}> {
@@ -31,7 +32,8 @@ class BlogPreview extends React.Component<IProps, {}> {
   }
 
   render() {
-    const { blog, user } = this.props;
+    const { bgColor, blog, user } = this.props;
+
     return (
       <Box display="flex" direction="row">
         <Column span={6} smSpan={4}>
@@ -40,7 +42,7 @@ class BlogPreview extends React.Component<IProps, {}> {
               display="flex"
               height="100%"
               direction="row"
-              color="blue"
+              color={bgColor as any}
               shape="rounded"
               padding={6}
               alignItems="center"
