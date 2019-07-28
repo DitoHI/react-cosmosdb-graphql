@@ -13,10 +13,10 @@ class BlogContentHeader extends React.Component<IProps, {}> {
   render() {
     const { prevBlog, nextBlog } = this.props;
     return (
-      <Box display="flex" direction="row" padding={3} alignItems="start">
+      <Box color="white" display="flex" direction="row" padding={3} alignItems="start">
         <Column span={4}>
-          <Touchable onTouch={() => {}}>
-            <Box justifyContent="start">
+          <Box justifyContent="start" height="100%">
+            <Touchable onTouch={() => {}}>
               <Box display="flex" direction="row" alignItems="center">
                 <IconButton
                   accessibilityLabel="prev"
@@ -37,12 +37,18 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                   {prevBlog.titlePreview}
                 </Text>
               </Box>
-            </Box>
-          </Touchable>
+            </Touchable>
+          </Box>
         </Column>
         <Column span={4}>
-          <Touchable onTouch={() => {}}>
-            <Box display="flex" direction="row" justifyContent="center" alignItems="center">
+          <Touchable onTouch={() => {}} fullHeight>
+            <Box
+              display="flex"
+              direction="row"
+              justifyContent="center"
+              alignItems="center"
+              height="100%"
+            >
               <IconButton
                 accessibilityLabel="menu"
                 bgColor="white"
@@ -60,8 +66,8 @@ class BlogContentHeader extends React.Component<IProps, {}> {
           </Touchable>
         </Column>
         <Column span={4}>
-          <Touchable onTouch={() => {}}>
-            <Box justifyContent="start">
+          <Box justifyContent="start" height="100%">
+            <Touchable onTouch={() => {}}>
               <Box display="flex" direction="row" alignItems="center">
                 <Box>
                   <Text bold color="gray" inline>
@@ -84,8 +90,8 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                   {nextBlog.titlePreview}
                 </Text>
               </Box>
-            </Box>
-          </Touchable>
+            </Touchable>
+          </Box>
         </Column>
       </Box>
     );

@@ -21,5 +21,7 @@ export default {
 
   DEFAULT_WIDTH_TITLE_ONE: 360,
 
+  DEFAULT_TOP_LG: 120,
+
   COLOR_TOP_STORIES: ['orange', 'midnight', 'eggplant', 'green', 'pine'],
 };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Box, Divider } from 'gestalt';
+import { Box, Divider, Sticky } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
 
 import BlogContentDetail from '../../contents/v2_contents/BlogContentDetail';
@@ -20,8 +20,10 @@ class BlogContent extends React.Component<IProps, {}> {
     return (
       <Box padding={12}>
         <Box color="white" shape="rounded">
-          <BlogContentHeader prevBlog={fixtures.blog} nextBlog={fixtures.blog} />
-          <Divider />
+          <Sticky top={0} dangerouslySetZIndex={{ __zIndex: 99 } as any}>
+            <BlogContentHeader prevBlog={fixtures.blog} nextBlog={fixtures.blog} />
+            <Divider />
+          </Sticky>
           <BlogContentDetail blog={fixtures.blog} user={fixtures.user} />
         </Box>
       </Box>

@@ -9,8 +9,8 @@ import {
   IconButton,
   Image,
   Mask,
+  Sticky,
   Text,
-  Touchable,
 } from 'gestalt';
 import { css } from 'aphrodite';
 import 'gestalt/dist/gestalt.css';
@@ -63,38 +63,40 @@ class BlogContentDetail extends React.Component<IProps, {}> {
         </Box>
         <Box display="flex" paddingX={3} paddingY={6}>
           <Column span={12} smSpan={3}>
-            <Box display="flex" direction="column" justifyContent="center" alignItems="center">
-              <Mask
-                shape="circle"
-                height={types.DEFAULT_BLOG_PREVIEW_USER_AVA.height}
-                width={types.DEFAULT_BLOG_PREVIEW_USER_AVA.width}
-              >
-                <Image
-                  alt={user.name}
-                  color={Colors.youngBlue}
-                  src={user.blobUri!}
-                  naturalHeight={1}
-                  naturalWidth={1}
-                  fit="cover"
-                />
-              </Mask>
-              <Box paddingX={2} paddingY={4}>
-                <Text bold>{user.name}</Text>
+            <Sticky top={types.DEFAULT_TOP_LG}>
+              <Box display="flex" direction="column" justifyContent="center" alignItems="center">
+                <Mask
+                  shape="circle"
+                  height={types.DEFAULT_BLOG_PREVIEW_USER_AVA.height}
+                  width={types.DEFAULT_BLOG_PREVIEW_USER_AVA.width}
+                >
+                  <Image
+                    alt={user.name}
+                    color={Colors.youngBlue}
+                    src={user.blobUri!}
+                    naturalHeight={1}
+                    naturalWidth={1}
+                    fit="cover"
+                  />
+                </Mask>
+                <Box paddingX={2} paddingY={4}>
+                  <Text bold>{user.name}</Text>
+                </Box>
+                <Box display="flex" direction="column" alignItems="center">
+                  <IconButton
+                    accessibilityLabel="Love"
+                    bgColor="white"
+                    icon="face-smiley"
+                    iconColor="blue"
+                    size="xl"
+                    onClick={() => {}}
+                  />
+                  <Text color="blue" size="xs" bold>
+                    75 Views
+                  </Text>
+                </Box>
               </Box>
-              <Box display="flex" direction="column" alignItems="center">
-                <IconButton
-                  accessibilityLabel="Love"
-                  bgColor="white"
-                  icon="face-smiley"
-                  iconColor="blue"
-                  size="xl"
-                  onClick={() => {}}
-                />
-                <Text color="blue" size="xs" bold>
-                  75 Views
-                </Text>
-              </Box>
-            </Box>
+            </Sticky>
           </Column>
           <Column span={12} smSpan={9}>
             <Box marginBottom={3}>
