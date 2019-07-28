@@ -10,15 +10,21 @@ interface IProps {
   text: string;
   statusCode: number;
   icon?: any;
+  colorText?: string;
 }
 
-const errorPath: React.FunctionComponent<IProps> = ({ text, statusCode, icon }) => {
+const errorPath: React.FunctionComponent<IProps> = ({
+  text,
+  statusCode,
+  icon,
+  colorText = 'black',
+}) => {
   return (
     <Container className={css(MainStyle.mainFlexColumnWrapper)}>
-      <h1 className={css(NotFoundPageStyle.notFoundWrapper)}>
+      <h1 className={css(NotFoundPageStyle.notFoundWrapper)} style={{ color: colorText }}>
         {text}&nbsp;<Badge color="secondary">{statusCode}</Badge>
       </h1>
-      <img className={css(NotFoundPageStyle.notFoundIcon)} src={icon} alt="Error" />
+      {icon && <img className={css(NotFoundPageStyle.notFoundIcon)} src={icon} alt="Error" />}
     </Container>
   );
 };

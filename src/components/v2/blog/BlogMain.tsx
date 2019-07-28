@@ -1,14 +1,17 @@
 import * as React from 'react';
 import { Box } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
+import { Query } from 'react-apollo';
 import { connect } from 'react-redux';
 
 import { IBlog, IMe } from '../../../custom/interface';
+import { blogsQuery } from '../../../graphql/queries/blogs';
 
 import blogV2Action from '../../../redux/actions/blogV2Action';
 
 import fixtures from '../../../test/fixtures';
 
+import ErrorPath from '../../ErrorPath';
 import BlogHeader from './BlogHeader';
 import BlogPreview from './BlogPreview';
 
@@ -25,16 +28,32 @@ class BlogMain extends React.Component<IProps, {}> {
   render() {
     const { pagination, user } = this.props;
     return (
-      <Box>
-        <Box padding={12}>
-          <BlogHeader blogs={Array.of<IBlog>(fixtures.blog, fixtures.blog, fixtures.blog)} />
-          <Box paddingY={6} />
-        </Box>
-        <Box paddingX={9}>
-          <BlogPreview blog={fixtures.blog} user={user} />
-        </Box>
-        <Box paddingY={6} />
-      </Box>
+      <Query query={blogsQuery} variables={{ startAt: pagination.start, endAt: pagination.end }}>
+        {({ loading, error, data }) => {
+          if (error) {
+            return (
+              <ErrorPath
+                text={`${(error as any).message || 'Server is still in maintenance'}`}
+                statusCode={500}
+                icon={null}
+                colorText="white"
+              />
+            );
+          }
+          return (
+            <Box>
+              <Box padding={12}>
+                <BlogHeader blogs={Array.of<IBlog>(fixtures.blog, fixtures.blog, fixtures.blog)} />
+                <Box paddingY={6} />
+              </Box>
+              <Box paddingX={9}>
+                <BlogPreview blog={fixtures.blog} user={user} />
+              </Box>
+              <Box paddingY={6} />
+            </Box>
+          );
+        }}
+      </Query>
     );
   }
 }
