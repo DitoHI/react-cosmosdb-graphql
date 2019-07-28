@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Box } from 'gestalt';
+import BlogContentHeader from '../../contents/v2_contents/BlogContentHeader';
 
 import 'gestalt/dist/gestalt.css';
 
@@ -13,7 +15,11 @@ class BlogContent extends React.Component<IProps, {}> {
         params: { id },
       },
     } = this.props;
-    return <div>Hello Content</div>;
+    return (
+      <Box>
+        <BlogContentHeader />
+      </Box>
+    );
   }
 }
 
