@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Box } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
+import { connect } from 'react-redux';
 
 import { IBlog, IMe } from '../../../custom/interface';
+
+import blogV2Action from '../../../redux/actions/blogV2Action';
 
 import fixtures from '../../../test/fixtures';
 
@@ -11,11 +14,16 @@ import BlogPreview from './BlogPreview';
 
 interface IProps {
   user: IMe;
+  pagination: {
+    start: number;
+    end: number;
+  };
+  upPagination: any;
 }
 
 class BlogMain extends React.Component<IProps, {}> {
   render() {
-    const { user } = this.props;
+    const { pagination, user } = this.props;
     return (
       <Box>
         <Box padding={12}>
@@ -31,4 +39,15 @@ class BlogMain extends React.Component<IProps, {}> {
   }
 }
 
-export default BlogMain;
+const mapStateToProps = (state) => ({
+  pagination: state.blogs.pagination,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  upPagination: () => dispatch(() => blogV2Action.upPagination()),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BlogMain);

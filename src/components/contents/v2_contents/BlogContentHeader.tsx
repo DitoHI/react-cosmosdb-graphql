@@ -13,7 +13,14 @@ class BlogContentHeader extends React.Component<IProps, {}> {
   render() {
     const { prevBlog, nextBlog } = this.props;
     return (
-      <Box color="white" display="flex" direction="row" padding={3} alignItems="start">
+      <Box
+        shape="rounded"
+        color="white"
+        display="flex"
+        direction="row"
+        padding={3}
+        alignItems="start"
+      >
         <Column span={4}>
           <Box justifyContent="start" height="100%">
             <Touchable onTouch={() => {}}>

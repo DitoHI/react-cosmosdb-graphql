@@ -19,7 +19,7 @@ class BlogPreview extends React.Component<IProps, {}> {
     const {} = this.props;
     return tags.map((tag) => {
       return (
-        <Box paddingY={1} paddingX={2} marginRight={1} marginTop={1}>
+        <Box key={tag} paddingY={1} paddingX={2} marginRight={1} marginTop={1}>
           <Card>
             <Text size="xs" color="white" bold>
               {tag}

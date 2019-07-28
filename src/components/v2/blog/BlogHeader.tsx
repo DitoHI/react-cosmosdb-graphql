@@ -66,7 +66,7 @@ class BlogHeader extends React.Component<IProps, {}> {
     const { blogs } = this.props;
     return blogs.map((blog: IBlog, index: number) => {
       return (
-        <Touchable onTouch={() => {}} shape="rounded">
+        <Touchable onTouch={() => {}} shape="rounded" key={index}>
           <Box paddingY={2} shape="rounded" overflow="hidden">
             <Card>
               <Box display="flex" direction="row" alignItems="center">
