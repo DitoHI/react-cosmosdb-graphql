@@ -16,19 +16,58 @@ import { css } from 'aphrodite';
 import 'gestalt/dist/gestalt.css';
 import { Placeholder } from 'semantic-ui-react';
 import * as moment from 'moment';
+import { connect } from 'react-redux';
 
 import { IBlog, IMe } from '../../../custom/interface';
 import types from '../../../custom/types';
+
 import BlogStyle from '../../../styles/blog/BlogStyle';
 import Colors from '../../../styles/Colors';
+
+import typesMod from '../../../redux/actions/typesMod';
+import blogV2Action from '../../../redux/actions/blogV2Action';
+
+import FirebaseConnect from '../../../utils/FirebaseConnect';
 
 interface IProps {
   user: IMe;
   blog: IBlog;
   loading: boolean;
+  incrementView: any;
 }
 
-class BlogContentDetail extends React.Component<IProps, {}> {
+interface IState {
+  views: string;
+  viewLoaded: boolean;
+}
+
+class BlogContentDetail extends React.Component<IProps, IState> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      views: '0',
+      viewLoaded: false,
+    };
+  }
+
+  componentDidMount(): void {
+    const { blog, incrementView, user } = this.props;
+    const db = FirebaseConnect.getDb();
+    if (user && blog) {
+      // increment the views
+      incrementView(user, blog);
+
+      const viewsRef = db.ref(typesMod.REF_BLOGS_VIEW(user.id, blog.id));
+
+      viewsRef.on('value', (snapShot: any) => {
+        this.setState({
+          views: snapShot.val(),
+          viewLoaded: true,
+        });
+      });
+    }
+  }
+
   renderContentPlaceholder() {
     const {} = this.props;
     return (
@@ -127,6 +166,7 @@ class BlogContentDetail extends React.Component<IProps, {}> {
 
   render() {
     const { blog, loading, user } = this.props;
+    const { views, viewLoaded } = this.state;
     return (
       <Box paddingX={12} paddingY={3}>
         <Box paddingX={3} paddingY={6} justifyContent="center">
@@ -187,9 +227,14 @@ class BlogContentDetail extends React.Component<IProps, {}> {
                     size="xl"
                     onClick={() => {}}
                   />
-                  <Text color="blue" size="xs" bold>
-                    75 Views
-                  </Text>
+
+                  {!viewLoaded ? (
+                    <Box width="100%">{this.renderOneLine()}</Box>
+                  ) : (
+                    <Text color="blue" size="xs" bold>
+                      {views} views
+                    </Text>
+                  )}
                 </Box>
               </Box>
             </Sticky>
@@ -235,4 +280,11 @@ class BlogContentDetail extends React.Component<IProps, {}> {
   }
 }
 
-export default BlogContentDetail;
+const mapDispatchToProps = (dispatch) => ({
+  incrementView: (user: IMe, blog: IBlog) => dispatch(() => blogV2Action.incrementView(user, blog)),
+});
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(BlogContentDetail);

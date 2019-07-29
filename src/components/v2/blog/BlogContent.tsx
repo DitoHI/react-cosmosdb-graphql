@@ -4,6 +4,7 @@ import 'gestalt/dist/gestalt.css';
 import { Placeholder } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import * as _ from 'lodash';
+import { connect } from 'react-redux';
 
 import blogsQuery from '../../../graphql/queries/queries_v2/blogsQuery';
 import { getBlogById } from '../../../schemaTypes';
@@ -14,9 +15,13 @@ import { IBlog, IMe } from '../../../custom/interface';
 import fixtures from '../../../test/fixtures';
 import ErrorPath from '../../ErrorPath';
 
+import blogV2Action from '../../../redux/actions/blogV2Action';
+
 interface IProps {
   match: any;
   user: IMe;
+  firebaseDb?: any;
+  incrementView?: any;
 }
 
 class BlogContent extends React.Component<IProps, {}> {
@@ -89,13 +94,6 @@ class BlogContent extends React.Component<IProps, {}> {
                     />
                   </Box>
                 )}
-                {/*<Box>*/}
-                {/*  <Sticky top={0} dangerouslySetZIndex={{ __zIndex: 99 } as any}>*/}
-                {/*    <BlogContentHeader blog={fixtures.blog} loading={loading} />*/}
-                {/*    <Divider />*/}
-                {/*  </Sticky>*/}
-                {/*  <BlogContentDetail blog={fixtures.blog} user={fixtures.user} loading={loading} />*/}
-                {/*</Box>*/}
               </Box>
             </Box>
           );
@@ -105,4 +103,15 @@ class BlogContent extends React.Component<IProps, {}> {
   }
 }
 
-export default BlogContent;
+const mapStateToProps = (state) => ({
+  pagination: state.blogs.pagination,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  incrementView: (user: IMe, blog: IBlog) => dispatch(() => blogV2Action.incrementView(user, blog)),
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(BlogContent);

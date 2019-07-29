@@ -7,6 +7,8 @@ const initialState = {
     start: 0,
     end: 5,
   },
+  firebaseDb: null,
+  sumView: 0,
 };
 
 export default (state = initialState, action: any) => {
@@ -28,6 +30,16 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         pagination: initialState.pagination,
+      };
+    case typesMod.INIT_FIREBASE:
+      return {
+        ...state,
+        firebaseDb: action.payload,
+      };
+    case typesMod.INCREMENT_VIEW:
+      return {
+        ...state,
+        sumView: action.payload,
       };
     default:
       return state;
