@@ -106,6 +106,59 @@ export interface MeVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getBlogById
+// ====================================================
+
+export interface getBlogById_getBlogById {
+  __typename: 'Blog';
+  id: string;
+  title: string | null;
+  content: string | null;
+  lastEdited: any | null;
+  blobUri: string | null;
+  blobName: string | null;
+  tags: (string | null)[] | null;
+  positionIndex: number | null;
+  user: string;
+}
+
+export interface getBlogById {
+  getBlogById: getBlogById_getBlogById | null;
+}
+
+export interface getBlogByIdVariables {
+  id: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getBlogByPosition
+// ====================================================
+
+export interface getBlogByPosition_getBlogByPositionIndex {
+  __typename: 'Blog';
+  id: string;
+  positionIndex: number | null;
+  title: string | null;
+}
+
+export interface getBlogByPosition {
+  getBlogByPositionIndex: getBlogByPosition_getBlogByPositionIndex | null;
+}
+
+export interface getBlogByPositionVariables {
+  index: number;
+  operator: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: BlogPage
 // ====================================================
 

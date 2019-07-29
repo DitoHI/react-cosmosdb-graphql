@@ -1,17 +1,33 @@
 import * as React from 'react';
 import { Box, Column, IconButton, Text, Touchable } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
+import { Query } from 'react-apollo';
+import { Placeholder } from 'semantic-ui-react';
 
 import { IBlog } from '../../../custom/interface';
+import blogsQuery from '../../../graphql/queries/queries_v2/blogsQuery';
+import { getBlogByPosition } from '../../../schemaTypes';
 
 interface IProps {
-  prevBlog: IBlog;
-  nextBlog: IBlog;
+  blog: IBlog;
+  loading: boolean;
 }
 
 class BlogContentHeader extends React.Component<IProps, {}> {
+  renderTitlePreviewPlaceholder() {
+    const {} = this.props;
+    return (
+      <Placeholder>
+        <Placeholder.Paragraph>
+          <Placeholder.Line />
+          <Placeholder.Line />
+        </Placeholder.Paragraph>
+      </Placeholder>
+    );
+  }
+
   render() {
-    const { prevBlog, nextBlog } = this.props;
+    const { blog } = this.props;
     return (
       <Box
         shape="rounded"
@@ -40,9 +56,21 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                 </Box>
               </Box>
               <Box paddingY={1} maxWidth="100%">
-                <Text size="xs" color="gray" bold truncate>
-                  {prevBlog.titlePreview}
-                </Text>
+                {this.renderTitlePreviewPlaceholder()}
+                {/*{blog && (*/}
+                {/*  <Query<getBlogByPosition>*/}
+                {/*    query={blogsQuery.getBlobByPositionIndex}*/}
+                {/*    variables={{ index: blog.positionIndex, operator: '-' }}*/}
+                {/*  >*/}
+                {/*    {({ loading, error, data }) => {*/}
+                {/*      return (*/}
+                {/*        <Text size="xs" color="gray" bold truncate>*/}
+                {/*          {blog && blog.title}*/}
+                {/*        </Text>*/}
+                {/*      );*/}
+                {/*    }}*/}
+                {/*  </Query>*/}
+                {/*)}*/}
               </Box>
             </Touchable>
           </Box>
@@ -94,7 +122,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
               </Box>
               <Box paddingY={1} maxWidth="100%">
                 <Text size="xs" color="gray" bold truncate>
-                  {nextBlog.titlePreview}
+                  {blog && blog.title}
                 </Text>
               </Box>
             </Touchable>
