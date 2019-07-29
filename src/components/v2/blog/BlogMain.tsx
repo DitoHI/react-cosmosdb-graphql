@@ -10,7 +10,6 @@ import { blogsQuery } from '../../../graphql/queries/blogs';
 
 import blogV2Action from '../../../redux/actions/blogV2Action';
 
-import fixtures from '../../../test/fixtures';
 import types from '../../../custom/types';
 
 import ErrorPath from '../../ErrorPath';

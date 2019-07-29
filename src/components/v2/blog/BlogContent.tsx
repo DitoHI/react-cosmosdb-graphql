@@ -15,8 +15,6 @@ import { IBlog, IMe } from '../../../custom/interface';
 import fixtures from '../../../test/fixtures';
 import ErrorPath from '../../ErrorPath';
 
-import blogV2Action from '../../../redux/actions/blogV2Action';
-
 interface IProps {
   match: any;
   user: IMe;
@@ -107,11 +105,7 @@ const mapStateToProps = (state) => ({
   pagination: state.blogs.pagination,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  incrementView: (user: IMe, blog: IBlog) => dispatch(() => blogV2Action.incrementView(user, blog)),
-});
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
+  {},
 )(BlogContent);
