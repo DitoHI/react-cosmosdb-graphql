@@ -20,6 +20,10 @@ interface IProps {
 }
 
 class BlogContent extends React.Component<IProps, {}> {
+  componentWillMount(): void {
+    window.scrollTo(0, 0);
+  }
+
   renderError(message: string) {
     const {} = this.props;
     return (

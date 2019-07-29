@@ -3,6 +3,7 @@ import { css } from 'aphrodite';
 import { Box, Card, Column, Divider, Heading, Image, Text, Touchable } from 'gestalt';
 import { Placeholder } from 'semantic-ui-react';
 import 'gestalt/dist/gestalt.css';
+import { Route } from 'react-router';
 
 import IBlog from '../../../custom/interface/IBlog';
 
@@ -144,24 +145,38 @@ class BlogHeader extends React.Component<IProps, IState> {
   renderBanner() {
     const { blogs } = this.props;
     const { activeBlog } = this.state;
+
+    const blog = blogs[activeBlog];
     return (
-      <Box position="relative" height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}>
-        <Image
-          alt={blogs[activeBlog].title}
-          color="pine"
-          src={blogs[activeBlog].blobUri}
-          fit="cover"
-          naturalHeight={1}
-          naturalWidth={1}
-        >
-          <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', height: '100%', width: '100%' }} />
-        </Image>
-        <Box padding={8} position="absolute" left bottom>
-          <Heading color="white" size="sm">
-            {blogs[activeBlog].title}
-          </Heading>
-        </Box>
-      </Box>
+      <Route
+        render={({ history }) => (
+          <Touchable
+            onTouch={() => {
+              history.push(`/blog/${blog.id}`);
+            }}
+          >
+            <Box position="relative" height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}>
+              <Image
+                alt={blog.title}
+                color="pine"
+                src={blog.blobUri}
+                fit="cover"
+                naturalHeight={1}
+                naturalWidth={1}
+              >
+                <div
+                  style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', height: '100%', width: '100%' }}
+                />
+              </Image>
+              <Box padding={8} position="absolute" left bottom>
+                <Heading color="white" size="sm">
+                  {blog.title}
+                </Heading>
+              </Box>
+            </Box>
+          </Touchable>
+        )}
+      />
     );
   }
 

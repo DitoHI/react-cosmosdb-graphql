@@ -3,6 +3,7 @@ import { Box, Column, IconButton, Text, Touchable } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
 import { Query } from 'react-apollo';
 import { Placeholder } from 'semantic-ui-react';
+import { Route } from 'react-router';
 
 import { IBlog } from '../../../custom/interface';
 import blogsQuery from '../../../graphql/queries/queries_v2/blogsQuery';
@@ -102,29 +103,38 @@ class BlogContentHeader extends React.Component<IProps, {}> {
           </Box>
         </Column>
         <Column span={4}>
-          <Touchable onTouch={() => {}} fullHeight>
-            <Box
-              display="flex"
-              direction="row"
-              justifyContent="center"
-              alignItems="center"
-              height="100%"
-            >
-              <IconButton
-                accessibilityLabel="menu"
-                bgColor="white"
-                icon="view-type-dense"
-                iconColor="gray"
-                onClick={() => {}}
-                size="xs"
-              />
-              <Box paddingX={2}>
-                <Text bold color="gray" inline>
-                  BACK TO MENU
-                </Text>
-              </Box>
-            </Box>
-          </Touchable>
+          <Route
+            render={({ history }) => (
+              <Touchable
+                onTouch={() => {
+                  history.goBack();
+                }}
+                fullHeight
+              >
+                <Box
+                  display="flex"
+                  direction="row"
+                  justifyContent="center"
+                  alignItems="center"
+                  height="100%"
+                >
+                  <IconButton
+                    accessibilityLabel="menu"
+                    bgColor="white"
+                    icon="view-type-dense"
+                    iconColor="gray"
+                    onClick={() => {}}
+                    size="xs"
+                  />
+                  <Box paddingX={2}>
+                    <Text bold color="gray" inline>
+                      BACK TO MENU
+                    </Text>
+                  </Box>
+                </Box>
+              </Touchable>
+            )}
+          />
         </Column>
         <Column span={4}>
           <Box display="flex" justifyContent="end" height="100%">
