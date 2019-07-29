@@ -170,7 +170,13 @@ class BlogContentDetail extends React.Component<IProps, {}> {
                   </Mask>
                 )}
                 <Box paddingX={2} paddingY={4} width="100%">
-                  {loading ? this.renderOneLine() : <Text bold>{user.name}</Text>}
+                  {loading ? (
+                    this.renderOneLine()
+                  ) : (
+                    <Text bold align="center">
+                      {user.name}
+                    </Text>
+                  )}
                 </Box>
                 <Box display="flex" direction="column" alignItems="center">
                   <IconButton

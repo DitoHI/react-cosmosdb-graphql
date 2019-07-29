@@ -10,10 +10,51 @@ import { getBlogByPosition } from '../../../schemaTypes';
 
 interface IProps {
   blog: IBlog;
-  loading: boolean;
+  loadingParent: boolean;
 }
 
 class BlogContentHeader extends React.Component<IProps, {}> {
+  renderComingSoon(mode: 'left' | 'right' = 'left') {
+    const {} = this.props;
+    return (
+      <Text color="gray" bold align={mode}>
+        Coming Soon
+      </Text>
+    );
+  }
+
+  renderToucableNav(loading, blog, mode: 'start' | 'end' = 'start') {
+    const { loadingParent } = this.props;
+    return (
+      <Touchable onTouch={() => {}}>
+        <Box display="flex" direction="row" alignItems="center" justifyContent={mode}>
+          <IconButton
+            accessibilityLabel="prev"
+            bgColor="white"
+            icon={mode === 'start' ? 'arrow-back' : 'arrow-forward'}
+            iconColor="gray"
+            onClick={() => {}}
+            size="xs"
+          />
+          <Box paddingX={2}>
+            <Text bold color="gray" inline>
+              {mode === 'start' ? 'PREV' : 'NEXT'}
+            </Text>
+          </Box>
+        </Box>
+        <Box paddingY={1} maxWidth="100%">
+          {loading && loadingParent ? (
+            this.renderTitlePreviewPlaceholder()
+          ) : (
+            <Text size="xs" color="gray" bold truncate>
+              {blog && blog.title}
+            </Text>
+          )}
+        </Box>
+      </Touchable>
+    );
+  }
+
   renderTitlePreviewPlaceholder() {
     const {} = this.props;
     return (
@@ -39,40 +80,25 @@ class BlogContentHeader extends React.Component<IProps, {}> {
       >
         <Column span={4}>
           <Box justifyContent="start" height="100%">
-            <Touchable onTouch={() => {}}>
-              <Box display="flex" direction="row" alignItems="center">
-                <IconButton
-                  accessibilityLabel="prev"
-                  bgColor="white"
-                  icon="arrow-back"
-                  iconColor="gray"
-                  onClick={() => {}}
-                  size="xs"
-                />
-                <Box paddingX={2}>
-                  <Text bold color="gray" inline>
-                    PREV
-                  </Text>
-                </Box>
-              </Box>
-              <Box paddingY={1} maxWidth="100%">
-                {this.renderTitlePreviewPlaceholder()}
-                {/*{blog && (*/}
-                {/*  <Query<getBlogByPosition>*/}
-                {/*    query={blogsQuery.getBlobByPositionIndex}*/}
-                {/*    variables={{ index: blog.positionIndex, operator: '-' }}*/}
-                {/*  >*/}
-                {/*    {({ loading, error, data }) => {*/}
-                {/*      return (*/}
-                {/*        <Text size="xs" color="gray" bold truncate>*/}
-                {/*          {blog && blog.title}*/}
-                {/*        </Text>*/}
-                {/*      );*/}
-                {/*    }}*/}
-                {/*  </Query>*/}
-                {/*)}*/}
-              </Box>
-            </Touchable>
+            {blog && (
+              <Query<getBlogByPosition>
+                query={blogsQuery.getBlobByPositionIndex}
+                variables={{ index: blog.positionIndex, operator: '-' }}
+              >
+                {({ loading, error, data }) => {
+                  if (error || !data) {
+                    return this.renderComingSoon();
+                  }
+
+                  const blog = data.getBlogByPositionIndex;
+                  if (blog) {
+                    return this.renderToucableNav(loading, blog);
+                  }
+
+                  return this.renderComingSoon();
+                }}
+              </Query>
+            )}
           </Box>
         </Column>
         <Column span={4}>
@@ -101,31 +127,26 @@ class BlogContentHeader extends React.Component<IProps, {}> {
           </Touchable>
         </Column>
         <Column span={4}>
-          <Box justifyContent="start" height="100%">
-            <Touchable onTouch={() => {}}>
-              <Box display="flex" direction="row" alignItems="center">
-                <Box>
-                  <Text bold color="gray" inline>
-                    NEXT
-                  </Text>
-                </Box>
-                <Box paddingX={2}>
-                  <IconButton
-                    accessibilityLabel="prev"
-                    bgColor="white"
-                    icon="arrow-forward"
-                    iconColor="gray"
-                    onClick={() => {}}
-                    size="xs"
-                  />
-                </Box>
-              </Box>
-              <Box paddingY={1} maxWidth="100%">
-                <Text size="xs" color="gray" bold truncate>
-                  {blog && blog.title}
-                </Text>
-              </Box>
-            </Touchable>
+          <Box display="flex" justifyContent="end" height="100%">
+            {blog && (
+              <Query<getBlogByPosition>
+                query={blogsQuery.getBlobByPositionIndex}
+                variables={{ index: blog.positionIndex, operator: '+' }}
+              >
+                {({ loading, error, data }) => {
+                  if (error || !data) {
+                    return this.renderComingSoon('right');
+                  }
+
+                  const blog = data.getBlogByPositionIndex;
+                  if (blog) {
+                    return this.renderToucableNav(loading, blog, 'end');
+                  }
+
+                  return this.renderComingSoon();
+                }}
+              </Query>
+            )}
           </Box>
         </Column>
       </Box>

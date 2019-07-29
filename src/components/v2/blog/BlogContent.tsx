@@ -75,7 +75,7 @@ class BlogContent extends React.Component<IProps, {}> {
                 {!error && data && (
                   <Box>
                     <Sticky top={0} dangerouslySetZIndex={{ __zIndex: 99 } as any}>
-                      <BlogContentHeader blog={fixtures.blog} loading={loading} />
+                      <BlogContentHeader blog={fixtures.blog} loadingParent={loading} />
                       <Divider />
                     </Sticky>
                     <BlogContentDetail
