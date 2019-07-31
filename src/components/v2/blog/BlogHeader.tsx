@@ -21,11 +21,16 @@ interface IState {
 }
 
 class BlogHeader extends React.Component<IProps, IState> {
+  private bannerRef;
+
   constructor(props) {
     super(props);
+    this.bannerRef = React.createRef();
     this.state = {
       activeBlog: 0,
     };
+
+    this.setActiveBlog = this.setActiveBlog.bind(this);
   }
 
   renderBannerPlaceholder() {
@@ -79,19 +84,19 @@ class BlogHeader extends React.Component<IProps, IState> {
     );
   }
 
+  setActiveBlog(index: number) {
+    this.setState({
+      activeBlog: index,
+    });
+    this.bannerRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
   renderStoryCard() {
     const { blogs } = this.props;
+
     return blogs.map((blog: IBlog, index: number) => {
       return (
-        <Touchable
-          onTouch={() => {
-            this.setState({
-              activeBlog: index,
-            });
-          }}
-          shape="rounded"
-          key={index}
-        >
+        <Touchable onTouch={() => this.setActiveBlog(index)} shape="rounded" key={index}>
           <Box paddingY={2} shape="rounded" overflow="hidden">
             <Card>
               <Box display="flex" direction="row" alignItems="center">
@@ -199,7 +204,15 @@ class BlogHeader extends React.Component<IProps, IState> {
   render() {
     const { loading } = this.props;
     return (
-      <Box display="flex" direction="row" color="white" overflow="hidden" shape="rounded" wrap>
+      <Box
+        display="flex"
+        direction="row"
+        color="white"
+        overflow="hidden"
+        shape="rounded"
+        ref={this.bannerRef}
+        wrap
+      >
         <Column span={12} mdSpan={8}>
           {loading ? this.renderBannerPlaceholder() : this.renderBanner()}
         </Column>
