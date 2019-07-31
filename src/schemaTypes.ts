@@ -120,6 +120,7 @@ export interface getBlogById_getBlogById {
   tags: (string | null)[] | null;
   positionIndex: number | null;
   user: string;
+  quote: string | null;
 }
 
 export interface getBlogById {

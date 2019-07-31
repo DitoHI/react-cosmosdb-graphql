@@ -276,10 +276,10 @@ class BlogContentDetail extends React.Component<IProps, IState> {
               this.renderContentPlaceholder()
             ) : (
               <Box>
-                <Box smMarginBottom={3} marginBottom={1}>
-                  <Heading size="xs" color="darkGray">
-                    {blog && blog.quote}
-                  </Heading>
+                <Box smMarginBottom={3} marginBottom={1} smPaddingY={0} paddingY={3}>
+                  <Text size="sm" smSize="xl" italic bold color="midnight">
+                    "{blog && blog.quote}"
+                  </Text>
                 </Box>
                 <Box marginBottom={6}>
                   <Divider />

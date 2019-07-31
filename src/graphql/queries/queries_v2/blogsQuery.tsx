@@ -13,6 +13,7 @@ export default {
         tags
         positionIndex
         user
+        quote
       }
     }
   `,
