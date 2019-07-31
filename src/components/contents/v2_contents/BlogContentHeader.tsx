@@ -11,8 +11,6 @@ import { IS_SM } from '../../../custom/types';
 import blogsQuery from '../../../graphql/queries/queries_v2/blogsQuery';
 import { getBlogByPosition } from '../../../schemaTypes';
 
-import fixtures from '../../../test/fixtures';
-
 interface IProps {
   blog: IBlog;
   loadingParent: boolean;

@@ -90,11 +90,14 @@ export default StyleSheet.create({
     fontSize: '0.9rem',
   },
   blogItemContentTextDesc: {
-    fontSize: '1.2rem',
+    fontSize: '21px',
     textAlign: 'start',
+    fontWeight: 300,
+    fontFamily:
+      '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
 
     '@media (max-width: 768px)': {
-      fontSize: '1.0rem',
+      fontSize: '18px',
     },
   },
   blogItemContentReadMore: {

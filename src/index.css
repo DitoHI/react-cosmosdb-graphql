@@ -14,3 +14,7 @@ body {
 #root {
   min-height: 100%;
 }
+
+p {
+  line-height: 1.58;
+}
