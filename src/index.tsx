@@ -25,7 +25,7 @@ declare global {
 const uri =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:8080/graphql'
-    : 'https://privateblog-server.azurewebsites.net/graphql';
+    : 'https://public-blog-api.herokuapp.com/graphql';
 
 const httpLink = new HttpLink({ uri });
 

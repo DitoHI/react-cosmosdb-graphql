@@ -9,7 +9,7 @@ import IBlog from '../../../custom/interface/IBlog';
 
 import BlogStyle from '../../../styles/blog/BlogStyle';
 
-import types from '../../../custom/types';
+import types, { IS_SM } from '../../../custom/types';
 
 interface IProps {
   blogs: IBlog[];
@@ -36,7 +36,7 @@ class BlogHeader extends React.Component<IProps, IState> {
         direction="column"
         alignItems="center"
         justifyContent="start"
-        paddingY={6}
+        padding={6}
         height="100%"
       >
         <Placeholder className={css(BlogStyle.blogHeaderPlaceholderSize)}>
@@ -95,20 +95,27 @@ class BlogHeader extends React.Component<IProps, IState> {
           <Box paddingY={2} shape="rounded" overflow="hidden">
             <Card>
               <Box display="flex" direction="row" alignItems="center">
-                <Box shape="rounded" color={types.COLOR_TOP_STORIES[index] as any} padding={6}>
-                  <Text size="xl" color="white" bold>
+                <Box
+                  shape="rounded"
+                  color={types.COLOR_TOP_STORIES[index] as any}
+                  padding={3}
+                  smPadding={6}
+                >
+                  <Text size="lg" smSize="xl" color="white" bold>
                     {index + 1}
                   </Text>
                 </Box>
                 <Box paddingX={1} />
                 <Box paddingX={1}>
                   <Box padding={1}>
-                    <Text size="lg" bold>
+                    <Text smSize="lg" bold>
                       {blog.tags[0]}
                     </Text>
                   </Box>
                   <Box padding={1}>
-                    <Text>{blog.titlePreview}</Text>
+                    <Text size="sm" smSize="md">
+                      {blog.titlePreview}
+                    </Text>
                   </Box>
                 </Box>
               </Box>
@@ -127,17 +134,19 @@ class BlogHeader extends React.Component<IProps, IState> {
         direction="column"
         color="white"
         overflow="auto"
-        height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}
+        height={IS_SM ? types.DEFAULT_BLOG_CONTAINER_SIZE.height : '100%'}
         alignItems="center"
       >
-        <Box paddingY={2} marginTop={3}>
-          <Text size="lg" bold align="center">
+        <Box paddingY={1} smPaddingY={2} marginTop={1} smMarginTop={3}>
+          <Text mdSize="lg" size="md" bold align="center">
             Top Stories
           </Text>
         </Box>
         <Divider />
-        <Box paddingX={3}>{this.renderStoryCard()}</Box>
-        <Box paddingY={2} />
+        <Box paddingX={2} smPaddingX={3}>
+          {this.renderStoryCard()}
+        </Box>
+        <Box paddingY={1} smPaddingY={2} />
       </Box>
     );
   }
@@ -168,10 +177,17 @@ class BlogHeader extends React.Component<IProps, IState> {
                   style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)', height: '100%', width: '100%' }}
                 />
               </Image>
-              <Box padding={8} position="absolute" left bottom>
-                <Heading color="white" size="sm">
-                  {blog.title}
-                </Heading>
+              <Box smPadding={8} padding={4} position="absolute" left bottom>
+                <Box display="none" smDisplay="block">
+                  <Heading color="white" size="xs">
+                    {blog.title}
+                  </Heading>
+                </Box>
+                <Box display="block" smDisplay="none">
+                  <Text color="white" bold size="xl">
+                    {blog.title}
+                  </Text>
+                </Box>
               </Box>
             </Box>
           </Touchable>
@@ -183,9 +199,11 @@ class BlogHeader extends React.Component<IProps, IState> {
   render() {
     const { loading } = this.props;
     return (
-      <Box display="flex" direction="row" color="white" overflow="hidden" shape="rounded">
-        <Column span={8}>{loading ? this.renderBannerPlaceholder() : this.renderBanner()}</Column>
-        <Column span={4}>
+      <Box display="flex" direction="row" color="white" overflow="hidden" shape="rounded" wrap>
+        <Column span={12} mdSpan={8}>
+          {loading ? this.renderBannerPlaceholder() : this.renderBanner()}
+        </Column>
+        <Column span={12} mdSpan={4}>
           {loading ? this.renderStoriesPlaceholder() : this.renderTopStories()}
         </Column>
       </Box>

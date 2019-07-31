@@ -1,12 +1,14 @@
+export const IS_SM = window.innerWidth >= 768;
+
 export default {
   DEFAULT_BLOG_CONTAINER_SIZE: {
-    height: '500px',
+    height: IS_SM ? '500px' : '265px',
     width: '350px',
   },
 
   DEFAULT_BLOG_PLACEHOLDER_SIZE: {
-    height: '280px',
-    width: '350px',
+    height: IS_SM ? '280px' : '120px',
+    width: IS_SM ? '350px' : '100%',
   },
 
   DEFAULT_BLOG_PREVIEW_CONTENT_BANNER: {
