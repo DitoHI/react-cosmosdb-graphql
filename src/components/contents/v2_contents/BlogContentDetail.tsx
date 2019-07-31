@@ -19,7 +19,7 @@ import * as moment from 'moment';
 import { connect } from 'react-redux';
 
 import { IBlog, IMe } from '../../../custom/interface';
-import types from '../../../custom/types';
+import types, { IS_SM } from '../../../custom/types';
 
 import BlogStyle from '../../../styles/blog/BlogStyle';
 import Colors from '../../../styles/Colors';
@@ -50,8 +50,8 @@ class BlogContentDetail extends React.Component<IProps, IState> {
     };
   }
 
-  componentDidMount(): void {
-    const { blog, incrementView, user } = this.props;
+  componentWillReceiveProps(nextProps): void {
+    const { blog, incrementView, user } = nextProps;
     const db = FirebaseConnect.getDb();
     if (user && blog) {
       // increment the views
@@ -71,7 +71,13 @@ class BlogContentDetail extends React.Component<IProps, IState> {
   renderContentPlaceholder() {
     const {} = this.props;
     return (
-      <Box display="flex" direction="column" alignItems="center" justifyContent="center">
+      <Box
+        display="flex"
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        marginTop={4}
+      >
         <Placeholder fluid style={{ width: '80%' }}>
           <Placeholder.Header image>
             <Placeholder.Line />
@@ -152,9 +158,9 @@ class BlogContentDetail extends React.Component<IProps, IState> {
       blog &&
       blog.tags.map((tag) => {
         return (
-          <Box key={tag} paddingX={3} paddingY={2} marginRight={3}>
+          <Box key={tag} smPaddingY={2} paddingY={1} smMarginRight={9} marginRight={4}>
             <Card>
-              <Text color="gray" size="sm" bold>
+              <Text color="gray" size="xs" mdSize="sm" bold>
                 #{tag}
               </Text>
             </Card>
@@ -164,87 +170,113 @@ class BlogContentDetail extends React.Component<IProps, IState> {
     );
   }
 
+  renderProfileImgAndTotalView() {
+    const { loading, user } = this.props;
+    const { viewLoaded, views } = this.state;
+    return (
+      <Box
+        display="flex"
+        direction={IS_SM ? 'column' : 'row'}
+        justifyContent="center"
+        alignItems="center"
+        marginBottom={2}
+        smMarginBottom={0}
+      >
+        {loading ? (
+          this.renderImageWithContent()
+        ) : (
+          <Mask
+            shape="circle"
+            height={types.DEFAULT_BLOG_PREVIEW_USER_AVA.height}
+            width={types.DEFAULT_BLOG_PREVIEW_USER_AVA.width}
+          >
+            <Image
+              alt={user.name}
+              color={Colors.youngBlue}
+              src={user.blobUri!}
+              naturalHeight={1}
+              naturalWidth={1}
+              fit="cover"
+            />
+          </Mask>
+        )}
+        <Box display="none" smDisplay="block" paddingX={2} paddingY={4} width="100%">
+          {loading ? (
+            this.renderOneLine()
+          ) : (
+            <Text bold align="center">
+              {user.name}
+            </Text>
+          )}
+        </Box>
+        <Box display="block" smDisplay="none" paddingX={2} />
+        <Box display="flex" direction="column" alignItems="center">
+          <IconButton
+            accessibilityLabel="Love"
+            bgColor="white"
+            icon="face-smiley"
+            iconColor="blue"
+            size={IS_SM ? 'xl' : 'md'}
+            onClick={() => {}}
+          />
+
+          {!viewLoaded ? (
+            <Box width="100%">{this.renderOneLine()}</Box>
+          ) : (
+            <Text color="blue" size="xs" bold>
+              {views} views
+            </Text>
+          )}
+        </Box>
+      </Box>
+    );
+  }
+
   render() {
     const { blog, loading, user } = this.props;
-    const { views, viewLoaded } = this.state;
+
     return (
-      <Box paddingX={12} paddingY={3}>
-        <Box paddingX={3} paddingY={6} justifyContent="center">
-          {loading ? this.renderTitlePlaceholder() : <Heading>{blog && blog.title}</Heading>}
+      <Box paddingX={4} smPaddingX={12} paddingY={1} smPaddingY={3}>
+        <Box smPaddingX={3} paddingY={2} smPaddingY={6} justifyContent="center">
+          {loading ? (
+            this.renderTitlePlaceholder()
+          ) : IS_SM ? (
+            <Heading>{blog && blog.title}</Heading>
+          ) : (
+            <Text size="lg" bold>
+              {blog && blog.title}
+            </Text>
+          )}
         </Box>
         {loading ? (
           <Box width="100%">{this.renderOneLine()}</Box>
         ) : (
-          <Box display="flex" paddingX={3} alignItems="center" width="100%">
-            <Icon accessibilityLabel="time" icon="clock" />
+          <Box display="flex" smPaddingX={3} alignItems="center" width="100%">
+            <Icon accessibilityLabel="time" icon="clock" size={types.ICON_SIZE_XS} />
             <Box padding={2}>
-              <Text size="sm" color="gray" bold inline>
+              <Text size="xs" smSize="sm" color="gray" bold inline>
                 {blog && moment(blog.lastEdited).format('LLLL')}
               </Text>
             </Box>
           </Box>
         )}
-        <Box paddingY={3}>
+        <Box smPaddingY={3}>
           <Divider />
         </Box>
-        <Box display="flex" paddingX={3} paddingY={6}>
+        <Box display="flex" smPaddingX={3} smPaddingY={6} paddingY={3} wrap>
           <Column span={12} smSpan={3}>
-            <Sticky top={types.DEFAULT_TOP_LG}>
-              <Box display="flex" direction="column" justifyContent="center" alignItems="center">
-                {loading ? (
-                  this.renderImageWithContent()
-                ) : (
-                  <Mask
-                    shape="circle"
-                    height={types.DEFAULT_BLOG_PREVIEW_USER_AVA.height}
-                    width={types.DEFAULT_BLOG_PREVIEW_USER_AVA.width}
-                  >
-                    <Image
-                      alt={user.name}
-                      color={Colors.youngBlue}
-                      src={user.blobUri!}
-                      naturalHeight={1}
-                      naturalWidth={1}
-                      fit="cover"
-                    />
-                  </Mask>
-                )}
-                <Box paddingX={2} paddingY={4} width="100%">
-                  {loading ? (
-                    this.renderOneLine()
-                  ) : (
-                    <Text bold align="center">
-                      {user.name}
-                    </Text>
-                  )}
-                </Box>
-                <Box display="flex" direction="column" alignItems="center">
-                  <IconButton
-                    accessibilityLabel="Love"
-                    bgColor="white"
-                    icon="face-smiley"
-                    iconColor="blue"
-                    size="xl"
-                    onClick={() => {}}
-                  />
-
-                  {!viewLoaded ? (
-                    <Box width="100%">{this.renderOneLine()}</Box>
-                  ) : (
-                    <Text color="blue" size="xs" bold>
-                      {views} views
-                    </Text>
-                  )}
-                </Box>
-              </Box>
-            </Sticky>
+            {IS_SM ? (
+              <Sticky top={types.DEFAULT_TOP_LG}>{this.renderProfileImgAndTotalView()}</Sticky>
+            ) : (
+              this.renderProfileImgAndTotalView()
+            )}
           </Column>
           <Column span={12} smSpan={9}>
             {loading ? (
               this.renderContentPlaceholder()
             ) : (
               <Box>
-                <Box marginBottom={3}>
+                <Box smMarginBottom={3} marginBottom={1}>
                   <Heading size="xs" color="darkGray">
                     {blog && blog.quote}
                   </Heading>
@@ -252,8 +284,8 @@ class BlogContentDetail extends React.Component<IProps, IState> {
                 <Box marginBottom={6}>
                   <Divider />
                 </Box>
-                <Box paddingY={2} marginBottom={4}>
-                  <Mask height={types.DEFAULT_HEIGHT_IMG.lg}>
+                <Box paddingY={2} smMarginBottom={4} marginBottom={1}>
+                  <Mask height={IS_SM ? types.DEFAULT_HEIGHT_IMG.lg : types.DEFAULT_HEIGHT_IMG.sm}>
                     <Image
                       alt={blog && blog.blobUri}
                       color="white"
@@ -268,7 +300,7 @@ class BlogContentDetail extends React.Component<IProps, IState> {
                   className={css(BlogStyle.blogItemContentTextDesc)}
                   dangerouslySetInnerHTML={{ __html: blog && blog.content }}
                 />
-                <Box display="flex" direction="row">
+                <Box display="flex" direction="row" wrap>
                   {this.renderTags()}
                 </Box>
               </Box>

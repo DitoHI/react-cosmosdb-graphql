@@ -25,9 +25,12 @@ export default {
 
   DEFAULT_HEIGHT_IMG: {
     lg: 300,
+    sm: 120,
   },
 
   DEFAULT_TOP_LG: 120,
+
+  ICON_SIZE_XS: 12,
 
   COLOR_TOP_STORIES: ['orange', 'midnight', 'eggplant', 'green', 'pine'],
 };

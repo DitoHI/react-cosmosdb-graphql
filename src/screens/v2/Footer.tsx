@@ -46,18 +46,18 @@ class Footer extends React.Component<IProps, {}> {
               <Box marginRight={1} padding={1}>
                 <Icon icon="face-smiley" size={24} accessibilityLabel="Contact" color="white" />
               </Box>
-              <Text mdSize="lg" color="white" bold>
+              <Text size="md" smSize="lg" color="white" bold>
                 Contact Us
               </Text>
             </Box>
             <Box display="flex" direction="column" paddingX={9} marginTop={1} smMarginTop={3}>
               <Box paddingY={1}>
-                <Text size="sm" color="gray" bold>
+                <Text size="xs" smSize="sm" color="gray" bold>
                   {me.phone}
                 </Text>
               </Box>
               <Box paddingY={1}>
-                <Text size="sm" color="gray" bold>
+                <Text size="xs" smSize="sm" color="gray" bold>
                   {me.email}
                 </Text>
               </Box>
@@ -75,13 +75,13 @@ class Footer extends React.Component<IProps, {}> {
               <Box marginRight={1} padding={1}>
                 <Icon icon="globe-checked" size={24} accessibilityLabel="Contact" color="white" />
               </Box>
-              <Text mdSize="lg" color="white" bold>
+              <Text size="md" smSize="lg" color="white" bold>
                 Address
               </Text>
             </Box>
             <Box display="flex" direction="column" paddingX={9} marginTop={1} smMarginTop={3}>
               <Box paddingY={1}>
-                <Text size="sm" color="gray" bold>
+                <Text size="xs" smSize="sm" color="gray" bold>
                   {me.address}
                 </Text>
               </Box>
@@ -95,7 +95,7 @@ class Footer extends React.Component<IProps, {}> {
           <Box marginLeft={1} marginRight={1} padding={1}>
             <Icon accessibilityLabel="Heart" icon="heart" color="white" size={21} />
           </Box>
-          <Text size="sm" color="white" bold>
+          <Text size="xs" smSize="sm" color="white" bold>
             Copyright &copy; 2019 by Dito Hafizh
           </Text>
         </Box>

@@ -77,19 +77,15 @@ class BlogContent extends React.Component<IProps, {}> {
           const blog = data.getBlogById as IBlog;
 
           return (
-            <Box padding={12}>
+            <Box paddingX={6} paddingY={6} smPadding={12}>
               <Box color="white" shape="rounded">
                 {!error && data && (
                   <Box>
                     <Sticky top={0} dangerouslySetZIndex={{ __zIndex: 99 } as any}>
-                      <BlogContentHeader blog={fixtures.blog} loadingParent={loading} />
+                      <BlogContentHeader blog={blog} loadingParent={loading} />
                       <Divider />
                     </Sticky>
-                    <BlogContentDetail
-                      blog={fixtures.blog}
-                      user={fixtures.user}
-                      loading={loading}
-                    />
+                    <BlogContentDetail blog={blog} user={fixtures.user} loading={loading} />
                   </Box>
                 )}
               </Box>

@@ -6,8 +6,12 @@ import { Placeholder } from 'semantic-ui-react';
 import { Route } from 'react-router';
 
 import { IBlog } from '../../../custom/interface';
+import { IS_SM } from '../../../custom/types';
+
 import blogsQuery from '../../../graphql/queries/queries_v2/blogsQuery';
 import { getBlogByPosition } from '../../../schemaTypes';
+
+import fixtures from '../../../test/fixtures';
 
 interface IProps {
   blog: IBlog;
@@ -18,41 +22,49 @@ class BlogContentHeader extends React.Component<IProps, {}> {
   renderComingSoon(mode: 'left' | 'right' = 'left') {
     const {} = this.props;
     return (
-      <Text color="gray" bold align={mode}>
+      <Text size="xs" mdSize="md" color="gray" bold align={mode}>
         Coming Soon
       </Text>
     );
   }
 
-  renderToucableNav(loading, blog, mode: 'start' | 'end' = 'start') {
+  renderToucableNav(loading: boolean, blog, mode: 'start' | 'end' = 'start') {
     const { loadingParent } = this.props;
     return (
-      <Touchable onTouch={() => {}}>
-        <Box display="flex" direction="row" alignItems="center" justifyContent={mode}>
-          <IconButton
-            accessibilityLabel="prev"
-            bgColor="white"
-            icon={mode === 'start' ? 'arrow-back' : 'arrow-forward'}
-            iconColor="gray"
-            onClick={() => {}}
-            size="xs"
-          />
-          <Box paddingX={2}>
-            <Text bold color="gray" inline>
-              {mode === 'start' ? 'PREV' : 'NEXT'}
-            </Text>
-          </Box>
-        </Box>
-        <Box paddingY={1} maxWidth="100%">
-          {loading && loadingParent ? (
-            this.renderTitlePreviewPlaceholder()
-          ) : (
-            <Text size="xs" color="gray" bold truncate>
-              {blog && blog.title}
-            </Text>
-          )}
-        </Box>
-      </Touchable>
+      <Route
+        render={({ history }) => (
+          <Touchable
+            onTouch={() => {
+              history.push(`/blog/${blog.id}`);
+            }}
+          >
+            <Box display="flex" direction="row" alignItems="center" justifyContent={mode}>
+              <IconButton
+                accessibilityLabel="prev"
+                bgColor="white"
+                icon={mode === 'start' ? 'arrow-back' : 'arrow-forward'}
+                iconColor="gray"
+                onClick={() => {}}
+                size="xs"
+              />
+              <Box paddingX={2}>
+                <Text bold color="gray" inline size="sm" smSize="md">
+                  {mode === 'start' ? 'Prev' : 'Next'}
+                </Text>
+              </Box>
+            </Box>
+            <Box paddingY={1} maxWidth="100%">
+              {loading && loadingParent ? (
+                this.renderTitlePreviewPlaceholder()
+              ) : (
+                <Text size="xs" color="gray" bold truncate>
+                  {blog && blog.title}
+                </Text>
+              )}
+            </Box>
+          </Touchable>
+        )}
+      />
     );
   }
 
@@ -77,7 +89,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
         display="flex"
         direction="row"
         padding={3}
-        alignItems="start"
+        alignItems={IS_SM ? 'start' : 'center'}
       >
         <Column span={4}>
           <Box justifyContent="start" height="100%">
@@ -126,11 +138,16 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                     onClick={() => {}}
                     size="xs"
                   />
-                  <Box paddingX={2}>
+                  <Box paddingX={2} display="none" smDisplay="block">
                     <Text bold color="gray" inline>
                       BACK TO MENU
                     </Text>
                   </Box>
+                </Box>
+                <Box display="block" smDisplay="none">
+                  <Text size="xs" bold color="gray" align="center">
+                    Menu
+                  </Text>
                 </Box>
               </Touchable>
             )}
@@ -153,7 +170,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                     return this.renderToucableNav(loading, blog, 'end');
                   }
 
-                  return this.renderComingSoon();
+                  return this.renderComingSoon('right');
                 }}
               </Query>
             )}
