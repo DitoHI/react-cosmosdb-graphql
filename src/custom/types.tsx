@@ -12,13 +12,13 @@ export default {
   },
 
   DEFAULT_BLOG_PREVIEW_CONTENT_BANNER: {
-    height: 260,
-    width: 260,
+    height: IS_SM ? 260 : 160,
+    width: IS_SM ? 260 : '100%',
   },
 
   DEFAULT_BLOG_PREVIEW_USER_AVA: {
-    height: 120,
-    width: 120,
+    height: IS_SM ? 120 : 65,
+    width: IS_SM ? 120 : 65,
   },
 
   DEFAULT_WIDTH_TITLE_ONE: 360,

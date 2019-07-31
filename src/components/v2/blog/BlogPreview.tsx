@@ -3,7 +3,7 @@ import { Avatar, Box, Card, Column, Heading, Image, Mask, Spinner, Text, Touchab
 import 'gestalt/dist/gestalt.css';
 import { Route } from 'react-router';
 
-import types from '../../../custom/types';
+import types, { IS_SM } from '../../../custom/types';
 
 import IMe from '../../../custom/interface/IMe';
 import IBlog from '../../../custom/interface/IBlog';
@@ -21,7 +21,7 @@ class BlogPreview extends React.Component<IProps, {}> {
     const {} = this.props;
     return tags.map((tag) => {
       return (
-        <Box key={tag} paddingY={1} paddingX={2} marginRight={1} marginTop={1}>
+        <Box key={tag} paddingY={1} smPaddingY={1} paddingX={2} marginRight={1} smMarginTop={1}>
           <Card>
             <Text size="xs" color="white" bold>
               {tag}
@@ -36,19 +36,22 @@ class BlogPreview extends React.Component<IProps, {}> {
     const { bgColor, blog, user } = this.props;
 
     return (
-      <Box display="flex" direction="row">
-        <Column span={6} smSpan={4}>
+      <Box display="flex" direction="row" wrap>
+        <Column span={12} smSpan={4}>
           <Box paddingX={3} height="100%">
             <Box
               display="flex"
               height="100%"
               direction="row"
               color={bgColor as any}
-              shape="rounded"
-              padding={6}
-              alignItems="center"
+              shape={IS_SM ? 'rounded' : 'roundedTop'}
+              smPadding={6}
+              paddingX={4}
+              paddingY={2}
+              alignItems={IS_SM ? 'center' : 'start'}
+              wrap
             >
-              <Column span={4}>
+              <Column span={3} smSpan={4}>
                 <Box
                   display="flex"
                   direction="column"
@@ -74,10 +77,10 @@ class BlogPreview extends React.Component<IProps, {}> {
                         />
                       </Mask>
                       <Box paddingY={2}>
-                        <Text color="white" inline>
+                        <Text color="white" size="sm" mdSize="md" inline>
                           by
                         </Text>{' '}
-                        <Text color="white" bold inline>
+                        <Text color="white" size="sm" mdSize="md" bold inline>
                           {user.name}
                         </Text>
                       </Box>
@@ -85,38 +88,79 @@ class BlogPreview extends React.Component<IProps, {}> {
                   </Card>
                 </Box>
               </Column>
-              <Column span={8}>
+              <Column span={9} smSpan={8}>
                 <Box paddingX={3}>
-                  <Box paddingY={2}>
+                  <Box paddingY={2} smDisplay="block" display="none">
                     <Heading size="xs" color="white">
                       {blog.quote}
                     </Heading>
                   </Box>
+                  <Box marginBottom={1} smDisplay="none" display="block">
+                    <Text color="white" bold>
+                      {blog.quote}
+                    </Text>
+                  </Box>
 
-                  <Box display="flex" direction="row" wrap>
+                  <Box smDisplay="flex" display="none" direction="row" wrap>
                     {this.renderTags(blog.tags)}
                   </Box>
                 </Box>
               </Column>
+
+              <Box display="flex" smDisplay="none" direction="row" wrap>
+                {this.renderTags(blog.tags)}
+              </Box>
             </Box>
           </Box>
         </Column>
-        <Column span={6} smSpan={8}>
+        <Column span={12} smSpan={8}>
           <Box paddingX={3} height="100%">
             <Box
               display="flex"
               height="100%"
               direction="row"
-              shape="rounded"
+              shape={IS_SM ? 'rounded' : 'roundedBottom'}
               color="white"
-              padding={6}
+              smPadding={6}
+              paddingX={4}
+              paddingY={2}
               alignItems="center"
+              wrap
             >
-              <Column span={7}>
+              <Column span={12} smSpan={7}>
                 <Card>
-                  <Box paddingX={3}>
-                    <Box display="inlineBlock" paddingX={4} paddingY={1} color="blue">
-                      <Text color="white" bold>
+                  <Box paddingX={1} smPaddingX={3}>
+                    <Box
+                      display="flex"
+                      smDisplay="none"
+                      height="100%"
+                      justifyContent="center"
+                      alignItems="center"
+                      marginTop={3}
+                    >
+                      <Mask
+                        shape="rounded"
+                        height={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.height}
+                        width={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.width}
+                      >
+                        <Image
+                          alt={blog.title}
+                          color={Colors.youngBlue}
+                          src={blog.blobUri}
+                          naturalHeight={1}
+                          naturalWidth={1}
+                          fit="cover"
+                        />
+                      </Mask>
+                    </Box>
+                    <Box
+                      display="none"
+                      smDisplay="inlineBlock"
+                      paddingX={4}
+                      paddingY={1}
+                      color="blue"
+                    >
+                      <Text color="white" bold size="xs" mdSize="md">
                         {blog.tags[0]}
                       </Text>
                     </Box>
@@ -128,20 +172,27 @@ class BlogPreview extends React.Component<IProps, {}> {
                               history.push(`/blog/${blog.id}`);
                             }}
                           >
-                            <Heading size="xs">{blog.title}</Heading>
+                            <Box display="none" smDisplay="block">
+                              <Heading size="xs">{blog.title}</Heading>
+                            </Box>
+                            <Box display="block" smDisplay="none">
+                              <Text size="lg" bold>
+                                {blog.title}
+                              </Text>
+                            </Box>
                           </Touchable>
                         )}
                       />
                     </Box>
                     <Box>
-                      <Text color="gray" size="lg">
+                      <Text color="gray" size="sm" mdSize="lg">
                         {blog.contentPreview}
                       </Text>
                     </Box>
                   </Box>
                 </Card>
               </Column>
-              <Column span={5}>
+              <Box column={5} display="none" smDisplay="block">
                 <Box display="flex" height="100%" justifyContent="center" alignItems="center">
                   <Mask
                     shape="circle"
@@ -158,7 +209,7 @@ class BlogPreview extends React.Component<IProps, {}> {
                     />
                   </Mask>
                 </Box>
-              </Column>
+              </Box>
             </Box>
           </Box>
         </Column>
