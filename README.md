@@ -14,7 +14,7 @@
 
 </div>
 
-<div style="display:flex;flex-flow:row-wrap;">
+<div style="display:flex;flex-flow:row-wrap;justify-content: center">
 
 <img src="https://user-images.githubusercontent.com/16315641/62235953-3f7e1680-b3f8-11e9-9f3d-3b1a849f4405.png" width="220" height="100%"/>
 
