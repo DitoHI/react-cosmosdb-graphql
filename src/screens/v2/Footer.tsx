@@ -32,17 +32,25 @@ class Footer extends React.Component<IProps, {}> {
         }}
         className={css(FooterStyles.footerContainer)}
       >
-        <Box display="flex" direction="row" justifyContent="center" paddingX={3} paddingY={6}>
-          <Column span={4}>
+        <Box
+          display="flex"
+          direction="row"
+          justifyContent="center"
+          smPaddingX={3}
+          smPaddingY={6}
+          paddingY={2}
+          wrap
+        >
+          <Column span={12} smSpan={4}>
             <Box display="flex" direction="row" alignItems="center" paddingX={9}>
               <Box marginRight={1} padding={1}>
                 <Icon icon="face-smiley" size={24} accessibilityLabel="Contact" color="white" />
               </Box>
-              <Text size="lg" color="white" bold>
+              <Text mdSize="lg" color="white" bold>
                 Contact Us
               </Text>
             </Box>
-            <Box display="flex" direction="column" paddingX={9} marginTop={3}>
+            <Box display="flex" direction="column" paddingX={9} marginTop={1} smMarginTop={3}>
               <Box paddingY={1}>
                 <Text size="sm" color="gray" bold>
                   {me.phone}
@@ -55,16 +63,23 @@ class Footer extends React.Component<IProps, {}> {
               </Box>
             </Box>
           </Column>
-          <Column span={4}>
-            <Box display="flex" direction="row" alignItems="center" paddingX={9}>
+          <Column span={12} smSpan={4}>
+            <Box
+              display="flex"
+              direction="row"
+              alignItems="center"
+              paddingX={9}
+              marginTop={2}
+              smMarginTop={0}
+            >
               <Box marginRight={1} padding={1}>
                 <Icon icon="globe-checked" size={24} accessibilityLabel="Contact" color="white" />
               </Box>
-              <Text size="lg" color="white" bold>
+              <Text mdSize="lg" color="white" bold>
                 Address
               </Text>
             </Box>
-            <Box display="flex" direction="column" paddingX={9} marginTop={3}>
+            <Box display="flex" direction="column" paddingX={9} marginTop={1} smMarginTop={3}>
               <Box paddingY={1}>
                 <Text size="sm" color="gray" bold>
                   {me.address}

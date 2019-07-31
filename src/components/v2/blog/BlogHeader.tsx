@@ -96,7 +96,7 @@ class BlogHeader extends React.Component<IProps, IState> {
             <Card>
               <Box display="flex" direction="row" alignItems="center">
                 <Box
-                  shape="rounded"
+                  shape={IS_SM ? 'rounded' : 'square'}
                   color={types.COLOR_TOP_STORIES[index] as any}
                   padding={3}
                   smPadding={6}

@@ -72,14 +72,14 @@ class BlogMain extends React.Component<IProps, {}> {
           const blogs = data.blogs as IBlog[];
           return (
             <Box>
-              <Box padding={12}>
+              <Box padding={6} smPadding={12}>
                 <BlogHeader loading={loading} blogs={loading ? [] : blogs.slice(0, 5)} />
                 <Box paddingY={3} smPaddingY={6} />
               </Box>
-              <Box paddingX={9}>
+              <Box paddingX={3} smPaddingX={9}>
                 {loading ? this.renderSpinner() : this.renderBlogPreview(blogs)}
               </Box>
-              <Box paddingY={6} />
+              <Box smPaddingY={6} marginBottom={12} smMarginBottom={0} />
             </Box>
           );
         }}
