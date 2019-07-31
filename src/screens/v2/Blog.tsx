@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import BlogContent from '../../components/v2/blog/BlogContent';
 import BlogMain from '../../components/v2/blog/BlogMain';
 
+import IMe from '../../custom/interface/IMe';
+
 import BlogStyle from '../../styles/blog/BlogStyle';
 
 import fixtures from '../../test/fixtures';
@@ -18,6 +20,7 @@ interface IProps {
   parentStyle?: any;
   firebaseDb?: any;
   initFirebase?: any;
+  user: IMe;
 }
 
 class Blog extends React.Component<ChildProps<IProps>, {}> {
@@ -33,13 +36,14 @@ class Blog extends React.Component<ChildProps<IProps>, {}> {
   }
 
   render() {
+    const { user } = this.props;
     return (
       <div className={css(BlogStyle.blogContainer)}>
         <Switch>
-          <Route exact path="/blog" render={(props) => <BlogMain user={fixtures.user} />} />
+          <Route exact path="/blog" render={(props) => <BlogMain user={user} />} />
           <Route
             path="/blog/:id"
-            render={({ match }) => <BlogContent match={match} user={fixtures.user} />}
+            render={({ match }) => <BlogContent match={match} user={user} />}
           />
         </Switch>
       </div>
