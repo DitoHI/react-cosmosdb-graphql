@@ -300,7 +300,7 @@ class BlogContentDetail extends React.Component<IProps, IState> {
                   className={css(BlogStyle.blogItemContentTextDesc)}
                   dangerouslySetInnerHTML={{ __html: blog && blog.content }}
                 />
-                <Box display="flex" direction="row" wrap>
+                <Box display="flex" direction="row" marginTop={6} wrap>
                   {this.renderTags()}
                 </Box>
               </Box>

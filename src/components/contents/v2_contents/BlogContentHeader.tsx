@@ -36,29 +36,31 @@ class BlogContentHeader extends React.Component<IProps, {}> {
               history.push(`/blog/${blog.id}`);
             }}
           >
-            <Box display="flex" direction="row" alignItems="center" justifyContent={mode}>
-              <IconButton
-                accessibilityLabel="prev"
-                bgColor="white"
-                icon={mode === 'start' ? 'arrow-back' : 'arrow-forward'}
-                iconColor="gray"
-                onClick={() => {}}
-                size="xs"
-              />
-              <Box paddingX={2}>
-                <Text bold color="gray" inline size="sm" smSize="md">
-                  {mode === 'start' ? 'Prev' : 'Next'}
-                </Text>
+            <Box display="flex" paddingX={3}>
+              <Box display="flex" direction="row" alignItems="center" justifyContent={mode}>
+                <IconButton
+                  accessibilityLabel="prev"
+                  bgColor="white"
+                  icon={mode === 'start' ? 'arrow-back' : 'arrow-forward'}
+                  iconColor="gray"
+                  onClick={() => {}}
+                  size="xs"
+                />
+                <Box paddingX={2}>
+                  <Text bold color="gray" inline size="sm" smSize="md">
+                    {mode === 'start' ? 'Prev' : 'Next'}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
-            <Box paddingY={1} maxWidth="100%">
-              {loading && loadingParent ? (
-                this.renderTitlePreviewPlaceholder()
-              ) : (
-                <Text size="xs" color="gray" bold truncate>
-                  {blog && blog.title}
-                </Text>
-              )}
+              <Box paddingY={1} smPaddingX={2} maxWidth="70%">
+                {loading && loadingParent ? (
+                  this.renderTitlePreviewPlaceholder()
+                ) : (
+                  <Text size="xs" color="gray" bold truncate>
+                    {blog && blog.title}
+                  </Text>
+                )}
+              </Box>
             </Box>
           </Touchable>
         )}
@@ -117,7 +119,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
             render={({ history }) => (
               <Touchable
                 onTouch={() => {
-                  history.goBack();
+                  history.push('/blog');
                 }}
                 fullHeight
               >
@@ -133,7 +135,9 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                     bgColor="white"
                     icon="view-type-dense"
                     iconColor="gray"
-                    onClick={() => {}}
+                    onClick={() => {
+                      history.push('/blog');
+                    }}
                     size="xs"
                   />
                   <Box paddingX={2} display="none" smDisplay="block">
