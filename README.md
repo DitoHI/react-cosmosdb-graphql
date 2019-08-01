@@ -4,7 +4,7 @@
 </p>
 <p align="center" style="font-size: 1.2rem;">Integrate GraphQL Api to be the fully end to end Web Interface in React</p>
 
-## Want to take a look? Check this out :hear_no_evil: :speak_no_evil:
+**Want to take a look?** Check this out :hear_no_evil: :speak_no_evil:
 
 <div style="display:flex;flex-flow:row-wrap;">
 
@@ -31,6 +31,15 @@ The implementation of connecting the Back-End using GraphQL to React. Full sourc
 1. Query of Back End using React-Apollo. For the details of implementation, check out the documentation [here](https://www.apollographql.com/docs/react/essentials/queries/)
 2. Using the same Design Language System of Pinterest. Namely Gestalt. Check out the docs [here](https://pinterest.github.io/gestalt/#/)
 3. Initialization of Realtime Database Firebase to fetch a realtime total views of each Blog
+
+## To-Do List
+
+1. Sort the Top Stories by the its most views
+2. Sharing Action (facebook/twitter)
+3. Comment Section
+4. Pagination of Blog Preview in the Main Screen
+
+_Feel free to add the To-Do Lists as many as possible in the issues :relaxed: :fire:_
 
 ## Deployment
 
