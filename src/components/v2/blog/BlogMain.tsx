@@ -37,7 +37,13 @@ class BlogMain extends React.Component<IProps, {}> {
     return blogs.map((blog, index) => {
       const nearestIndex = 5 * Math.floor(index / 5) + index;
       return (
-        <Box key={blog.titlePreview} paddingY={1} smPaddingY={2}>
+        <Box
+          key={blog.titlePreview}
+          marginBottom={3}
+          smMarginBottom={4}
+          paddingY={2}
+          smPaddingY={4}
+        >
           <BlogPreview bgColor={types.COLOR_TOP_STORIES[nearestIndex]} blog={blog} user={user} />
         </Box>
       );
