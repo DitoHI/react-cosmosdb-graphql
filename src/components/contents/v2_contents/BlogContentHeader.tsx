@@ -162,7 +162,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
           />
         </Column>
         <Column span={4}>
-          <Box display="flex" justifyContent="end" height="100%">
+          <Box justifyContent="end" height="100%">
             {blog && !loadingParent ? (
               <Query<getBlogByPosition>
                 query={blogsQuery.getBlobByPositionIndex}
@@ -179,7 +179,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
 
                   const blog = data.getBlogByPositionIndex;
                   if (blog) {
-                    return this.renderToucableNav(loading, blog);
+                    return this.renderToucableNav(loading, blog, 'end');
                   }
 
                   return this.renderComingSoon('right');
