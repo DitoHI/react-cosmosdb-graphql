@@ -2,6 +2,7 @@ import * as React from 'react';
 import { css } from 'aphrodite';
 import { Box, Column, Divider, Heading, Icon, Text } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
+import { IS_SM } from '../../custom/types';
 
 import FooterStyles from '../../styles/FooterStyles';
 
@@ -69,8 +70,7 @@ class Footer extends React.Component<IProps, {}> {
               direction="row"
               alignItems="center"
               paddingX={9}
-              marginTop={2}
-              smMarginTop={0}
+              marginTop={IS_SM ? 0 : 2}
             >
               <Box marginRight={1} padding={1}>
                 <Icon icon="globe-checked" size={24} accessibilityLabel="Contact" color="white" />

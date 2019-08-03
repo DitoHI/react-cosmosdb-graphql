@@ -106,19 +106,19 @@ class BlogHeader extends React.Component<IProps, IState> {
                   padding={3}
                   smPadding={6}
                 >
-                  <Text size="lg" smSize="xl" color="white" bold>
+                  <Text size="lg" mdSize="xl" color="white" bold>
                     {index + 1}
                   </Text>
                 </Box>
                 <Box paddingX={1} />
                 <Box paddingX={1}>
                   <Box padding={1}>
-                    <Text smSize="lg" bold>
+                    <Text lgSize="lg" bold>
                       {blog.tags[0]}
                     </Text>
                   </Box>
                   <Box padding={1}>
-                    <Text size="sm" smSize="md">
+                    <Text size="sm" mdSize="sm" lgSize="md">
                       {blog.titlePreview}
                     </Text>
                   </Box>

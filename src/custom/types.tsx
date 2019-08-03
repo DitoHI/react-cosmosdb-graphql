@@ -1,8 +1,9 @@
 export const IS_SM = window.innerWidth >= 768;
+export const IS_LG = window.innerWidth >= 960;
 
 export default {
   DEFAULT_BLOG_CONTAINER_SIZE: {
-    height: IS_SM ? '500px' : '265px',
+    height: IS_SM ? (IS_LG ? '500px' : '360px') : '265px',
     width: '350px',
   },
 
@@ -17,8 +18,8 @@ export default {
   },
 
   DEFAULT_BLOG_PREVIEW_USER_AVA: {
-    height: IS_SM ? 120 : 65,
-    width: IS_SM ? 120 : 65,
+    height: IS_LG ? 120 : 65,
+    width: IS_LG ? 120 : 65,
   },
 
   DEFAULT_WIDTH_TITLE_ONE: 360,

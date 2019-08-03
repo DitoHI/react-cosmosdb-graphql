@@ -6,7 +6,7 @@ import { Placeholder } from 'semantic-ui-react';
 import { Route } from 'react-router';
 
 import { IBlog } from '../../../custom/interface';
-import { IS_SM } from '../../../custom/types';
+import { IS_LG, IS_SM } from '../../../custom/types';
 
 import blogsQuery from '../../../graphql/queries/queries_v2/blogsQuery';
 import { getBlogByPosition } from '../../../schemaTypes';
@@ -36,7 +36,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
               history.push(`/blog/${blog.id}`);
             }}
           >
-            <Box display="flex" direction={IS_SM ? 'row' : 'column'} paddingX={3}>
+            <Box display="flex" direction={IS_LG ? 'row' : 'column'} paddingX={3}>
               <Box display="flex" direction="row" alignItems="center" justifyContent={mode}>
                 <IconButton
                   accessibilityLabel="prev"
@@ -52,7 +52,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                   </Text>
                 </Box>
               </Box>
-              <Box paddingY={1} smPaddingX={2} maxWidth={IS_SM ? '85%' : '100%'}>
+              <Box paddingY={1} smPaddingX={2} maxWidth={IS_LG ? '85%' : '100%'}>
                 {loading && loadingParent ? (
                   this.renderTitlePreviewPlaceholder()
                 ) : (

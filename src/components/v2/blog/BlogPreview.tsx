@@ -3,7 +3,7 @@ import { Avatar, Box, Card, Column, Heading, Image, Mask, Spinner, Text, Touchab
 import 'gestalt/dist/gestalt.css';
 import { Route } from 'react-router';
 
-import types, { IS_SM } from '../../../custom/types';
+import types, { IS_LG, IS_SM } from '../../../custom/types';
 
 import IMe from '../../../custom/interface/IMe';
 import IBlog from '../../../custom/interface/IBlog';
@@ -37,14 +37,14 @@ class BlogPreview extends React.Component<IProps, {}> {
 
     return (
       <Box display="flex" direction="row" wrap>
-        <Column span={12} smSpan={4}>
+        <Column span={12} lgSpan={4}>
           <Box paddingX={3} height="100%">
             <Box
               display="flex"
               height="100%"
               direction="row"
               color={bgColor as any}
-              shape={IS_SM ? 'rounded' : 'roundedTop'}
+              shape={IS_LG ? 'rounded' : 'roundedTop'}
               smPadding={6}
               paddingX={4}
               paddingY={2}
@@ -113,7 +113,7 @@ class BlogPreview extends React.Component<IProps, {}> {
             </Box>
           </Box>
         </Column>
-        <Column span={12} smSpan={8}>
+        <Column span={12} lgSpan={8}>
           <Box paddingX={3} height="100%">
             <Route
               render={({ history }) => (
@@ -127,7 +127,7 @@ class BlogPreview extends React.Component<IProps, {}> {
                       display="flex"
                       height="100%"
                       direction="row"
-                      shape={IS_SM ? 'rounded' : 'roundedBottom'}
+                      shape={IS_LG ? 'rounded' : 'roundedBottom'}
                       color="white"
                       smPadding={6}
                       paddingX={4}

@@ -188,6 +188,7 @@ class BlogContentDetail extends React.Component<IProps, IState> {
         alignItems="center"
         marginBottom={2}
         smMarginBottom={0}
+        mdPaddingX={3}
       >
         {loading ? (
           this.renderImageWithContent()
@@ -207,16 +208,16 @@ class BlogContentDetail extends React.Component<IProps, IState> {
             />
           </Mask>
         )}
-        <Box display="none" smDisplay="block" paddingX={2} paddingY={4} width="100%">
+        <Box display="none" mdDisplay="block" paddingX={2} paddingY={4} width="100%">
           {loading ? (
             this.renderOneLine()
           ) : (
-            <Text bold align="center">
+            <Text bold align="center" mdSize="xs" lgSize="md">
               {user.name}
             </Text>
           )}
         </Box>
-        <Box display="block" smDisplay="none" paddingX={2} />
+        <Box display="block" mdDisplay="none" paddingX={2} />
         <Box display="flex" direction="column" alignItems="center">
           <IconButton
             accessibilityLabel="Love"
@@ -248,7 +249,9 @@ class BlogContentDetail extends React.Component<IProps, IState> {
           {loading ? (
             this.renderTitlePlaceholder()
           ) : IS_SM ? (
-            <Heading>{blog && blog.title}</Heading>
+            <Heading size="sm" lgSize="md">
+              {blog && blog.title}
+            </Heading>
           ) : (
             <Text size="lg" bold>
               {blog && blog.title}
@@ -271,19 +274,19 @@ class BlogContentDetail extends React.Component<IProps, IState> {
           <Divider />
         </Box>
         <Box display="flex" smPaddingX={3} smPaddingY={6} paddingY={3} wrap>
-          <Column span={12} smSpan={3}>
+          <Column span={12} mdSpan={2} lgSpan={3}>
             {IS_SM ? (
               <Sticky top={types.DEFAULT_TOP_LG}>{this.renderProfileImgAndTotalView()}</Sticky>
             ) : (
               this.renderProfileImgAndTotalView()
             )}
           </Column>
-          <Column span={12} smSpan={9}>
+          <Column span={12} mdSpan={10} lgSpan={9}>
             {loading ? (
               this.renderContentPlaceholder()
             ) : (
-              <Box>
-                <Box smMarginBottom={3} marginBottom={1} smPaddingY={0} paddingY={3}>
+              <Box mdPaddingX={3}>
+                <Box smMarginBottom={3} marginBottom={1} smPaddingY={0} lgPaddingY={3}>
                   <Text size="sm" smSize="xl" italic bold color="midnight">
                     "{blog && blog.quote}"
                   </Text>
