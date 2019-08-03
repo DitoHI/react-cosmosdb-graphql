@@ -81,7 +81,7 @@ class BlogContentHeader extends React.Component<IProps, {}> {
   }
 
   render() {
-    const { blog } = this.props;
+    const { blog, loadingParent } = this.props;
     return (
       <Box
         shape="rounded"
@@ -93,12 +93,16 @@ class BlogContentHeader extends React.Component<IProps, {}> {
       >
         <Column span={4}>
           <Box justifyContent="start" height="100%">
-            {blog && (
+            {blog && !loadingParent ? (
               <Query<getBlogByPosition>
                 query={blogsQuery.getBlobByPositionIndex}
                 variables={{ index: blog.positionIndex, operator: '-' }}
               >
                 {({ loading, error, data }) => {
+                  if (loading) {
+                    return this.renderTitlePreviewPlaceholder();
+                  }
+
                   if (error || !data) {
                     return this.renderComingSoon();
                   }
@@ -111,6 +115,8 @@ class BlogContentHeader extends React.Component<IProps, {}> {
                   return this.renderComingSoon();
                 }}
               </Query>
+            ) : (
+              this.renderTitlePreviewPlaceholder()
             )}
           </Box>
         </Column>
@@ -157,24 +163,30 @@ class BlogContentHeader extends React.Component<IProps, {}> {
         </Column>
         <Column span={4}>
           <Box display="flex" justifyContent="end" height="100%">
-            {blog && (
+            {blog && !loadingParent ? (
               <Query<getBlogByPosition>
                 query={blogsQuery.getBlobByPositionIndex}
                 variables={{ index: blog.positionIndex, operator: '+' }}
               >
                 {({ loading, error, data }) => {
+                  if (loading) {
+                    return this.renderTitlePreviewPlaceholder();
+                  }
+
                   if (error || !data) {
                     return this.renderComingSoon('right');
                   }
 
                   const blog = data.getBlogByPositionIndex;
                   if (blog) {
-                    return this.renderToucableNav(loading, blog, 'end');
+                    return this.renderToucableNav(loading, blog);
                   }
 
                   return this.renderComingSoon('right');
                 }}
               </Query>
+            ) : (
+              this.renderTitlePreviewPlaceholder()
             )}
           </Box>
         </Column>
