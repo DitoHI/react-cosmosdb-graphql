@@ -68,6 +68,13 @@ class BlogContentDetail extends React.Component<IProps, IState> {
     }
   }
 
+  componentWillUnmount(): void {
+    this.setState({
+      views: '0',
+      viewLoaded: false,
+    });
+  }
+
   renderContentPlaceholder() {
     const {} = this.props;
     return (
