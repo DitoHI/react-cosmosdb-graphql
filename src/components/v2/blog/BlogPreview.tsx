@@ -115,63 +115,63 @@ class BlogPreview extends React.Component<IProps, {}> {
         </Column>
         <Column span={12} smSpan={8}>
           <Box paddingX={3} height="100%">
-            <Box
-              display="flex"
-              height="100%"
-              direction="row"
-              shape={IS_SM ? 'rounded' : 'roundedBottom'}
-              color="white"
-              smPadding={6}
-              paddingX={4}
-              paddingY={2}
-              alignItems="center"
-              wrap
-            >
-              <Column span={12} smSpan={7}>
-                <Card>
-                  <Box paddingX={1} smPaddingX={3}>
+            <Route
+              render={({ history }) => (
+                <Touchable
+                  onTouch={() => {
+                    history.push(`/blog/${blog.id}`);
+                  }}
+                >
+                  <Card>
                     <Box
                       display="flex"
-                      smDisplay="none"
                       height="100%"
-                      justifyContent="center"
-                      alignItems="center"
-                      marginTop={3}
-                    >
-                      <Mask
-                        shape="rounded"
-                        height={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.height}
-                        width={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.width}
-                      >
-                        <Image
-                          alt={blog.title}
-                          color={Colors.youngBlue}
-                          src={blog.blobUri}
-                          naturalHeight={1}
-                          naturalWidth={1}
-                          fit="cover"
-                        />
-                      </Mask>
-                    </Box>
-                    <Box
-                      display="none"
-                      smDisplay="inlineBlock"
+                      direction="row"
+                      shape={IS_SM ? 'rounded' : 'roundedBottom'}
+                      color="white"
+                      smPadding={6}
                       paddingX={4}
-                      paddingY={1}
-                      color="blue"
+                      paddingY={2}
+                      alignItems="center"
+                      wrap
                     >
-                      <Text color="white" bold size="xs" mdSize="md">
-                        {blog.tags[0]}
-                      </Text>
-                    </Box>
-                    <Box paddingY={4}>
-                      <Route
-                        render={({ history }) => (
-                          <Touchable
-                            onTouch={() => {
-                              history.push(`/blog/${blog.id}`);
-                            }}
+                      <Column span={12} smSpan={7}>
+                        <Box paddingX={1} smPaddingX={3}>
+                          <Box
+                            display="flex"
+                            smDisplay="none"
+                            height="100%"
+                            justifyContent="center"
+                            alignItems="center"
+                            marginTop={3}
                           >
+                            <Mask
+                              shape="rounded"
+                              height={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.height}
+                              width={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.width}
+                            >
+                              <Image
+                                alt={blog.title}
+                                color={Colors.youngBlue}
+                                src={blog.blobUri}
+                                naturalHeight={1}
+                                naturalWidth={1}
+                                fit="cover"
+                              />
+                            </Mask>
+                          </Box>
+                          <Box
+                            display="none"
+                            smDisplay="inlineBlock"
+                            paddingX={4}
+                            paddingY={1}
+                            color="blue"
+                          >
+                            <Text color="white" bold size="xs" mdSize="md">
+                              {blog.tags[0]}
+                            </Text>
+                          </Box>
+                          <Box paddingY={4}>
                             <Box display="none" smDisplay="block">
                               <Heading size="xs">{blog.title}</Heading>
                             </Box>
@@ -180,37 +180,42 @@ class BlogPreview extends React.Component<IProps, {}> {
                                 {blog.title}
                               </Text>
                             </Box>
-                          </Touchable>
-                        )}
-                      />
+                          </Box>
+                          <Box>
+                            <Text color="gray" size="sm" mdSize="lg">
+                              {blog.contentPreview}
+                            </Text>
+                          </Box>
+                        </Box>
+                      </Column>
+                      <Box column={5} display="none" smDisplay="block">
+                        <Box
+                          display="flex"
+                          height="100%"
+                          justifyContent="center"
+                          alignItems="center"
+                        >
+                          <Mask
+                            shape="circle"
+                            height={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.height}
+                            width={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.width}
+                          >
+                            <Image
+                              alt={blog.title}
+                              color={Colors.youngBlue}
+                              src={blog.blobUri}
+                              naturalHeight={1}
+                              naturalWidth={1}
+                              fit="cover"
+                            />
+                          </Mask>
+                        </Box>
+                      </Box>
                     </Box>
-                    <Box>
-                      <Text color="gray" size="sm" mdSize="lg">
-                        {blog.contentPreview}
-                      </Text>
-                    </Box>
-                  </Box>
-                </Card>
-              </Column>
-              <Box column={5} display="none" smDisplay="block">
-                <Box display="flex" height="100%" justifyContent="center" alignItems="center">
-                  <Mask
-                    shape="circle"
-                    height={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.height}
-                    width={types.DEFAULT_BLOG_PREVIEW_CONTENT_BANNER.width}
-                  >
-                    <Image
-                      alt={blog.title}
-                      color={Colors.youngBlue}
-                      src={blog.blobUri}
-                      naturalHeight={1}
-                      naturalWidth={1}
-                      fit="cover"
-                    />
-                  </Mask>
-                </Box>
-              </Box>
-            </Box>
+                  </Card>
+                </Touchable>
+              )}
+            />
           </Box>
         </Column>
       </Box>
