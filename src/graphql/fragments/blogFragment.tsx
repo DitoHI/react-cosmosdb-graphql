@@ -5,6 +5,7 @@ export const blogFragment = gql`
     id
     user
     title
+    titleDash
     titlePreview
     content
     contentPreview

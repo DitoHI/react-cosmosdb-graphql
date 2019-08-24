@@ -42,7 +42,7 @@ class Blog extends React.Component<ChildProps<IProps>, {}> {
         <Switch>
           <Route exact path="/blog" render={(props) => <BlogMain user={user} />} />
           <Route
-            path="/blog/:id"
+            path="/blog/:titleDash"
             render={({ match }) => <BlogContent match={match} user={user} />}
           />
         </Switch>

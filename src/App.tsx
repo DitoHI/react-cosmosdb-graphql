@@ -156,7 +156,7 @@ class App extends React.Component<Props, States> {
           if (!data || !data.me) {
             return (
               <ErrorPath
-                text={`${(error as any).message || 'Server is still in maintenance'}`}
+                text={`${(error && (error as any).message) || 'Server is still in maintenance'}`}
                 statusCode={500}
                 icon={require('./images/server_error.png')}
               />

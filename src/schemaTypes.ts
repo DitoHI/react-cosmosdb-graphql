@@ -11,6 +11,7 @@ export interface Blogs_blogs {
   id: string;
   user: string;
   title: string | null;
+  titleDash: string | null;
   titlePreview: string | null;
   content: string | null;
   contentPreview: string | null;
@@ -160,6 +161,36 @@ export interface getBlogByPositionVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getBlogByTitleDash
+// ====================================================
+
+export interface getBlogByTitleDash_getBlogByTitleDash {
+  __typename: 'Blog';
+  id: string;
+  title: string | null;
+  content: string | null;
+  lastEdited: any | null;
+  blobUri: string | null;
+  blobName: string | null;
+  tags: (string | null)[] | null;
+  positionIndex: number | null;
+  user: string;
+  quote: string | null;
+}
+
+export interface getBlogByTitleDash {
+  getBlogByTitleDash: getBlogByTitleDash_getBlogByTitleDash | null;
+}
+
+export interface getBlogByTitleDashVariables {
+  titleDash: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL fragment: BlogPage
 // ====================================================
 
@@ -168,6 +199,7 @@ export interface BlogPage {
   id: string;
   user: string;
   title: string | null;
+  titleDash: string | null;
   titlePreview: string | null;
   content: string | null;
   contentPreview: string | null;

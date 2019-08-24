@@ -119,7 +119,7 @@ class BlogPreview extends React.Component<IProps, {}> {
               render={({ history }) => (
                 <Touchable
                   onTouch={() => {
-                    history.push(`/blog/${blog.id}`);
+                    history.push(`/blog/${blog.titleDash}`);
                   }}
                 >
                   <Card>

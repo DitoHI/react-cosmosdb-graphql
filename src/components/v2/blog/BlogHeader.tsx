@@ -166,7 +166,7 @@ class BlogHeader extends React.Component<IProps, IState> {
         render={({ history }) => (
           <Touchable
             onTouch={() => {
-              history.push(`/blog/${blog.id}`);
+              history.push(`/blog/${blog.titleDash}`);
             }}
           >
             <Box position="relative" height={types.DEFAULT_BLOG_CONTAINER_SIZE.height}>

@@ -7,7 +7,7 @@ import * as _ from 'lodash';
 import { connect } from 'react-redux';
 
 import blogsQuery from '../../../graphql/queries/queries_v2/blogsQuery';
-import { getBlogById } from '../../../schemaTypes';
+import { getBlogById, getBlogByTitleDash } from '../../../schemaTypes';
 
 import BlogContentDetail from '../../contents/v2_contents/BlogContentDetail';
 import BlogContentHeader from '../../contents/v2_contents/BlogContentHeader';
@@ -58,11 +58,11 @@ class BlogContent extends React.Component<IProps, {}> {
   render() {
     const {
       match: {
-        params: { id },
+        params: { titleDash },
       },
     } = this.props;
     return (
-      <Query<getBlogById> query={blogsQuery.getBlogById} variables={{ id }}>
+      <Query<getBlogByTitleDash> query={blogsQuery.getBlogByTitleDash} variables={{ titleDash }}>
         {({ loading, error, data }) => {
           if (error) {
             return this.renderError(
@@ -74,7 +74,7 @@ class BlogContent extends React.Component<IProps, {}> {
             return this.renderError('Server is still in maintenance');
           }
 
-          const blog = data.getBlogById as IBlog;
+          const blog = data.getBlogByTitleDash as IBlog;
 
           return (
             <Box paddingX={6} paddingY={6} smPadding={12}>

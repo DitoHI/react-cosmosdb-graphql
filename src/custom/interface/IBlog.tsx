@@ -2,6 +2,7 @@ interface IBlog {
   id: string;
   user: string;
   title: string;
+  titleDash?: string;
   titlePreview?: string;
   content: string;
   contentPreview?: string;

@@ -226,6 +226,33 @@
             "deprecationReason": null
           },
           {
+            "name": "getBlogByTitleDash",
+            "description": "",
+            "args": [
+              {
+                "name": "titleDash",
+                "description": "",
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Blog",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "getBlogByPositionIndex",
             "description": "",
             "args": [
@@ -1085,6 +1112,18 @@
           },
           {
             "name": "titlePreview",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "titleDash",
             "description": "",
             "args": [],
             "type": {

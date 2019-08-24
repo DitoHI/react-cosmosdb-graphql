@@ -26,4 +26,20 @@ export default {
       }
     }
   `,
+  getBlogByTitleDash: gql`
+    query getBlogByTitleDash($titleDash: String!) {
+      getBlogByTitleDash(titleDash: $titleDash) {
+        id
+        title
+        content
+        lastEdited
+        blobUri
+        blobName
+        tags
+        positionIndex
+        user
+        quote
+      }
+    }
+  `,
 };
