@@ -1,6 +1,19 @@
 import { default as gql } from 'graphql-tag';
 
 export default {
+  getBlogsByItsMostView: gql`
+    query getBlogItsView($method: SortMethod) {
+      blogsByItsView(method: $method) {
+        id
+        title
+        titlePreview
+        titleDash
+        contentPreview
+        blobUri
+        tags
+      }
+    }
+  `,
   getBlogById: gql`
     query getBlogById($id: String!) {
       getBlogById(id: $id) {
@@ -23,6 +36,7 @@ export default {
         id
         positionIndex
         title
+        titleDash
       }
     }
   `,

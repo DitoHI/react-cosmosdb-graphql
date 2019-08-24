@@ -60,6 +60,7 @@ class BlogContent extends React.Component<IProps, {}> {
       match: {
         params: { titleDash },
       },
+      user,
     } = this.props;
     return (
       <Query<getBlogByTitleDash> query={blogsQuery.getBlogByTitleDash} variables={{ titleDash }}>
@@ -85,7 +86,7 @@ class BlogContent extends React.Component<IProps, {}> {
                       <BlogContentHeader blog={blog} loadingParent={loading} />
                       <Divider />
                     </Sticky>
-                    <BlogContentDetail blog={blog} user={fixtures.user} loading={loading} />
+                    <BlogContentDetail blog={blog} user={user} loading={loading} />
                   </Box>
                 )}
               </Box>

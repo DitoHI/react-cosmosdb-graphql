@@ -79,7 +79,7 @@ class BlogMain extends React.Component<IProps, {}> {
           return (
             <Box>
               <Box padding={6} mdPadding={9} lgPadding={12}>
-                <BlogHeader loading={loading} blogs={loading ? [] : blogs.slice(0, 5)} />
+                <BlogHeader />
                 <Box paddingY={3} mdPaddingY={4} lgPaddingY={6} />
               </Box>
               <Box paddingX={3} mdPaddingX={6} lgPaddingX={9}>

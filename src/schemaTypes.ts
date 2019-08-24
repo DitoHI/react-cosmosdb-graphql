@@ -107,6 +107,33 @@ export interface MeVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getBlogItsView
+// ====================================================
+
+export interface getBlogItsView_blogsByItsView {
+  __typename: 'Blog';
+  id: string;
+  title: string | null;
+  titlePreview: string | null;
+  titleDash: string | null;
+  contentPreview: string | null;
+  blobUri: string | null;
+  tags: (string | null)[] | null;
+}
+
+export interface getBlogItsView {
+  blogsByItsView: (getBlogItsView_blogsByItsView | null)[] | null;
+}
+
+export interface getBlogItsViewVariables {
+  method?: SortMethod | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getBlogById
 // ====================================================
 
@@ -145,6 +172,7 @@ export interface getBlogByPosition_getBlogByPositionIndex {
   id: string;
   positionIndex: number | null;
   title: string | null;
+  titleDash: string | null;
 }
 
 export interface getBlogByPosition {
@@ -278,6 +306,11 @@ export interface UserPage {
 //==============================================================
 // START Enums and Input Objects
 //==============================================================
+
+export enum SortMethod {
+  asc = 'asc',
+  desc = 'desc',
+}
 
 export interface Sort {
   by?: string | null;

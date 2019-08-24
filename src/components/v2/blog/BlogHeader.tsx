@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { css } from 'aphrodite';
 import { Box, Card, Column, Divider, Heading, Image, Text, Touchable } from 'gestalt';
+import Query from 'react-apollo/Query';
 import { Placeholder } from 'semantic-ui-react';
 import 'gestalt/dist/gestalt.css';
 import { Route } from 'react-router';
+import { default as blogQueryV2 } from '../../../graphql/queries/queries_v2/blogsQuery';
 
 import IBlog from '../../../custom/interface/IBlog';
 
@@ -11,16 +13,11 @@ import BlogStyle from '../../../styles/blog/BlogStyle';
 
 import types, { IS_SM } from '../../../custom/types';
 
-interface IProps {
-  blogs: IBlog[];
-  loading: boolean;
-}
-
 interface IState {
   activeBlog: number;
 }
 
-class BlogHeader extends React.Component<IProps, IState> {
+class BlogHeader extends React.Component<{}, IState> {
   private bannerRef;
 
   constructor(props) {
@@ -91,9 +88,7 @@ class BlogHeader extends React.Component<IProps, IState> {
     this.bannerRef.current.scrollIntoView({ behavior: 'smooth' });
   }
 
-  renderStoryCard() {
-    const { blogs } = this.props;
-
+  renderStoryCard(blogs: IBlog[]) {
     return blogs.map((blog: IBlog, index: number) => {
       return (
         <Touchable onTouch={() => this.setActiveBlog(index)} shape="rounded" key={index}>
@@ -131,7 +126,7 @@ class BlogHeader extends React.Component<IProps, IState> {
     });
   }
 
-  renderTopStories() {
+  renderTopStories(blogs: IBlog[]) {
     const {} = this.state;
     return (
       <Box
@@ -149,15 +144,14 @@ class BlogHeader extends React.Component<IProps, IState> {
         </Box>
         <Divider />
         <Box paddingX={2} smPaddingX={3}>
-          {this.renderStoryCard()}
+          {this.renderStoryCard(blogs)}
         </Box>
         <Box paddingY={1} smPaddingY={2} />
       </Box>
     );
   }
 
-  renderBanner() {
-    const { blogs } = this.props;
+  renderBanner(blogs: IBlog[]) {
     const { activeBlog } = this.state;
 
     const blog = blogs[activeBlog];
@@ -202,24 +196,30 @@ class BlogHeader extends React.Component<IProps, IState> {
   }
 
   render() {
-    const { loading } = this.props;
     return (
-      <Box
-        display="flex"
-        direction="row"
-        color="white"
-        overflow="hidden"
-        shape="rounded"
-        ref={this.bannerRef}
-        wrap
-      >
-        <Column span={12} mdSpan={8}>
-          {loading ? this.renderBannerPlaceholder() : this.renderBanner()}
-        </Column>
-        <Column span={12} mdSpan={4}>
-          {loading ? this.renderStoriesPlaceholder() : this.renderTopStories()}
-        </Column>
-      </Box>
+      <Query query={blogQueryV2.getBlogsByItsMostView}>
+        {({ loading, error, data }) => {
+          const blogs = data && (data.blogsByItsView as IBlog[]);
+          return (
+            <Box
+              display="flex"
+              direction="row"
+              color="white"
+              overflow="hidden"
+              shape="rounded"
+              ref={this.bannerRef}
+              wrap
+            >
+              <Column span={12} mdSpan={8}>
+                {!loading && blogs ? this.renderBanner(blogs) : this.renderBannerPlaceholder()}
+              </Column>
+              <Column span={12} mdSpan={4}>
+                {!loading && blogs ? this.renderTopStories(blogs) : this.renderStoriesPlaceholder()}
+              </Column>
+            </Box>
+          );
+        }}
+      </Query>
     );
   }
 }
