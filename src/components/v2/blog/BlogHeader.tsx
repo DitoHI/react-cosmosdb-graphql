@@ -197,7 +197,7 @@ class BlogHeader extends React.Component<{}, IState> {
 
   render() {
     return (
-      <Query query={blogQueryV2.getBlogsByItsMostView}>
+      <Query query={blogQueryV2.getBlogsByItsMostView} variables={{ method: 'desc' }}>
         {({ loading, error, data }) => {
           const blogs = data && (data.blogsByItsView as IBlog[]);
           return (
