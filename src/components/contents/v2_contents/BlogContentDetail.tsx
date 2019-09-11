@@ -17,7 +17,7 @@ import 'gestalt/dist/gestalt.css';
 import { Placeholder } from 'semantic-ui-react';
 import * as moment from 'moment';
 import { connect } from 'react-redux';
-import * as _ from 'lodash';
+import { Helmet } from 'react-helmet';
 
 import { IBlog, IMe } from '../../../custom/interface';
 import types, { IS_SM } from '../../../custom/types';
@@ -56,18 +56,12 @@ class BlogContentDetail extends React.Component<IProps, IState> {
   componentDidMount(): void {
     if (!this.props.loading) {
       this.renderGetProps(this.props);
-      document.title = this.props.blog.title;
-    } else {
-      document.title = 'Loading...';
     }
   }
 
   componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
     if (!nextProps.loading) {
       this.renderGetProps(nextProps);
-      document.title = nextProps.blog.title;
-    } else {
-      document.title = 'Loading...';
     }
   }
 
@@ -265,80 +259,94 @@ class BlogContentDetail extends React.Component<IProps, IState> {
     const { blog, loading, user } = this.props;
 
     return (
-      <Box paddingX={4} smPaddingX={12} paddingY={1} smPaddingY={3}>
-        <Box smPaddingX={3} paddingY={2} smPaddingY={6} justifyContent="center">
-          {loading ? (
-            this.renderTitlePlaceholder()
-          ) : IS_SM ? (
-            <Heading size="sm" lgSize="md">
-              {blog && blog.title}
-            </Heading>
-          ) : (
-            <Text size="lg" bold>
-              {blog && blog.title}
-            </Text>
-          )}
-        </Box>
-        {loading ? (
-          <Box width="100%">{this.renderOneLine()}</Box>
-        ) : (
-          <Box display="flex" smPaddingX={3} alignItems="center" width="100%">
-            <Icon accessibilityLabel="time" icon="clock" size={types.ICON_SIZE_XS} />
-            <Box padding={2}>
-              <Text size="xs" smSize="sm" color="gray" bold inline>
-                {blog && moment(blog.lastEdited).format('LLLL')}
-              </Text>
-            </Box>
-          </Box>
+      <div>
+        {blog && (
+          <Helmet>
+            <title>{blog.title}</title>
+            <meta property="og:title" content={blog.title} />
+            <meta
+              property="og:url"
+              content={`https://hafizhnotes.firebaseapp.com/blog/${blog.titleDash}`}
+            />
+          </Helmet>
         )}
-        <Box smPaddingY={3}>
-          <Divider />
-        </Box>
-        <Box display="flex" smPaddingX={3} smPaddingY={6} paddingY={3} wrap>
-          <Column span={12} mdSpan={2} lgSpan={3}>
-            {IS_SM ? (
-              <Sticky top={types.DEFAULT_TOP_LG}>{this.renderProfileImgAndTotalView()}</Sticky>
-            ) : (
-              this.renderProfileImgAndTotalView()
-            )}
-          </Column>
-          <Column span={12} mdSpan={10} lgSpan={9}>
+        <Box paddingX={4} smPaddingX={12} paddingY={1} smPaddingY={3}>
+          <Box smPaddingX={3} paddingY={2} smPaddingY={6} justifyContent="center">
             {loading ? (
-              this.renderContentPlaceholder()
+              this.renderTitlePlaceholder()
+            ) : IS_SM ? (
+              <Heading size="sm" lgSize="md">
+                {blog && blog.title}
+              </Heading>
             ) : (
-              <Box mdPaddingX={3}>
-                <Box smMarginBottom={3} marginBottom={1} smPaddingY={0} lgPaddingY={3}>
-                  <Text size="sm" smSize="xl" italic bold color="midnight">
-                    "{blog && blog.quote}"
-                  </Text>
-                </Box>
-                <Box marginBottom={6}>
-                  <Divider />
-                </Box>
-                <Box paddingY={2} smMarginBottom={4} marginBottom={1}>
-                  <Mask height={IS_SM ? types.DEFAULT_HEIGHT_IMG.lg : types.DEFAULT_HEIGHT_IMG.sm}>
-                    <Image
-                      alt={blog && blog.blobUri}
-                      color="white"
-                      src={blog && blog.blobUri!}
-                      naturalHeight={1}
-                      naturalWidth={1}
-                      fit="contain"
-                    />
-                  </Mask>
-                </Box>
-                <div
-                  className={css(BlogStyle.blogItemContentTextDesc)}
-                  dangerouslySetInnerHTML={{ __html: blog && blog.content }}
-                />
-                <Box display="flex" direction="row" marginTop={6} wrap>
-                  {this.renderTags()}
-                </Box>
-              </Box>
+              <Text size="lg" bold>
+                {blog && blog.title}
+              </Text>
             )}
-          </Column>
+          </Box>
+          {loading ? (
+            <Box width="100%">{this.renderOneLine()}</Box>
+          ) : (
+            <Box display="flex" smPaddingX={3} alignItems="center" width="100%">
+              <Icon accessibilityLabel="time" icon="clock" size={types.ICON_SIZE_XS} />
+              <Box padding={2}>
+                <Text size="xs" smSize="sm" color="gray" bold inline>
+                  {blog && moment(blog.lastEdited).format('LLLL')}
+                </Text>
+              </Box>
+            </Box>
+          )}
+          <Box smPaddingY={3}>
+            <Divider />
+          </Box>
+          <Box display="flex" smPaddingX={3} smPaddingY={6} paddingY={3} wrap>
+            <Column span={12} mdSpan={2} lgSpan={3}>
+              {IS_SM ? (
+                <Sticky top={types.DEFAULT_TOP_LG}>{this.renderProfileImgAndTotalView()}</Sticky>
+              ) : (
+                this.renderProfileImgAndTotalView()
+              )}
+            </Column>
+            <Column span={12} mdSpan={10} lgSpan={9}>
+              {loading ? (
+                this.renderContentPlaceholder()
+              ) : (
+                <Box mdPaddingX={3}>
+                  <Box smMarginBottom={3} marginBottom={1} smPaddingY={0} lgPaddingY={3}>
+                    <Text size="sm" smSize="xl" italic bold color="midnight">
+                      "{blog && blog.quote}"
+                    </Text>
+                  </Box>
+                  <Box marginBottom={6}>
+                    <Divider />
+                  </Box>
+                  <Box paddingY={2} smMarginBottom={4} marginBottom={1}>
+                    <Mask
+                      height={IS_SM ? types.DEFAULT_HEIGHT_IMG.lg : types.DEFAULT_HEIGHT_IMG.sm}
+                    >
+                      <Image
+                        alt={blog && blog.blobUri}
+                        color="white"
+                        src={blog && blog.blobUri!}
+                        naturalHeight={1}
+                        naturalWidth={1}
+                        fit="contain"
+                      />
+                    </Mask>
+                  </Box>
+                  <div
+                    className={css(BlogStyle.blogItemContentTextDesc)}
+                    dangerouslySetInnerHTML={{ __html: blog && blog.content }}
+                  />
+                  <Box display="flex" direction="row" marginTop={6} wrap>
+                    {this.renderTags()}
+                  </Box>
+                </Box>
+              )}
+            </Column>
+          </Box>
         </Box>
-      </Box>
+      </div>
     );
   }
 }

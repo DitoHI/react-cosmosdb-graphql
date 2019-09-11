@@ -2,7 +2,8 @@ import { css } from 'aphrodite';
 import * as React from 'react';
 import { Query } from 'react-apollo';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, Provider } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
 import './index.css';
 import './styles/Main.css';
@@ -147,72 +148,86 @@ class App extends React.Component<Props, States> {
       : { marginTop: '10rem' };
 
     return (
-      <Query<Me> query={meQuery} variables={{ sort: { by: 'dateStart', as: 'asc' } }}>
-        {({ loading, error, data }) => {
-          if (loading) {
-            return <HomeSpinner containerImg={radioSpinner} contentText="Please wait a moment" />;
-          }
+      <div>
+        <Helmet>
+          <title>Hafizh CV and Blog - Place for read any latest knowledge of tech stacks</title>
+          <meta property="og:site_name" content="Hafizh Blog" />
+          <meta
+            name="og:description"
+            content={`Original Writings from Dito Hafizh, Passionate Developers from Indonesia. Visit the blog to know
+                    more of my latest development alongside the research of any latest tech stacks. Currently, I'm focusing most of the times
+                    to develop apps with GraphQL, Golang, Spring, and Flutter
+                  `}
+          />
+          <meta property="og:url" content="https://hafizhnotes.firebaseapp.com" />
+        </Helmet>
+        <Query<Me> query={meQuery} variables={{ sort: { by: 'dateStart', as: 'asc' } }}>
+          {({ loading, error, data }) => {
+            if (loading) {
+              return <HomeSpinner containerImg={radioSpinner} contentText="Please wait a moment" />;
+            }
 
-          if (!data || !data.me) {
+            if (!data || !data.me) {
+              return (
+                <ErrorPath
+                  text={`${(error && (error as any).message) || 'Server is still in maintenance'}`}
+                  statusCode={500}
+                  icon={require('./images/server_error.png')}
+                />
+              );
+            }
+
+            if (!data.me.education && !data.me.project && !data.me.experience) {
+              return (
+                <ErrorPath
+                  text="Server is still in maintenance"
+                  statusCode={500}
+                  icon={require('./images/server_error.png')}
+                />
+              );
+            }
+
+            const educations = data.me.education as IEducation[];
+            const projects = data.me.project as IProject[];
+            const experiences = data.me.experience as IExperience[];
+            const me = data.me as IMe;
+
             return (
-              <ErrorPath
-                text={`${(error && (error as any).message) || 'Server is still in maintenance'}`}
-                statusCode={500}
-                icon={require('./images/server_error.png')}
-              />
-            );
-          }
-
-          if (!data.me.education && !data.me.project && !data.me.experience) {
-            return (
-              <ErrorPath
-                text="Server is still in maintenance"
-                statusCode={500}
-                icon={require('./images/server_error.png')}
-              />
-            );
-          }
-
-          const educations = data.me.education as IEducation[];
-          const projects = data.me.project as IProject[];
-          const experiences = data.me.experience as IExperience[];
-          const me = data.me as IMe;
-
-          return (
-            <BrowserRouter>
-              <div className={css(MainStyle.mainContainer)}>
-                <Switch>
-                  <Route path="/" exact>
-                    <HomePage
-                      dismissAlertSourceCode={this.onDismiss}
-                      marginTopMainNav={marginTopMainNav}
-                      topNavbar={topNavbar}
-                      showAlertViewNotReady={this.showAlertViewNotReady}
-                      educations={educations}
-                      experiences={experiences}
-                      projects={projects}
+              <BrowserRouter>
+                <div className={css(MainStyle.mainContainer)}>
+                  <Switch>
+                    <Route path="/" exact>
+                      <HomePage
+                        dismissAlertSourceCode={this.onDismiss}
+                        marginTopMainNav={marginTopMainNav}
+                        topNavbar={topNavbar}
+                        showAlertViewNotReady={this.showAlertViewNotReady}
+                        educations={educations}
+                        experiences={experiences}
+                        projects={projects}
+                      />
+                    </Route>
+                    <Route
+                      path="/blog"
+                      render={(props) => (
+                        <BlogV2 {...props} children={marginTopBlogMainNav} user={me} />
+                      )}
                     />
-                  </Route>
-                  <Route
-                    path="/blog"
-                    render={(props) => (
-                      <BlogV2 {...props} children={marginTopBlogMainNav} user={me} />
-                    )}
-                  />
-                  <Route
-                    render={(props) => (
-                      <ErrorPath {...props} text="Not found page" statusCode={403} />
-                    )}
-                  />
-                </Switch>
+                    <Route
+                      render={(props) => (
+                        <ErrorPath {...props} text="Not found page" statusCode={403} />
+                      )}
+                    />
+                  </Switch>
 
-                {/* Footer */}
-                <FooterV2 me={me} />
-              </div>
-            </BrowserRouter>
-          );
-        }}
-      </Query>
+                  {/* Footer */}
+                  <FooterV2 me={me} />
+                </div>
+              </BrowserRouter>
+            );
+          }}
+        </Query>
+      </div>
     );
   }
 }
