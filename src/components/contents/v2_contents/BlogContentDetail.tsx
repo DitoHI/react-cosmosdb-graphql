@@ -57,6 +57,8 @@ class BlogContentDetail extends React.Component<IProps, IState> {
     if (!this.props.loading) {
       this.renderGetProps(this.props);
       document.title = this.props.blog.title;
+    } else {
+      document.title = 'Loading...';
     }
   }
 
@@ -64,6 +66,8 @@ class BlogContentDetail extends React.Component<IProps, IState> {
     if (!nextProps.loading) {
       this.renderGetProps(nextProps);
       document.title = nextProps.blog.title;
+    } else {
+      document.title = 'Loading...';
     }
   }
 
