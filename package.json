@@ -17,8 +17,10 @@
     "loaders.css": "^0.1.2",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "node-fetch": "^2.6.0",
     "react": "^16.8.4",
     "react-apollo": "^2.5.2",
+    "react-document-meta": "^3.0.0-beta.2",
     "react-dom": "^16.8.4",
     "react-icons": "^3.5.0",
     "react-loader-spinner": "^2.3.0",
@@ -68,7 +70,7 @@
     "prettier": "^1.16.4",
     "tslint-config-airbnb": "^5.11.1",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.3.3333"
+    "typescript": "~3.6.3"
   },
   "resolutions": {
     "@types/react": "16.8.8"

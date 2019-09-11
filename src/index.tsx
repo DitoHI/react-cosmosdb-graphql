@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import registerServiceWorker from './registerServiceWorker';
+import { default as DocumentMeta } from 'react-document-meta';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'semantic-ui-css/semantic.min.css';
@@ -47,12 +48,29 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const meta = {
+  title: 'Hafizh CV and Blog - Place for read any latest knowledge of tech stacks',
+  description: `Original Writings from Dito Hafizh, Passionate Developers from Indonesia. Visit the blog to know
+      more of my latest development alongside the research of any latest tech stacks. Currently, I'm focusing most of the times
+      to develop apps with GraphQL, Golang, Spring, and Flutter
+    `,
+  canonical: 'https://github.com/DitoHI',
+  meta: {
+    charset: 'utf-8',
+    name: {
+      keywords: 'react,meta,document,html,tags',
+    },
+  },
+};
+
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </ApolloProvider>,
+  <DocumentMeta {...meta}>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ApolloProvider>
+  </DocumentMeta>,
   document.getElementById('root') as HTMLElement,
 );
 registerServiceWorker();
