@@ -30,6 +30,14 @@ class BlogHeader extends React.Component<{}, IState> {
     this.setActiveBlog = this.setActiveBlog.bind(this);
   }
 
+  componentDidMount(): void {
+    document.title = 'Hafizh Blog - Your place to read latest update of Graphql, Golang, etc';
+  }
+
+  componentWillReceiveProps(nextProps: any, nextContext: any): void {
+    document.title = 'Hafizh Blog - Your place to read latest update of Graphql, Golang, etc';
+  }
+
   renderBannerPlaceholder() {
     const {} = this.state;
     return (

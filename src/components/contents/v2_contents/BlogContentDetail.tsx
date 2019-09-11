@@ -56,12 +56,14 @@ class BlogContentDetail extends React.Component<IProps, IState> {
   componentDidMount(): void {
     if (!this.props.loading) {
       this.renderGetProps(this.props);
+      document.title = this.props.blog.title;
     }
   }
 
   componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
     if (!nextProps.loading) {
       this.renderGetProps(nextProps);
+      document.title = nextProps.blog.title;
     }
   }
 

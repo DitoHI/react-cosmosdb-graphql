@@ -24,10 +24,6 @@ interface IProps {
 }
 
 class Blog extends React.Component<ChildProps<IProps>, {}> {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount(): void {
     const { initFirebase } = this.props;
     window.scrollTo(0, 0);

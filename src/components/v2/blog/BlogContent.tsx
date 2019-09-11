@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Box, Divider, Spinner, Sticky } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
-import { Placeholder } from 'semantic-ui-react';
 import { Query } from 'react-apollo';
 import * as _ from 'lodash';
 import { connect } from 'react-redux';
@@ -23,7 +22,7 @@ interface IProps {
 }
 
 class BlogContent extends React.Component<IProps, {}> {
-  componentWillMount(): void {
+  componentDidMount(): void {
     window.scrollTo(0, 0);
   }
 
