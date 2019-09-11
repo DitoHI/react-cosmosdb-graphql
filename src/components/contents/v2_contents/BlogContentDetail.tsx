@@ -17,6 +17,7 @@ import 'gestalt/dist/gestalt.css';
 import { Placeholder } from 'semantic-ui-react';
 import * as moment from 'moment';
 import { connect } from 'react-redux';
+import * as _ from 'lodash';
 
 import { IBlog, IMe } from '../../../custom/interface';
 import types, { IS_SM } from '../../../custom/types';
@@ -37,42 +38,55 @@ interface IProps {
 }
 
 interface IState {
-  views: string;
+  views: number;
   viewLoaded: boolean;
 }
 
 class BlogContentDetail extends React.Component<IProps, IState> {
+  private viewRef: any;
+
   constructor(props) {
     super(props);
     this.state = {
-      views: '0',
+      views: 0,
       viewLoaded: false,
     };
   }
 
-  componentWillReceiveProps(nextProps): void {
-    const { blog, incrementView, user } = nextProps;
+  componentDidMount(): void {
+    if (!this.props.loading) {
+      this.renderGetProps(this.props);
+    }
+  }
+
+  componentWillReceiveProps(nextProps: Readonly<IProps>, nextContext: any): void {
+    if (!nextProps.loading) {
+      this.renderGetProps(nextProps);
+    }
+  }
+
+  componentWillUnmount(): void {
+    if (this.viewRef) {
+      this.viewRef.off();
+    }
+  }
+
+  renderGetProps(props: any) {
+    const { blog, incrementView, user } = props;
     const db = FirebaseConnect.getDb();
     if (user && blog) {
       // increment the views
       incrementView(user, blog);
 
-      const viewsRef = db.ref(typesMod.REF_BLOGS_VIEW(user.id, blog.id));
+      this.viewRef = db.ref(typesMod.REF_BLOGS_VIEW(user.id, blog.id));
 
-      viewsRef.on('value', (snapShot: any) => {
+      this.viewRef.on('value', (snapShot: any) => {
         this.setState({
           views: snapShot.val(),
           viewLoaded: true,
         });
       });
     }
-  }
-
-  componentWillUnmount(): void {
-    this.setState({
-      views: '0',
-      viewLoaded: false,
-    });
   }
 
   renderContentPlaceholder() {
@@ -180,6 +194,7 @@ class BlogContentDetail extends React.Component<IProps, IState> {
   renderProfileImgAndTotalView() {
     const { loading, user } = this.props;
     const { viewLoaded, views } = this.state;
+
     return (
       <Box
         display="flex"
